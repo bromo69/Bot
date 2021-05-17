@@ -208,10 +208,10 @@ async function starts() {
 
 	fs.existsSync('./BarBar.json') && client.loadAuthInfo('./BarBar.json')
 	client.on('connecting', () => {
-		start('2', 'Pera ae vey...')
+		start('2', 'Calma Rapaiz')
 	})
 	client.on('open', () => {
-		success('2', 'Conectado parça')
+		success('2', 'Sem pressa parsa')
 	})
 	await client.connect({timeoutMs: 30*1000})
         fs.writeFileSync('./BarBar.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
@@ -306,10 +306,10 @@ async function starts() {
 			}
 
 			const botNumber = client.user.jid
-			const ownerNumber = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"] // Recoloque o seu numero
+			const ownerNumber = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"] // Coloque o seu numero
 			const mod = [ownerNumber,"558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"]// Moderador do bot
-			const adminbotnumber = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"]// admin bot numero
-			const frendsowner = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"]// amigo do criador 
+			const adminbotnumber = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"]// Número adm do bot
+			const frendsowner = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"]// Amigo do criador 
 			const premium = ["558981210976@s.whatsapp.net","584167147895@s.whatsapp.net","5491130465477@s.whatsapp.net","558981246187@s.whatsapp.net","558981204807@s.whatsapp.net","558981213553@s.whatsapp.net","554999498331@s.whatsapp.net","558981309535@s.whatsapp.net","558981309535@s.whatsapp.net"]
 			const isGroup = from.endsWith('@g.us')
 			const sender = isGroup ? mek.participant : mek.key.remoteJid
@@ -800,7 +800,7 @@ if (text.includes("placa"))
             client.sendMessage(from, tujuh, MessageType.audio, {quoted: mek, mimetype: 'audio/mp4', ptt:true})
 	}
 
-	if (messagesC.includes("xandao")){
+			if (messagesC.includes("xandao")){
 			client.updatePresence(from, Presence.composing) 
 	     	const d = fs.readFileSync('./sticker/pqp.webp');
             client.sendMessage(from, d, sticker, {quoted: mek})
@@ -868,15 +868,23 @@ if (text.includes("placa"))
                     putagg = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname, time)})
                     break
+                case 'figu':
+			client.updatePresence(from, Presence.composing) 
+	     	const figu = fs.readFileSync('./sticker/pqp.webp');
+            client.sendMessage(from, figu, sticker, {quoted: mek})
+
+            client.updatePresence(from, Presence.composing) 
+	     	const figu1 = fs.readFileSync('./sticker/pqp1.webp');
+            client.sendMessage(from, figu1, sticker, {quoted: mek})
+
+            client.updatePresence(from, Presence.composing) 
+	     	const figu2 = fs.readFileSync('./sticker/pqp2.webp');
+            client.sendMessage(from, figu2, sticker, {quoted: mek})
+            		break
                 case 'eu':
                 putagg = await getBuffer(`https://i.ibb.co/TthtCSG/pakipariu-doido.jpg`)
-                client.sendMessage(from, putagg, image, {quoted: mek, caption: eu()})
+                client.sendMessage(from, putagg, buffer, {quoted: mek, caption: 'Vc'})
                 break
-                  if (messagesC.includes("eita")){
-					 client.updatePresence(from, Presence.composing) 
-	     			 const d = fs.readFileSync('./sticker/eita.webp');
-           			 client.sendMessage(from, d, sticker, {quoted: mek})
-    		}	
                 case 'alist':
                     putagg = await getBuffer(`https://i.ibb.co/mt4FvHN/Animes.png`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: animes(prefix, pushname)})
@@ -952,50 +960,6 @@ if (text.includes("placa"))
 					membr.push(otakus10.jid)
 					mentions(teks, membr, true)
 						break
-				case "ppt": //Feito por LUCAS
-				msgFilter.isFiltered(from)
-				if (args.length < 1) return reply(ptbr.tterro())
-				ppt = ["pedra","papel","tesoura"]
-				ppy = ppt[Math.floor(Math.random() * ppt.length)]
-				ppg = Math.floor(Math.random() * 13) + 349
-				pptb = ppy
-				pph = `Você ganhou ${ppg} em xp`
-				if ((pptb == "pedra" && args == "papel") || 
-				(pptb == "papel" && args == "tesoura") || 
-				(pptb == "tesoura" && args == "pedra")) {
-				var vit = "vitoria"
-				} else if ((pptb == "pedra" && args == "tesoura") || 
-				(pptb == "papel" && args == "pedra") || 
-				(pptb == "tesoura" && args == "papel")) {
-				var vit = "derrota"
-				} else if ((pptb == "pedra" && args == "pedra") ||
-				(pptb == "papel" && args == "papel") ||
-				(pptb == "tesoura" && args == "tesoura")) {
-				var vit = "empate"
-				} else if (vit = "undefined") {
-				return reply(ptbr.tterro())
-				}
-				if (vit == "vitoria") {
-				var tes = "Vitória do jogador"
-				}
-				if (vit == "derrota" ) {
-				var tes = "A vitória é do Tiringa-BOT"
-				}
-				if (vit == "empate" ) {
-				var tes = "O jogo terminou em empate"
-				}
-				reply(`Tiringa-BOT jogou: ${pptb}\nO jogador jogou: ${args}\n\n${tes}`)
-				if (tes == "Vitória do jogador") {
-				reply(pph)
-				}
-					break
-				case 'github':
-				reply(`https://github.com/Meliodas-rai/Bot`)
-				setTimeout( () => {
-				client.sendMessage(from, Presence.composing)
-				reply(`${pushname} esse e o link da git do ⚡Super Xandão⚡`)
-				}, 1000)
-					break
 				case 'install':
 			reply(`Aqui os comandos do ⚡Super Xandão⚡ ${pushname}`)
 			setTimeout( () => {
@@ -1023,6 +987,18 @@ if (text.includes("placa"))
 				reply("npm start")
 			}, 7000)
 					break
+					case 'bass':
+               		encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
+               		media = await frhan.downloadAndSaveMediaMessage(encmedia);
+	               	ran = getRandom('.mp3');
+               		exec(`ffmpeg -i ${media} -af equalizer=f=94:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+                  	fs.unlinkSync(media);
+                  	if (err) return reply('Error!');
+                  	hah = fs.readFileSync(ran);
+                  	frhan.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: true, quoted: mek });
+                  	fs.unlinkSync(ran);
+               	   });
+               			break
 					case 'kiss':
 				    try {    
 					
