@@ -2,7 +2,7 @@
 	<img src="./image/xandao2.jpg">
 </p>
 
-<h1> ⚡SUPER XANDÃO⚡ e um Bot de whatsapp feito com a base de um dos meu YouTubers favoritos <a href="https://youtube.com/CaussZ"> Causs </a></h1>
+<h1>⚡SUPER XANDÃO⚡ e um Bot de whatsapp feito com a base de um dos meu YouTubers favoritos <a href="https://youtube.com/CaussZ"> Causs </a></h1>
 
 Comandos pra instalar:
 
