@@ -989,13 +989,13 @@ if (text.includes("placa"))
 					break
 					case 'bass':
                		encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
-               		media = await frhan.downloadAndSaveMediaMessage(encmedia);
+               		media = await client.downloadAndSaveMediaMessage(encmedia);
 	               	ran = getRandom('.mp3');
                		exec(`ffmpeg -i ${media} -af equalizer=f=94:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
                   	fs.unlinkSync(media);
                   	if (err) return reply('Error!');
                   	hah = fs.readFileSync(ran);
-                  	frhan.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: true, quoted: mek });
+                  	client.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: true, quoted: mek });
                   	fs.unlinkSync(ran);
                	   });
                			break
