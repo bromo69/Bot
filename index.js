@@ -37,7 +37,6 @@ const moment = require('moment-timezone')
 const { exec } = require('child_process')
 const kagApi = require('@kagchi/kag-api')
 const fetch = require('node-fetch')
-const tiktod = require('tiktok-scraper')
 const { cekvip } = require('./src/cekvip')
 const { TobzApi } = JSON.parse(fs.readFileSync('./database/json/apikey.json'))
 const { VthearApi } = JSON.parse(fs.readFileSync('./database/json/apikey.json'))
@@ -70,7 +69,7 @@ blocked = []
 limitawal = '999999999'
 cr = '*Meliodas*'
 
-/*********** LOAD FILE ***********/
+/*********** CARREGAR ARQUIVO ***********/
 const _leveling = JSON.parse(fs.readFileSync('./database/group/leveling.json'))
 const antilink = JSON.parse(fs.readFileSync('./database/json/antilink.json'))
 const event = JSON.parse(fs.readFileSync('./database/json/event.json'))
@@ -78,7 +77,7 @@ const _level = JSON.parse(fs.readFileSync('./database/user/level.json'))
 const _limit = JSON.parse(fs.readFileSync('./database/json/limit.json'))
 /*********** END LOAD ***********/
 
-/********** FUNCTION ***************/
+/********** FUNÇÕES ***************/
 const getLevelingXp = (userId) => {
             let position = false
             Object.keys(_level).forEach((i) => {
@@ -217,36 +216,37 @@ async function starts() {
         fs.writeFileSync('./BarBar.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
 
 	client.on('group-participants-update', async (anu) => {
-		if (!welkom.includes(anu.jid)) return
-		try {
-			const mdata = await client.groupMetadata(anu.jid)
-			console.log(anu)
-			if (anu.action == 'add') {
-				num = anu.participants[0]
-				try {
-					ppimg = await client.getProfilePicture(`${anu.participants[0].split('@')[0]}@c.us`)
-				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-				}
-				teks = `𝚘𝚕𝚊 𝚖𝚎𝚞 𝚌𝚊𝚛𝚘 𝚐𝚊𝚏𝚊𝚗𝚑𝚘𝚝𝚘@${num.split('@')[0]}\n𝚂𝚎𝚓𝚊 𝚋𝚎𝚖 𝚟𝚒𝚗𝚍𝚘 𝚊𝚘  *${groupName}*\n\n 𝚕𝚎𝚒𝚊 𝚊𝚜 𝚛𝚎𝚐𝚛𝚊𝚜 𝚜𝚎 𝚗ã𝚘 𝚓𝚊 𝚕𝚎𝚟𝚊 𝚘 𝚋𝚊𝚗️`
-				let buff = await getBuffer(ppimg)
-				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
-				client.sendMessage(from, tujuh, MessageType.audio, {quoted: mek, mimetype: 'audio/mp4', ptt:true})
-			} else if (anu.action == 'remove') {
-				num = anu.participants[0]
-				try {
-					ppimg = await client.getProfilePicture(`${num.split('@')[0]}@c.us`)
-				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-				}
-				teks = `𝙱𝚘𝚒 𝚋𝚘𝚒 𝚋𝚘𝚒... 𝚋𝚘𝚒 𝚍𝚊 𝚌𝚊𝚛𝚊 𝚙𝚛𝚎𝚝𝚊 𝚜𝚎 𝚝𝚞 𝚏𝚘𝚒 𝚎𝚖𝚋𝚘𝚛𝚊 𝚌𝚎 𝚟𝚊𝚒 𝚜𝚎𝚗𝚝𝚊𝚛 𝚎 𝚗𝚊 𝚌𝚊𝚋𝚎ç𝚊@${num.split('@')[0]} 𝚔𝚔𝚔𝚔𝚔𝚔𝚔 😂👋`
-				let buff = await getBuffer(ppimg)
-				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
-			}
-		} catch (e) {
-			console.log('Error : %s', color(e, 'red'))
-		}
-	})
+                if (!welkom.includes(anu.jid)) return
+                try {
+                        const imgur = require('imgur')
+            num = anu.participants[0]
+            const mdata = await client.groupMetadata(anu.jid)
+            try {
+                var pp_user = await client.getProfilePicture(num)
+            } catch (e) {
+                var pp_user = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
+            }
+            exeone = await imageToBase64(JSON.stringify(pp_user).replace(/\"/gi, ''))
+                        exetwo = getRandom('.jpeg')
+                        fs.writeFileSync(exetwo, exeone, 'Base64')
+                        let psCAPA = await imgur.uploadFile(exetwo)
+                        fs.unlinkSync(exetwo)
+            if (anu.action == 'add') {
+                ini_user = client.contacts[num]
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${ini_user.notify}&gpnome=${mdata.subject}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/BHJPWTs/sonny-mauricio-Nzdo-UCVLTe-Y-unsplash-picsay.jpg`)
+				client.sendMessage(anu.jid, ini_img, MessageType.image)
+                group_info = await client.groupMetadata(anu.jid)
+                client.sendMessage(anu.jid, ini_img, MessageType.image)
+            }
+            if (anu.action == 'remove') {
+                ini_user = client.contacts[num]
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/goodbye?nome=${ini_user.notify}&gpnome=${mdata.subject}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/BHJPWTs/sonny-mauricio-Nzdo-UCVLTe-Y-unsplash-picsay.jpg`)
+                client.sendMessage(anu.jid, ini_img, MessageType.image)
+            }
+                } catch (e) {
+                        console.log('Error : %s', color(e, 'red'))
+                }
+})
 
 	client.on('CB:Blocklist', json => {
             if (blocked.length > 2) return
@@ -287,7 +287,8 @@ async function starts() {
 					levelon: '*leveling* *ativado*',
 					leveloff: '*leveling* *desativado*',
 					levelnoton: ' *leveling não ativado*',
-					levelnol: '*ERROR* °-°',
+					fodase: 'Calma filho(a) da puta'
+					levelnol: 'ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR\nE R R O R  N O  S I S T E M A',
 					error: {
 				stick: 'Não deu pra converter a foto/video na figurinha parsa, A vida e triste',
 				Iv: 'Link invalido'
@@ -339,7 +340,7 @@ async function starts() {
 			    return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
 			}
 			const reply = (teks) => {
-				client.sendMessage(from, teks, text, {quoted:mek})
+				client.sendMessage(from, teks, msg, menssagem, para, text, {quoted:mek})
 			}
 			const sendImage = (teks) => {
 		    client.sendMessage(from, teks, image, {quoted:mek})
@@ -350,7 +351,7 @@ async function starts() {
 			const mentions = (teks, memberr, id) => {
 				(id == null || id == undefined || id == false) ? client.sendMessage(from, teks.trim(), extendedText, {contextInfo: {"mentionedJid": memberr}}) : client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}})
 			}
-              //function leveling
+              //função de nível 
             if (isGroup && isLevelingOn) {
             const currentLevel = getLevelingLevel(sender)
             const checkId = getLevelingId(sender)
@@ -857,10 +858,10 @@ if (text.includes("placa"))
 			const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
 			const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 			const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', time, color(command), 'do parsa', color(sender.split('@')[0]), 'Artigo :', color(args.length))
-			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;37m]', time, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'Artigo :', color(args.length))
-			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', time, color(command), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'Artigo :', color(args.length))
-			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;37m]', time, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'Artigo :', color(args.length))
+			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', time, color(command), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
+			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;37m]', time, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
+			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', time, color(command), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
+			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;37m]', time, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
 			switch(command) {
 	            case 'menu':
 	            case 'help':
@@ -868,19 +869,6 @@ if (text.includes("placa"))
                     putagg = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname, time)})
                     break
-                case 'figu':
-			client.updatePresence(from, Presence.composing) 
-	     	const figu = fs.readFileSync('./sticker/pqp.webp');
-            client.sendMessage(from, figu, sticker, {quoted: mek})
-
-            client.updatePresence(from, Presence.composing) 
-	     	const figu1 = fs.readFileSync('./sticker/pqp1.webp');
-            client.sendMessage(from, figu1, sticker, {quoted: mek})
-
-            client.updatePresence(from, Presence.composing) 
-	     	const figu2 = fs.readFileSync('./sticker/pqp2.webp');
-            client.sendMessage(from, figu2, sticker, {quoted: mek})
-            		break
                 case 'eu':
                 putagg = await getBuffer(`https://i.ibb.co/TthtCSG/pakipariu-doido.jpg`)
                 client.sendMessage(from, putagg, buffer, {quoted: mek, caption: 'Vc'})
@@ -960,6 +948,44 @@ if (text.includes("placa"))
 					membr.push(otakus10.jid)
 					mentions(teks, membr, true)
 						break
+					case 'otakus':
+					if (!isGroup) return reply(`Comando so pode ser utiizado em grupos parsa`)
+					membr = []
+					const gado1 = groupMembers
+					const gado2 = groupMembers
+					const gado3 = groupMembers
+					const gado3 = groupMembers
+					const gado5 = groupMembers
+					const gado6 = groupMembers
+					const gado7 = groupMembers
+					const gado8 = groupMembers
+					const gado9 = groupMembers
+					const gado10 = groupMembers
+					const gados1 = gado1[Math.floor(Math.random() * gado1.length)]
+					const gados2 = gado2[Math.floor(Math.random() * gado2.length)]
+					const gados3 = gado3[Math.floor(Math.random() * gado3.length)]
+					const gados4 = gado4[Math.floor(Math.random() * gado4.length)]
+					const gados5 = gado5[Math.floor(Math.random() * gado5.length)]
+					const gados6 = gado6[Math.floor(Math.random() * gado6.length)]
+					const gados7 = gado7[Math.floor(Math.random() * gado7.length)]
+					const gados8 = gado8[Math.floor(Math.random() * gado8.length)]
+					const gados9 = gado9[Math.floor(Math.random() * gado9.length)]
+					const gados10 = gado10[Math.floor(Math.random() * gado10.length)]
+					var pct = ["1%", `2%`, `3%`, `4%`, `5%`, `6%`, `7`, `8%`, `9%`, `10`, `11%`, `12%`,`13%`, `14%`, `15%`, `16%`, `17%`, `18%`, `19%`, `20%`, `21%`, `22`, `23%`, `24%`, `25%`, `26%`, `27%`, `28%`, `27%`, `28%`, `29%`, `30%`, `31%`, `32%`, `33%`, `34%`, `35%`, `36%`, `37%`, `38%`, `39%`, `40%`, `41%`, `42%`, `43%`, `44%`, `45%`, `46%`, `47%`, `48%`, `49%`, `50%`, `51%`, `52%`, `53%`, `54%`, `55%`, `56%`, `57%`, `58%`, `59%`, `60%`, `61%`, `62%`, `63%`, `64%`, `65%`, `66%`, `67%`, `68%`, `69%`, `70%`, `71%`, `72%`, `73%`, `74%`, `75%`, `76%`, `77%`, `78%`, `79%`, `80%`, `81%`, `82%`, `85%`, `84%`, `85%`, `86%`, `87%`, `88%`, `89%`, `90%`, `91%`, `92%`, `93%`, `94%`, `95%`, `96%`, `97%`, `98%`, `99%`, `100%`]
+					const porcentagem = pct[Math.floor(Math.random() * pct.length)]
+					teks = `${pushname} Esses são os mais Gados do grupo ${groupName}\n@${gados1.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados2.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados3.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados4.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados5.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados6.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados7.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados8.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados9.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gados10.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem} Sem pressão Neném, ⚡Xandão⚡ ta aqui`
+					membr.push(gados1.jid)
+					membr.push(gados2.jid)
+					membr.push(gados3.jid)
+					membr.push(gados4.jid)
+					membr.push(gadps5.jid)
+					membr.push(gados6.jid)
+					membr.push(gados7.jid)
+					membr.push(gados8.jid)
+					membr.push(gados9.jid)
+					membr.push(gados10.jid)
+					mentions(teks, membr, true)
+						break
 				case 'install':
 			reply(`Aqui os comandos do ⚡Super Xandão⚡ ${pushname}`)
 			setTimeout( () => {
@@ -999,19 +1025,6 @@ if (text.includes("placa"))
                   	fs.unlinkSync(ran);
                	   });
                			break
-					case 'kiss':
-				    try {    
-					
-						res = await fetchJson(`https://tobz-api.herokuapp.com/api/kiss?apikey=BotWeA`, {method: 'get'})
-						bufferv = await getBuffer(res.result)
-						client.sendMessage(from, bufferv, image, {quoted: mek, caption: 'ezzzz'})
-					} catch (e) {
-						console.log(`Error :`, color(e,'red'))
-						sa = await getBuffer(`https://i.ibb.co/JcSjmNY/IMG-20210107-WA0052.jpg`)
-						client.sendMessage(from, sa, image, {quoted: mek, caption: 'Erro como!!'})
-						reply('EITA VEY DEU ERRO AQUI MN')
-					}
-					break
 					case 'lista':
 					if (!isGroup) return reply(mess.only.group)
 					if (!isOwner) return reply('Você quem é, o proprietário?')
@@ -4461,7 +4474,7 @@ break
                                         }
                                         break
 				case 'toimg':
-					if (!isQuotedSticker) return reply('{ ❗ } *Marque a figurinha*')
+					if (!isQuotedSticker) return reply('Marque a figurinha')
 					reply(mess.wait)
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
