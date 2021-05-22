@@ -288,7 +288,7 @@ async function starts() {
 					leveloff: '*leveling* *desativado*',
 					levelnoton: ' *leveling não ativado*',
 					fodase: 'Calma filho(a) da puta'
-					levelnol: 'ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR\nE R R O R  N O  S I S T E M A',
+					levelnol: 'ERROR \nE R R O R  N O  S I S T E M A',
 					error: {
 				stick: 'Não deu pra converter a foto/video na figurinha parsa, A vida e triste',
 				Iv: 'Link invalido'
