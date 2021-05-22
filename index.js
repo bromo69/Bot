@@ -340,7 +340,7 @@ async function starts() {
 			    return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
 			}
 			const reply = (teks) => {
-				client.sendMessage(from, teks, msg, menssagem, para, text, {quoted:mek})
+				client.sendMessage(from, teks, text, {quoted:mek})
 			}
 			const sendImage = (teks) => {
 		    client.sendMessage(from, teks, image, {quoted:mek})
