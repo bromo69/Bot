@@ -10,6 +10,7 @@ const {
 } = require('@adiwajshing/baileys')
 const { color, bgcolor } = require('./lib/color')
 const { eu } = require('./Fxc7/eu')
+const imageToBase64 = require('image-to-base64')
 const { help } = require('./src/help')
 const {help1} = require('./src/help1')
 const { modapk } = require('./src/modapk')
