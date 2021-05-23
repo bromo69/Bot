@@ -234,7 +234,7 @@ if (!welkom.includes(anu.jid)) return
                         fs.unlinkSync(exetwo)
             if (anu.action == 'add') {
                 ini_user = client.contacts[num]
-                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${pushname}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVTVw9K_RQFJrpRKltLP1kRLWyYiaBN6Y7Fg&usqp=CAU`)
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVTVw9K_RQFJrpRKltLP1kRLWyYiaBN6Y7Fg&usqp=CAU`)
                 teks = `━━━━━━❰⊰❰⊰✾⊱❱⊱❱━━━━━━
 
 Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido 
@@ -251,7 +251,7 @@ Apresente-ser
             }
             if (anu.action == 'remove') {
                 ini_user = client.contacts[num]
-                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/goodbye?nome=${pushname}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/BHJPWTs/sonny-mauricio-Nzdo-UCVLTe-Y-unsplash-picsay.jpg`)
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/goodbye?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/BHJPWTs/sonny-mauricio-Nzdo-UCVLTe-Y-unsplash-picsay.jpg`)
                 client.sendMessage(anu.jid, ini_img, MessageType.image)
             }
                 } catch (e) {
@@ -289,7 +289,7 @@ Apresente-ser
 			const isCmd = body.startsWith(prefix)
 			const insom = from.endsWith('@g.us')
 			const nameReq = insom ? mek.participant : mek.key.remoteJid
-			pushname = client.contacts[nameReq] != undefined ? client.contacts[nameReq].vname || client.contacts[nameReq].notify : undefined
+			pushname2 = client.contacts[nameReq] != undefined ? client.contacts[nameReq].vname || client.contacts[nameReq].notify : undefined
 
 			mess = {
 					wait: 'Pera ae parsa, Xandão ta Trabalhando porra',
@@ -310,7 +310,7 @@ Apresente-ser
 					benned: 'Você foi banido, contate o dono para te desbanir',
 					ownerG: 'Só o Meliodas pode usar esse comando parsa',
 					ownerB: 'Só o Meliodas pode usar esse comando parsa',
-					userB: `──「 LISTA 」──\nOlá ${pushname} !\nVocê não esta registrado como amigo do meu dono então pessa para ele te adicionar como amigo\n\n──「 ⚡Super Xandão⚡ 」──`,
+					userB: `──「 LISTA 」──\nOlá ${pushname2} !\nVocê não esta registrado como amigo do meu dono então pessa para ele te adicionar como amigo\n\n──「 ⚡Super Xandão⚡ 」──`,
 					admin: 'Este comando só pode ser usado por administradores de grupo!',
 					Badmin: 'Este comando so pode ser usado quando o ⚡SUPER XANDÃO⚡ se torna ADM do grupo parsa',
 				}
@@ -877,7 +877,7 @@ if (text.includes("placa"))
 	            case 'help':
 	            	uptime = process.uptime ()
                     putagg = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
-                    client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname, time)})
+                    client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname2, time)})
                     break
                 case 'eu':
                 putagg = await getBuffer(`https://i.ibb.co/TthtCSG/pakipariu-doido.jpg`)
@@ -885,7 +885,7 @@ if (text.includes("placa"))
                 break
                 case 'alist':
                     putagg = await getBuffer(`https://i.ibb.co/mt4FvHN/Animes.png`)
-                    client.sendMessage(from, putagg, image, {quoted: mek, caption: animes(prefix, pushname)})
+                    client.sendMessage(from, putagg, image, {quoted: mek, caption: animes(prefix, pushname2)})
                     break
 				case 'help1':
 				case 'menu1':
@@ -945,7 +945,7 @@ if (text.includes("placa"))
 					const otakus8 = otaku8[Math.floor(Math.random() * otaku8.length)]
 					const otakus9 = otaku9[Math.floor(Math.random() * otaku9.length)]
 					const otakus10 = otaku10[Math.floor(Math.random() * otaku10.length)]
-					teks = `${pushname} esses são os otakus fedidos do grupo\n@${otakus1.jid.split('@')[0]}\n@${otakus2.jid.split('@')[0]}\n@${otakus3.jid.split('@')[0]}\n@${otakus4.jid.split('@')[0]}\n@${otakus5.jid.split('@')[0]}\n@${otakus6.jid.split('@')[0]}\n@${otakus7.jid.split('@')[0]}\n@${otakus8.jid.split('@')[0]}\n@${otakus9.jid.split('@')[0]}\n@${otakus10.jid.split('@')[0]}\n\nSEM PRESSÃO AQUI É ⚡ Xandão ⚡`
+					teks = `${pushname2} esses são os otakus fedidos do grupo\n@${otakus1.jid.split('@')[0]}\n@${otakus2.jid.split('@')[0]}\n@${otakus3.jid.split('@')[0]}\n@${otakus4.jid.split('@')[0]}\n@${otakus5.jid.split('@')[0]}\n@${otakus6.jid.split('@')[0]}\n@${otakus7.jid.split('@')[0]}\n@${otakus8.jid.split('@')[0]}\n@${otakus9.jid.split('@')[0]}\n@${otakus10.jid.split('@')[0]}\n\nSEM PRESSÃO AQUI É ⚡ Xandão ⚡`
 					membr.push(otakus1.jid)
 					membr.push(otakus2.jid)
 					membr.push(otakus3.jid)
@@ -959,7 +959,7 @@ if (text.includes("placa"))
 					mentions(teks, membr, true)
 						break
 				case 'install':
-			reply(`Aqui os comandos do ⚡Super Xandão⚡ ${pushname}`)
+			reply(`Aqui os comandos do ⚡Super Xandão⚡ ${pushname2}`)
 			setTimeout( () => {
 			client.sendMessage(from, Presence.composing)
 			reply("Você irá precisar do Termux instalado e dois celulares, quando pedir y/n digite Y e de enter, se pedir Y/N/M/S ou algo do tipo digite Y e de enter, aí e só ir fazendo isso ate aparecer o qr code")
@@ -1034,7 +1034,7 @@ if (text.includes("placa"))
 					const gays5 = gay5[Math.floor(Math.random() * gay5.length)]
 					var porcentagemgay = ["1%", `2%`, `3%`, `4%`, `5%`, `6%`, `7`, `8%`, `9%`, `10`, `11%`, `12%`,`13%`, `14%`, `15%`, `16%`, `17%`, `18%`, `19%`, `20%`, `21%`, `22`, `23%`, `24%`, `25%`, `26%`, `27%`, `28%`, `27%`, `28%`, `29%`, `30%`, `31%`, `32%`, `33%`, `34%`, `35%`, `36%`, `37%`, `38%`, `39%`, `40%`, `41%`, `42%`, `43%`, `44%`, `45%`, `46%`, `47%`, `48%`, `49%`, `50%`, `51%`, `52%`, `53%`, `54%`, `55%`, `56%`, `57%`, `58%`, `59%`, `60%`, `61%`, `62%`, `63%`, `64%`, `65%`, `66%`, `67%`, `68%`, `69%`, `70%`, `71%`, `72%`, `73%`, `74%`, `75%`, `76%`, `77%`, `78%`, `79%`, `80%`, `81%`, `82%`, `85%`, `84%`, `85%`, `86%`, `87%`, `88%`, `89%`, `90%`, `91%`, `92%`, `93%`, `94%`, `95%`, `96%`, `97%`, `98%`, `99%`, `100%`]
 					const porcentagem = porcentagemgay[Math.floor(Math.random() * porcentagemgay.length)]
-					teks = `${pushname} Esses são os mais SuperGays do grupo ${groupName}\n@${gays1.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gays2.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gays3.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gays4.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gays5.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n\n Sem pressão Neném, ⚡Xandão⚡ ta aqui`
+					teks = `${pushname2} Esses são os mais SuperGays do grupo ${groupName}\n@${gays1.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gays2.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gays3.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gays4.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n@${gays5.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagem}\n\n Sem pressão Neném, ⚡Xandão⚡ ta aqui`
 					membr.push(gays1.jid)
 					membr.push(gays2.jid)
 					membr.push(gays3.jid)
@@ -1057,7 +1057,7 @@ if (text.includes("placa"))
 					const cornos5 = corno5[Math.floor(Math.random() * corno5.length)]
 					var porcentagemcorno = ["1%", `2%`, `3%`, `4%`, `5%`, `6%`, `7`, `8%`, `9%`, `10`, `11%`, `12%`,`13%`, `14%`, `15%`, `16%`, `17%`, `18%`, `19%`, `20%`, `21%`, `22`, `23%`, `24%`, `25%`, `26%`, `27%`, `28%`, `27%`, `28%`, `29%`, `30%`, `31%`, `32%`, `33%`, `34%`, `35%`, `36%`, `37%`, `38%`, `39%`, `40%`, `41%`, `42%`, `43%`, `44%`, `45%`, `46%`, `47%`, `48%`, `49%`, `50%`, `51%`, `52%`, `53%`, `54%`, `55%`, `56%`, `57%`, `58%`, `59%`, `60%`, `61%`, `62%`, `63%`, `64%`, `65%`, `66%`, `67%`, `68%`, `69%`, `70%`, `71%`, `72%`, `73%`, `74%`, `75%`, `76%`, `77%`, `78%`, `79%`, `80%`, `81%`, `82%`, `85%`, `84%`, `85%`, `86%`, `87%`, `88%`, `89%`, `90%`, `91%`, `92%`, `93%`, `94%`, `95%`, `96%`, `97%`, `98%`, `99%`, `O chifre desse ai bate na lua ksksksk`]
 					const porcentagemc = porcentagemcorno[Math.floor(Math.random() * porcentagemcorno.length)]
-					teks = `${pushname} Esses são os cornos do grupo ${groupName}\n@${cornos1.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n@${cornos2.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n@${cornos3.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n@${cornos4.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n@${cornos5.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n\n Sem pressão Neném, ⚡Xandão⚡ ta aqui`
+					teks = `${pushname2} Esses são os cornos do grupo ${groupName}\n@${cornos1.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n@${cornos2.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n@${cornos3.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n@${cornos4.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n@${cornos5.jid.split('@')[0]}\nCom uma porcentagem de ${porcentagemc}\n\n Sem pressão Neném, ⚡Xandão⚡ ta aqui`
 					membr.push(cornos1.jid)
 					membr.push(cornos2.jid)
 					membr.push(cornos3.jid)
