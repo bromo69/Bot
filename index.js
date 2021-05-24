@@ -2980,14 +2980,6 @@ break
                    client.sendMessage(from, hasil, image, {quoted: mek, caption: `Resultados de *${body.slice(5)}*`})
                    await limitAdd(sender)
                    break
-                   case 'covidcountry':
-                   client.updatePresence(from, Presence.composing) 
-                   data = await fetchJson(`https://arugaz.my.id/api/edu/corona?country=${body.slice(7)}`)
-                   if (data.result) reply(data.result)
-                   hasil = `País : ${data.result.country}\n\nAtivo : ${data.result.active}\ncasesPerOneMillion : ${data.result.casesPerOneMillion}\ncrítico : ${data.result.critical}\nMortes por milhão : ${data.result.deathsPerOneMillion}\nrecuperado : ${data.result.recovered}\nteste por milhão : ${data.result.testPerOneMillion}\ncasos de hj : ${data.result.todayCases}\nMortes de hj : ${data.result.todayDeath}\nCasos total : ${data.result.totalCases}\ntotalTest : ${data.result.totalTest}`
-                   reply(hasil)
-                   await limitAdd(sender)
-                   break
 					case 'usuarios':
 					if (!isOwner) return reply(mess.only.ownerB)    
 					teks = `\`\`\`╭────*「 *TOTAL DE USUÁRIOS ⚡Super Xandão⚡* 」\n\`\`\``
@@ -3349,6 +3341,15 @@ break
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: 'bugado vey', quoted: mek})
 					break
+                case 'logo1':
+                    gh = body.slice(6)
+                    teks = gh.split("|")[0];
+                    if (args.length < 1) return reply('Cadê o texto?')
+                    reply('Aguarde...')
+                    anu = await fetchJson(`https://toddynn.herokuapp.com/api/text3d?text=${teks}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Lôgo', quoted: mek})
+                    break
                 case 'pubg':
 					gh = body.slice(7)
                     p1 = gh.split("/")[0];
