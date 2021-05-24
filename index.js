@@ -234,16 +234,11 @@ if (!welkom.includes(anu.jid)) return
                         fs.unlinkSync(exetwo)
             if (anu.action == 'add') {
                 ini_user = client.contacts[num]
-                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVTVw9K_RQFJrpRKltLP1kRLWyYiaBN6Y7Fg&usqp=CAU`)
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                 teks = `━━━━━━❰⊰❰⊰✾⊱❱⊱❱━━━━━━
 
 Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido 
 
-Apresente-ser
-
-🎲Nome
-🔮Idade
-🧸Anime
  ⚡ Super Xandão ⚡ `
                 group_info = await client.groupMetadata(anu.jid)
                 client.sendMessage(anu.jid, ini_img, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
@@ -251,7 +246,7 @@ Apresente-ser
             }
             if (anu.action == 'remove') {
                 ini_user = client.contacts[num]
-                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/goodbye?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/BHJPWTs/sonny-mauricio-Nzdo-UCVLTe-Y-unsplash-picsay.jpg`)
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/goodbye?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                 client.sendMessage(anu.jid, ini_img, MessageType.image)
             }
                 } catch (e) {
