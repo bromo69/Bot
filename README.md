@@ -60,5 +60,4 @@ Comandos pra instalar:
 
 * OBS: o bot só pode ser instalador em celulares com o androind acima de 4.0 ou 5.0
 
-<h3 align="center">*⚡SUPER XANDÃO⚡*
-Peeeeeeita parsa</h3>
+<h3 align="center">⚡SUPER XANDÃO⚡<br>Peeeeeeita parsa</br></h3>
