@@ -1,8 +1,3 @@
-<style>
-	a {
-		color: red;
-	}
-</style>
 <p align="center" height="300" width="300">
 	<img src="./image/xandao2.jpg">
 </p>
@@ -65,4 +60,5 @@ Comandos pra instalar:
 
 * OBS: o bot só pode ser instalador em celulares com o androind acima de 4.0 ou 5.0
 
-<h3 align="center">⚡SUPER XANDÃO⚡</h3>
+<h3 align="center">*⚡SUPER XANDÃO⚡*
+Peeeeeeita parsa</h3>
