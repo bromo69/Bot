@@ -875,9 +875,56 @@ if (text.includes("placa"))
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname2, time)})
                     break
                 case 'eu':
-                putagg = await getBuffer(`https://i.ibb.co/TthtCSG/pakipariu-doido.jpg`)
-                client.sendMessage(from, putagg, buffer, {quoted: mek, caption: 'Vc'})
-                break
+                    client.updatePresence(from, Presence.composing)
+                    reply('https://i.ibb.co/TthtCSG/pakipariu-doido.jpg')
+                    client.sendMessage(from, image, {quoted: mek, caption 'Voçê ksksks'})
+                    break
+                case 'time':
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('10')
+                    }, 10000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('9')
+                    }, 9000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('8')
+                    }, 8000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('7')
+                    }, 7000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('6')
+                    }, 6000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('5')
+                    }, 5000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('4')
+                    }, 4000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('3')
+                    }, 3000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('2')
+                    }, 2000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('1')
+                    }, 1000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('ACABOU O TEMPO!!!!!')
+                    }, 9000)
+                        break
                 case 'alist':
                     putagg = await getBuffer(`https://i.ibb.co/mt4FvHN/Animes.png`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: animes(prefix, pushname2)})
@@ -953,6 +1000,24 @@ if (text.includes("placa"))
 					membr.push(otakus10.jid)
 					mentions(teks, membr, true)
 						break
+                    case 'poze':
+                    if (!isGroup)return reply(mess.only.group)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('LINK DA IMG')
+                        client.sendMessage(from, image)
+                    }, 5000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('LINK DA IMG')
+                        client.sendMessage(from, image)
+                    }, 4000)
+                    setTimeout( () => {
+                        client.updatePresence(from, Presence.composing)
+                        reply('LINK DA IMG')
+                        client.sendMessage(from, image)
+                    }, 3000)
+                        break
 				case 'install':
 			reply(`Aqui os comandos do ⚡Super Xandão⚡ ${pushname2}`)
 			setTimeout( () => {
@@ -1072,24 +1137,19 @@ if (text.includes("placa"))
                       membr.push(gostosa12.jid)
                       mentions(teks, membr, true)
                        break
-                    case 'lindos':
-                     if (!isGroup) return reply(mess.only.group)
-                      membr = []
-                      const cu12 = groupMembers
-                      const cu11 = groupMembers
-                      const cuz13 = groupMembers
-                      const cuz14 = groupMembers
-                      const cuzao12 = cu12[Math.floor(Math.random() * cu12.length)]
-                      const cuzao11 = cu11[Math.floor(Math.random() * cu11.length)]
-                      const cuzin21 = cuz13[Math.floor(Math.random() * cuz13.length)]
-                      const cuzin22 = cuz14[Math.floor(Math.random() * cuz14.length)]
-                      reply(`*${pushname2} Esses são os mais lindos do grupo\n${groupName}\n\n@554791347623\n@${cuzao11.jid.split('@')[0]} \n@${cuzao12.jid.split('@')[0]} \n@${cuzin21.jid.split('@')[0]} \n@${cuzin22.jid.split('@')[0]} \n\n Cortesia de Super Xandão`)
-                      membr.push(cu11.jid)
-                      membr.push(cu12.jid)
-                      membr.push(cuz13.jid)
-                      membr.push(cuz14.jid)
-                      mentions(teks, membr, true)
-                       break
+                    case 'ttp1':
+                    msg.filter.isFiltered(from)
+                    if (args.length < 1)return reply('Cade o texto?')
+                    attp2 = await
+                    getBuffer(`https://api.exteam.xyz/ttp?file&text=${encodeURIComponent(body.slice(5))}`)
+                    client.sendMessage(from, attp2, sticker, {quoted: mek})
+                        break
+                    case 'attp':
+                    if (args.length < 1)return reply('Cade o texto?')
+                    attp2 = await
+                    getBuffer(`https://api.exteam.xyz/attp?file&text=${encodeURIComponent(body.slice(5))}`)
+                    client.sendMessage(from, attp2, sticker, {quoted: mek})
+                        break
 					case 'addsay':
 				    hai = body.slice(8)
 						sayrandom.push(hai)
@@ -1098,8 +1158,8 @@ if (text.includes("placa"))
 						break
                    case 'saylist':
 					teks = 'Esta é a lista de dizeres :\n'
-					for (let awokwkwk of sayrandom) {
-						teks += `╠➥ ${awokwkwk}\n`
+					for (let Lista of sayrandom) {
+						teks += `╠➥ ${Lista}\n`
 					}
 					teks += `Total : ${sayrandom.length}`
 					client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": sayrandom}})
@@ -1183,6 +1243,7 @@ if (text.includes("placa"))
                     break
                    case 'packzera':
                     if (!isPremium) return reply(mess.only.premium)
+                        reply('Pera ae...')
                     client.sendMessage(from, pack(prefix), text, { quoted: mek })
                     break
                    case 'chentai':
@@ -1231,7 +1292,6 @@ if (text.includes("placa"))
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp3', filename: `${anu.title}.mp3`, quoted: mek})
 					break
 				case 'game':
-				
 					anu = await fetchJson(`http://rt-files.000webhostapp.com/tts.php?apikey=rasitech`, {method: 'get'})
 					setTimeout( () => {
 					client.sendMessage(from, '*➸ Responda :* '+anu.result.jawaban+'\n'+anu.result.desk, text, {quoted: mek}) // ur cods
@@ -1847,7 +1907,6 @@ if (text.includes("placa"))
 			     	await limitAdd(sender) 
 			     	break 
             case 'onichan':
-            case 'bodoh':
                 client.sendMessage(from, buff, './lindy/baka.mp3', audio/mp3, {quoted: mek, ptt:true})
                 break
 				case 'daftar':
@@ -3342,7 +3401,7 @@ break
 					client.sendMessage(from, buffer, image, {caption: 'bugado vey', quoted: mek})
 					break
                 case 'logo1':
-                    gh = body.slice(6)
+                    gh = body.slice(7)
                     teks = gh.split("|")[0];
                     if (args.length < 1) return reply('Cadê o texto?')
                     reply('Aguarde...')
