@@ -1073,7 +1073,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                       mentions(teks, membr, true)
                        break
                     case 'ttp1':
-                    msg.filter.isFiltered(from)
                     if (args.length < 1)return reply('Cade o texto?')
                     attp2 = await
                     getBuffer(`https://api.exteam.xyz/ttp?file&text=${encodeURIComponent(body.slice(5))}`)
