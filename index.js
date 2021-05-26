@@ -934,7 +934,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     if (!isGroup)return reply(mess.only.group)
                     setTimeout( () => {
                         client.updatePresence(from, Presence.composing)
-                        reply('https://i.ibb.co/mt4FvHN/Animes.png')
+                        reply("https://i.ibb.co/mt4FvHN/Animes.png")
                         client.sendMessage(from, image)
                     }, 5000)
                     setTimeout( () => {
