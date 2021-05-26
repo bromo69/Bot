@@ -236,10 +236,10 @@ if (!welkom.includes(anu.jid)) return
                 ini_user = client.contacts[num]
                 ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                 teks = `━━━━━━❰⊰❰⊰✾⊱❱⊱❱━━━━━━
-
 Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido 
 
- ⚡ Super Xandão ⚡ `
+ ⚡ Super Xandão ⚡ 
+ ━━━━━━❰⊰❰⊰✾⊱❱⊱❱━━━━━━`
                 group_info = await client.groupMetadata(anu.jid)
                 client.sendMessage(anu.jid, ini_img, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 
@@ -934,7 +934,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     if (!isGroup)return reply(mess.only.group)
                     setTimeout( () => {
                         client.updatePresence(from, Presence.composing)
-                        reply('LINK DA IMG')
+                        reply('https://i.ibb.co/mt4FvHN/Animes.png')
                         client.sendMessage(from, image)
                     }, 5000)
                     setTimeout( () => {
