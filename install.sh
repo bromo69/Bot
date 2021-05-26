@@ -11,5 +11,9 @@ wget -O ~/../usr/share/tessdata/ind.traineddata "https://github.com/tesseract-oc
 npm install
 npm install image-to-base64
 npm install imgur
+pkg install python
+pkg install sl
 
 echo "[*] SENTE A PRESSÃO NENÉM ⚡SUPER XANDÃO⚡"
+echo ' '
+echo 'Se tiver alguma dúvida relacionada ao bot digite \'bash help.sh\''
