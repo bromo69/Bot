@@ -46,13 +46,29 @@ const help = (prefix, sender, pushname2, time) => {
 ╰───────────────────────────────╯
 
 ╭────「 COMANDOS NOVOS 」
-│                          
-┣⊱  *supergay              
+┣⊱  *pubg 
+┣⊱  *battle
+┣⊱  *fogo
+┣⊱  *neon
+┣⊱  *smoke 
+┣⊱  *skytext  
+┣⊱  *grafite  
+┣⊱  *harryp 
+┣⊱  *honey  
+┣⊱  *camuflagem  
+┣⊱  *rainbow  
+┣⊱  *8bit  
+┣⊱  *wolflogo
+┣⊱  *narutologo 
+┣⊱  *skytext
+┣⊱  *cemiterio
+┣⊱  *glow
+┣⊱  *coffee
+┣⊱  *agua   
 ┣⊱  *gostosa               
-┣⊱  *casal                 
-┣⊱  ${prefix}cornos        
+┣⊱  *casal                   
 │                          
-╰──────────────────────
+╰───────────────────
 │═༒︎〘 MENU 〙༒︎══
 │
 ┣⊱  **sticker*
