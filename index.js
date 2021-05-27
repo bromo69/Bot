@@ -234,7 +234,7 @@ if (!welkom.includes(anu.jid)) return
                         fs.unlinkSync(exetwo)
             if (anu.action == 'add') {
                 ini_user = client.contacts[num]
-                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://pt-static.z-dn.net/files/df9/e66f1513bca9d94fefdea96e5a5c59de.jpg`)
                 teks = `━━━━━━❰⊰❰⊰✾⊱❱⊱❱━━━━━━
 Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido 
 
@@ -246,7 +246,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
             }
             if (anu.action == 'remove') {
                 ini_user = client.contacts[num]
-                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/goodbye?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/goodbye?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://pt-static.z-dn.net/files/df9/e66f1513bca9d94fefdea96e5a5c59de.jpg`)
                 client.sendMessage(anu.jid, ini_img, MessageType.image)
             }
                 } catch (e) {
@@ -808,6 +808,14 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 	            	uptime = process.uptime ()
                     putagg = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname2, time)})
+                    break
+                case 'beijar':
+                    if (!isGroup) return reply('So em grupo')
+                    if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
+                        mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+                    teks1 = (body.slice(7))
+                    teks = `eita bixo @${sender.split("@"[0])} deu um beijo em @${mentioned[0].split('@')[0]}`, mentioned, true
+                    client.sendMessage(from, mentioned, teks)
                     break
                 case 'time':
                     setTimeout( () => {
@@ -3290,7 +3298,7 @@ break
 					if (args.length < 1) return reply(mess.blank)
 					p1 = body.slice(7)
 					reply('espere')
-					anu = await getBuffer(`https://api-gdr.herokuapp.com/api/coffee?text=${p1}`, {method: 'get'})
+					anu = await fetchJson(`https://api-gdr.herokuapp.com/api/coffee?text=${p1}`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: 'Coffee', quoted: mek})
 					break
@@ -3302,14 +3310,6 @@ break
                     buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: 'Neon', quoted: mek})
 					break
-                case 'glow':
-                    if (args.length < 1) return reply(mess.blank)
-                    p1 = body.slice(5)
-                    reply('espere')
-                    anu = await fetchJson(`https://mistic-api-br.herokuapp.com/api/neon?text=${p1}`, {method: 'get'})
-                    buffer = await getBuffer(anu.result)
-                    client.sendMessage(from, buffer, image, {caption: 'Diva', quoted: mek})
-                    break
                 case 'smoke':
                     if (args.length < 1) return reply(mess.blank)
                     p1 = body.slice(6)

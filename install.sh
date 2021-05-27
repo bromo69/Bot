@@ -15,5 +15,5 @@ pkg install python
 pkg install sl
 
 echo "[*] SENTE A PRESSÃO NENÉM ⚡SUPER XANDÃO⚡"
-echo ' '
+echo " "
 echo "Se tiver alguma dúvida relacionada ao bot digite \'bash help.sh\'"
