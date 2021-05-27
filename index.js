@@ -3290,7 +3290,7 @@ break
 					if (args.length < 1) return reply(mess.blank)
 					p1 = body.slice(7)
 					reply('espere')
-					anu = await fetchJson(`https://api-gdr.herokuapp.com/api/coffee?text=${p1}`, {method: 'get'})
+					anu = await getBuffer(`https://api-gdr.herokuapp.com/api/coffee?text=${p1}`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: 'Coffee', quoted: mek})
 					break
@@ -3535,16 +3535,6 @@ break
                       buff = await getBuffer(anu.result)
                       client.sendMessage(from, buff, image, {quoted: mek})
                       break
-                case 'glitch':
-					var gh = body.slice(8)
-					var tels3 = gh.split("|")[0];
-					var tels4 = gh.split("|")[1];
-					if (args.length < 1) return reply(mess.blank)
-					reply(mess.wait)
-					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=glitch&text1=${tels3}&text2=${tels4}`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
 				case 'party':
 					if (args.length < 1) return reply(mess.blank)
 					part = body.slice(7)
