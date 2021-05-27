@@ -3381,7 +3381,7 @@ break
                     p2 = gh.split("/")[0];
                     if (args.length < 1) return reply('Texto?')
                     reply('espere')
-                    anu = await getBuffer(`https://api-gdr.herokuapp.com/api/glitch?text=${p1}&text2=${p2}`, {method: 'get'})
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/glitch?text=${p1}&text2=${p2}`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
                     client.sendMessage(from, buffer, image, {caption: 'Bugado'})
                     break
