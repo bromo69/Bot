@@ -1243,26 +1243,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					client.sendMessage(from, anu.result.soal, text, { quoted: mek }) // ur cods
 					}, 0) // 1000 = 1s,
 					break
-                case 'quotemaker':
-					var gh = body.slice(12)
-					var quote = gh.split("|")[0];
-					var wm = gh.split("|")[1];
-					var bg = gh.split("|")[2];
-					const pref = `Usage: \n.}quotemaker teks | marca d'água | tema\n\nEx :\n${prefix}quotemaker este é um exemplo | bicit | aleatório`
-					if (args.length < 1) return reply(pref)
-					reply(mess.wait)
-					anu = await fetchJson(`https://terhambar.com/aw/qts/?kata=${quote}&author=${wm}&tipe=${bg}`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {caption: 'Nih dah jadi kak', quoted: mek})
-					break
-				case 'galaxtext':
-					if (args.length < 1) return reply('o que você quer tio')
-					teks = body.slice(12)
-					if (teks.length > 8) return reply('O texto é longo, com até 8 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/galaxytext?text=${teks}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
 					case 'hashidentifier':
 
 					  hash = `${body.slice(16)}`
@@ -3256,7 +3236,7 @@ break
                 play = body.slice(5)
                 anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?q=${play}&apikey=apivinz`)
                if (anu.error) return reply(anu.error)
-                 infomp3 = `*MUSICA ENCONTRADA!!!*\nTítulo : ${anu.result.title}\nUrl : ${anu.result.source}\nTamanho : ${anu.result.size}\n\n*ESPERE UM POUQUINHO, N SPAME O CHAT*`
+                 infomp3 = `*MÚSICA ENCONTRADA ${pushname2}*\nTítulo: ${anu.result.title}\nLink: ${anu.result.source}\nTamanho: ${anu.result.size}\n\n*PERA AE TO MANDANDO O AUDIO*`
                 buffer = await getBuffer(anu.result.thumbnail)
                 lagu = await getBuffer(anu.result.url_audio)
                 client.sendMessage(from, buffer, image, {quoted: mek, caption: infomp3})
@@ -3270,14 +3250,6 @@ break
                    client.groupUpdateSubject(from, `${body.slice(9)}`)
                    client.sendMessage(from, 'Sucesso, alterou o nome do grupo', text, {quoted: mek})
                    break
-				case 'galaxtext':
-					if (args.length < 1) return reply('o que você quer tio')
-					teks = body.slice(12)
-					if (teks.length > 8) return reply('O texto é longo, com até 8 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/galaxytext?text=${teks}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
                 case 'agua':
 					if (args.length < 1) return reply(mess.blank)
 					anaa = body.slice(5)
@@ -3296,34 +3268,15 @@ break
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: 'BattleField', quoted: mek})
 					break
-                case 'bug':
-					gh = body.slice(7)
-                    p1 = gh.split("/")[0];
-                    p2 = gh.split("/")[1];
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					reply('espere')
-					anu = await fetchJson(`https://restapi-exe.herokuapp.com/api/glitch?text=${p1}&text2=${p2}`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {caption: 'bugado vey', quoted: mek})
-					break
-                case 'logo1':
-                    gh = body.slice(7)
-                    teks = gh.split("|")[0];
-                    if (args.length < 1) return reply('Cadê o texto?')
-                    reply('Aguarde...')
-                    anu = await fetchJson(`https://toddynn.herokuapp.com/api/text3d?text=${teks}`, {method: 'get'})
-                    buffer = await getBuffer(anu.result)
-                    client.sendMessage(from, buffer, image, {caption: 'Lôgo', quoted: mek})
-                    break
                 case 'pubg':
-					gh = body.slice(7)
+					gh = body.slice(5)
                     p1 = gh.split("/")[0];
                     p2 = gh.split("/")[1];
 					if (args.length < 1) return reply('Cadê o texto, hum')
 					reply('espere')
 					anu = await fetchJson(`https://api-gdr.herokuapp.com/api/pubg?text=${p1}&text2=${p2}`, {method: 'get'})
 					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {caption: 'pubg', quoted: mek})
+					client.sendMessage(from, buffer, image, {caption: 'Pubg', quoted: mek})
 					break
                case 'narutologo':
 					if (args.length < 1) return reply(mess.blank)
@@ -3335,7 +3288,7 @@ break
 					break
                case 'coffee':
 					if (args.length < 1) return reply(mess.blank)
-					p1 = body.slice(11)
+					p1 = body.slice(7)
 					reply('espere')
 					anu = await fetchJson(`https://api-gdr.herokuapp.com/api/coffee?text=${p1}`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
@@ -3343,19 +3296,102 @@ break
 					break
                 case 'neon':
 					if (args.length < 1) return reply(mess.blank)
-					p1 = body.slice(5)
+                    p1 = body.slice(5)
 					reply('espere')
 					anu = await fetchJson(`https://mistic-api-br.herokuapp.com/api/neon?text=${p1}`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {caption: 'neon', quoted: mek})
+					client.sendMessage(from, buffer, image, {caption: 'Neon', quoted: mek})
 					break
-                case 'hrptr':
-					if (args.length < 1) return reply(mess.blank)
-					p1 = body.slice(6)
-					reply('espere')
-					anu = await fetchJson(`https://mistic-api-br.herokuapp.com/api/harry?text=${p1}`, {method: 'get'})
+                case 'glow':
+                    if (args.length < 1) return reply(mess.blank)
+                    p1 = body.slice(5)
+                    reply('espere')
+                    anu = await fetchJson(`https://mistic-api-br.herokuapp.com/api/neon?text=${p1}`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {caption: 'Harry Potter', quoted: mek})
+                    client.sendMessage(from, buffer, image, {caption: 'Diva', quoted: mek})
+                    break
+                case 'smoke':
+                    if (args.length < 1) return reply(mess.blank)
+                    p1 = body.slice(6)
+                    reply('espere')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/smoke?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: '...', quoted: mek})
+                    break
+                case 'grafite':
+                    if (args.length < 1) return reply('texto?')
+                    p1 = body.slice(8)
+                    reply('espere')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/grafite?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Grafitado', quoted: mek})
+                    break
+                case 'fogo':
+                    if (args.length < 1) return reply('texto?')
+                    p1 = body.slice(5)
+                    reply('espere')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/flaming?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Fogaréu', quoted: mek})
+                    break
+                case 'harryp':
+                    if (args.length < 1) return reply('texto?')
+                    p1 = body.slice(7)
+                    reply('espere')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/harry-potter?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Harry Potter', quoted: mek})
+                    break
+                case 'honey':
+                    if (args.length < 1) return reply('texto?')
+                    p1 = body.slice(6)
+                    reply('espere')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/mel?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Mel e mt bom', quoted: mek})
+                    break
+                case 'camuflagem':
+                    if (args.length < 1) return reply('texto?')
+                    p1 = body.slice(11)
+                    reply('espere')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/camuflagem?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Camuflado hehe', quoted: mek})
+                    break
+                case 'rainbow':
+                    if (args.length < 1) return reply('texto?')
+                    p1 = body.slice(8)
+                    reply('espere')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/rainbow?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Mts cores, uiiiiiiii...', quoted: mek})
+                    break
+                case '8bit':
+                    gh = body.slice(5)
+                    p1 = gh.split("/")[0];
+                    p2 = gh.split("/")[1];
+                    if (args.length < 1) return reply('Cadê o texto, hum')
+                    reply('espere')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/8bit?text=${p1}&text2=${p2}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Joguinho', quoted: mek})
+                    break
+                case 'glitch':
+                    p1 = gh.split("/")[0];
+                    p2 = gh.split("/")[0];
+                    if (args.length < 1) return reply('Texto?')
+                    reply('espere')
+                    anu = await getBuffer(`https://api-gdr.herokuapp.com/api/glitch?text=${p1}&text2=${p2}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {caption: 'Bugado'})
+                    break
+                case 'wolflogo':
+					if (args.length < 1) return reply('texto?')
+					p1 = body.slice(10)
+					reply('espere')
+					anu = await fetchJson(`https://api-gdr.herokuapp.com/api/wolf111?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
+					client.sendMessage(from, buffer, image, {caption: `${p1} ALPHA`, quoted: mek})
 					break
                 case 'cemiterio':
 					if (args.length < 1) return reply(mess.blank)
@@ -3365,28 +3401,13 @@ break
                     buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: '...I morreu....', quoted: mek})
 					break
-                case 'sombra':
-					if (args.length < 1) return reply(mess.blank)
-					p1 = body.slice(7)
+                case 'skytext':
+					if (args.length < 1) return reply('texto?')
+					p1 = body.slice(8)
 					reply('espere')
 					anu = await fetchJson(`https://mistic-api-br.herokuapp.com/api/shadow?text=${p1}`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: ' ', quoted: mek})
-					break
-				case 'primbonjodoh':
-					var gh = body.slice(14)
-					var gbl1 = gh.split("|")[0];
-					var gbl2 = gh.split("|")[1];
-					anu = await fetchJson(`https://api.vhtear.com/primbonjodoh?nama=${gbl1}&pasangan=${gbl2}&apikey=ANTIGRATISNIHANJENKKK`)
-					reply(anu.result.hasil)
-					break
-				case 'ramaljadian':
-					var gh = body.slice(10)
-					var gbl1 = gh.split("|")[0];
-					var gbl2 = gh.split("|")[1];
-					var gbl3 = gh.split("|")[2];
-					anu = await fetchJson(`https://api.vhtear.com/harijadian?tgl=${gbl1}&bln=${gbl2}&thn=${gbl3}&apikey=ANTIGRATISNIHANJENKKK`)
-					reply(anu.result.hasil)
 					break
                       case 'teste': 
                                         var imgbb = require('imgbb-uploader')
