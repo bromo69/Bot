@@ -16,4 +16,4 @@ pkg install sl
 
 echo "[*] SENTE A PRESSÃO NENÉM ⚡SUPER XANDÃO⚡"
 echo ' '
-echo 'Se tiver alguma dúvida relacionada ao bot digite \'bash help.sh\''
+echo "Se tiver alguma dúvida relacionada ao bot digite \'bash help.sh\'"
