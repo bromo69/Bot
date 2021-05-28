@@ -798,10 +798,10 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
 			const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 			const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', time, color(command), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
-			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;37m]', time, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
-			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', time, color(command), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
-			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;37m]', time, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
+			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', '[\x1b[1;36m${time}\x1b[1;36m]', color(command), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
+			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;36m]', '[\x1b[1;36m${time}\x1b[1;36m]', color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
+			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', '[\x1b[1;36m${time}\x1b[1;36m]', color(command), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
+			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;36m]', '[\x1b[1;36m${time}\x1b[1;36m]', color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
 			switch(command) {
 	            case 'menu':
 	            case 'help':
@@ -813,9 +813,17 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     if (!isGroup) return reply('So em grupo')
                     if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
                         mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
-                    teks1 = (body.slice(7))
-                    teks = `eita bixo @${sender.split("@"[0])} deu um beijo em @${mentioned[0].split('@')[0]}`, mentioned, true
-                    client.sendMessage(from, mentioned, teks)
+                    if (mentioned.length > 1) {
+                        teks = 'beijar\n'
+                        for (let _ of mentioned) {
+                            teks += `@${_.split('@')[0]}\n`
+                        }
+                        mentions(from, mentioned, true)
+                        client.sendMessage(from, mentioned)
+                    } else {
+                        mentions(`Ok, chefe. esse cara aqui: @${mentioned[0].split('@')[0]} agora é admin do grupo!`, mentioned, true)
+                        client.sendMessage(from, mentioned)
+                    }
                     break
                 case 'time':
                     setTimeout( () => {
