@@ -12,6 +12,12 @@ Comandos pra instalar:
 
 * `apt-get upgrade `
 
+* `git clone https://github.com/busyloop/lolcat`
+
+* `cd lolcat/bin`
+
+* `gem install lolcat`
+
 * `pkg install git `
 
 * `pkg install ffmpeg `
