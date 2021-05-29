@@ -206,7 +206,7 @@ async function starts() {
 		console.log(color('[','white'), color('!','red'), color(']','white'), color('Escaneie o QR code acima'))
 	})
 
-	fs.existsSync('./Meliodas-rai.json') && client.loadAuthInfo('./Meliodas-rai.json')
+	fs.existsSync('./BarBar.json') && client.loadAuthInfo('./BarBar.json')
 	client.on('connecting', () => {
 		start('2', 'Calma Rapaiz')
 	})
@@ -214,7 +214,7 @@ async function starts() {
 		success('2', 'Sem pressa parsa')
 	})
 	await client.connect({timeoutMs: 30*1000})
-        fs.writeFileSync('./Meliodas-rai.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
+        fs.writeFileSync('./BarBar.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
 
 	client.on('group-participants-update', async (anu) => {
 if (!welkom.includes(anu.jid)) return
