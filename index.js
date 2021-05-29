@@ -997,6 +997,18 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                   	fs.unlinkSync(ran);
                	   });
                			break
+                        case 'converter':
+                        encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
+                        media = await client.downloadAndSaveMediaMessage(encmedia);
+                        ran = getRandom('.mp3');
+                        exec(`ffmpeg -i ${media} -af equalizer=f=0:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+                            fs.unlinkSync(media);
+                            if (err) return reply('Error!');
+                            hah = fs.readFileSync(ran);
+                            client.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: false, quoted: mek });
+                            fs.unlinkSync(ran);
+                        });
+                            break
 					case 'lista':
 					if (!isGroup) return reply(mess.only.group)
 					if (!isOwner) return reply('Você quem é, o proprietário?')
