@@ -12,6 +12,8 @@ Comandos pra instalar:
 
 * `apt-get upgrade `
 
+* `pkg install ruby -y`
+
 * `git clone https://github.com/busyloop/lolcat`
 
 * `cd lolcat/bin`
