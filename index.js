@@ -206,7 +206,7 @@ async function starts() {
 		console.log(color('[','white'), color('!','red'), color(']','white'), color('Escaneie o QR code acima'))
 	})
 
-	fs.existsSync('./BarBar.json') && client.loadAuthInfo('./BarBar.json')
+	fs.existsSync('./Meliodas-rai.json') && client.loadAuthInfo('./Meliodas-rai.json')
 	client.on('connecting', () => {
 		start('2', 'Calma Rapaiz')
 	})
@@ -214,7 +214,7 @@ async function starts() {
 		success('2', 'Sem pressa parsa')
 	})
 	await client.connect({timeoutMs: 30*1000})
-        fs.writeFileSync('./BarBar.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
+        fs.writeFileSync('./Meliodas-rai.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
 
 	client.on('group-participants-update', async (anu) => {
 if (!welkom.includes(anu.jid)) return
@@ -798,10 +798,10 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
 			const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 			const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', '[\x1b[1;36m${time}\x1b[1;36m]', color(command), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
-			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;36m]', '[\x1b[1;36m${time}\x1b[1;36m]', color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
-			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', '[\x1b[1;36m${time}\x1b[1;36m]', color(command), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
-			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;36m]', '[\x1b[1;36m${time}\x1b[1;36m]', color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
+			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', `\x1b[1;36m${time}\x1b[1;36m`, color(command), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
+			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;36m]', `\x1b[1;36m${time}\x1b[1;36m`, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
+			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', `\x1b[1;36m${time}\x1b[1;36m`, color(command), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
+			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;36m]', `\x1b[1;36m${time}\x1b[1;36m`, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
 			switch(command) {
 	            case 'menu':
 	            case 'help':
@@ -947,21 +947,20 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					mentions(teks, membr, true)
 						break
                     case 'poze':
-                    if (!isGroup)return reply(mess.only.group)
                     setTimeout( () => {
                         client.updatePresence(from, Presence.composing)
                         reply("https://i.ibb.co/mt4FvHN/Animes.png")
-                        client.sendMessage(from, image)
+                        client.sendMessage(from, image, MessageType.image)
                     }, 5000)
                     setTimeout( () => {
                         client.updatePresence(from, Presence.composing)
                         reply('LINK DA IMG')
-                        client.sendMessage(from, image)
+                        client.sendMessage(from, image, MessageType.image)
                     }, 4000)
                     setTimeout( () => {
                         client.updatePresence(from, Presence.composing)
                         reply('LINK DA IMG')
-                        client.sendMessage(from, image)
+                        client.sendMessage(from, image, MessageType.image)
                     }, 3000)
                         break
 				case 'install':
@@ -1048,11 +1047,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					membr.push(gays5.jid)
 					mentions(teks, membr, true)
 					break
-                    case 'pack':
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('Deixa de ser safado cara')
-                    }, 2000)
 					case 'cornos':
 					if (!isGroup) return reply(`Esse comando so pode ser usadoem grupos parsa`)
 					membr = []
@@ -1090,15 +1084,15 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                        break
                     case 'ttp1':
                     if (args.length < 1)return reply('Cade o texto?')
-                    attp2 = await
-                    getBuffer(`https://api.exteam.xyz/ttp?file&text=${encodeURIComponent(body.slice(5))}`)
-                    client.sendMessage(from, attp2, sticker, {quoted: mek})
+                    ttp1 = await
+                    fetchJson(`https://api.exteam.xyz/ttp?file&text=${encodeURIComponent(body.slice(5))}`)
+                    client.sendMessage(from, ttp1, sticker, {quoted: mek})
                         break
                     case 'attp':
                     if (args.length < 1)return reply('Cade o texto?')
-                    attp2 = await
-                    getBuffer(`https://api.exteam.xyz/attp?file&text=${encodeURIComponent(body.slice(5))}`)
-                    client.sendMessage(from, attp2, sticker, {quoted: mek})
+                    attp1 = await
+                    fetchJson(`https://api.exteam.xyz/attp?file&text=${encodeURIComponent(body.slice(5))}`)
+                    client.sendMessage(from, attp1, sticker, {quoted: mek})
                         break
 					case 'addsay':
 				    hai = body.slice(8)
