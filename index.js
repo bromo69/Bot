@@ -713,11 +713,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 	     	const d = fs.readFileSync('./sticker/gay.webp');
             client.sendMessage(from, d, sticker, {quoted: mek})
     }
-          if (messagesC.includes("kkkkkk")){
-			client.updatePresence(from, Presence.composing) 
-	     	const d = fs.readFileSync('./sticker/kkk.webp');
-            client.sendMessage(from, d, sticker, {quoted: mek})
-    }
           if (messagesC.includes("vida")){
 			client.updatePresence(from, Presence.composing) 
 	     	const d = fs.readFileSync('./sticker/vida.webp');
