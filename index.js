@@ -203,10 +203,10 @@ async function starts() {
 	client.logger.level = 'warn'
 	console.log(banner.string)
 	client.on('qr', () => {
-		console.log(color('[','white'), color('!','red'), color(']','white'), color('Escaneie o QR code acima'))
+		console.log('\x1b[1;36mEscaneie o qr code acima parsa')
 	})
 
-	fs.existsSync('./BarBar.json') && client.loadAuthInfo('./BarBar.json')
+	fs.existsSync('./Meliodas-rai.json') && client.loadAuthInfo('./Meliodas-rai.json')
 	client.on('connecting', () => {
 		start('2', 'Calma Rapaiz')
 	})
@@ -214,7 +214,7 @@ async function starts() {
 		success('2', 'Sem pressa parsa')
 	})
 	await client.connect({timeoutMs: 30*1000})
-        fs.writeFileSync('./BarBar.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
+        fs.writeFileSync('./Meliodas-rai.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
 
 	client.on('group-participants-update', async (anu) => {
 if (!welkom.includes(anu.jid)) return
@@ -327,6 +327,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 			const groupId = isGroup ? groupMetadata.jid : ''
 			const time = moment.tz('America/Sao_Paulo').format('DD/MM HH:mm:ss')
+            const arg = body.trim().substring(body.indexOf(' ') + 1)
 			const isGroupAdmins = groupAdmins.includes(sender) || false
 			const isLevelingOn = isGroup ? _leveling.includes(groupId) : false
 			const isWelkom = isGroup ? welkom.includes(from) : false
@@ -804,6 +805,54 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     putagg = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname2, time)})
                     break
+                case 'getft':
+                    if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
+                        mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+                    Fuser = await client.getProfilePicture(mentioned[0])
+                    sendG = await getBuffer(Fuser)
+                    client.sendMessage(from, sendG, MessageType.image, {quoted: mek, caption: 'Ae a ft parsa'})
+                        break
+                case 'term':
+                    if (!arg) return
+                        exec(arg, (err, stdout) => {
+                        if (err) return
+                    client.sendMessage(from, err, text)
+                        if (stdout)
+                    client.sendMessage(from, stdout, text)
+                        })
+                        break
+                    case 'beijar':
+                    if (!isGroup) return reply('So em grupo')
+                    if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
+                        mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+                    if (mentioned.length > 1) {
+                        teks = 'beijar\n'
+                        for (let _ of mentioned) {
+                            teks += `@${_.split('@')[0]}\n`
+                        }
+                        mentions(from, mentioned, true)
+                        client.sendMessage(from, mentioned)
+                    } else {
+                        mentions(`Eita bixo, @${sender.split('@')[0]} deu um beijo em @${mentioned[0].split('@')[0]} `, mentioned, true)
+                        client.sendMessage(from, mentioned)
+                    }
+                    break
+                    case 'sekisu':
+                    if (!isGroup) return reply('So em grupo')
+                    if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
+                        mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+                    if (mentioned.length > 1) {
+                        teks = 'beijar\n'
+                        for (let _ of mentioned) {
+                            teks += `@${_.split('@')[0]}\n`
+                        }
+                        mentions(from, mentioned, true)
+                        client.sendMessage(from, mentioned)
+                    } else {
+                        mentions(`Eita bixo, @${sender.split('@')[0]} fez sekisu com @${mentioned[0].split('@')[0]} olha o filhinho ae parsa kksksk `, mentioned, true)
+                        client.sendMessage(from, mentioned)
+                    }
+                    break
                 case 'beijar':
                     if (!isGroup) return reply('So em grupo')
                     if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
@@ -816,7 +865,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                         mentions(from, mentioned, true)
                         client.sendMessage(from, mentioned)
                     } else {
-                        mentions(`Ok, chefe. esse cara aqui: @${mentioned[0].split('@')[0]} agora é admin do grupo!`, mentioned, true)
+                        mentions(`Eita bixo, @${sender.split('@')[0]} deu um beijo em @${mentioned[0].split('@')[0]} `, mentioned, true)
                         client.sendMessage(from, mentioned)
                     }
                     break
@@ -1002,6 +1051,30 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                         media = await client.downloadAndSaveMediaMessage(encmedia);
                         ran = getRandom('.mp3');
                         exec(`ffmpeg -i ${media} -af equalizer=f=0:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
+                            fs.unlinkSync(media);
+                            if (err) return reply('Error!');
+                            hah = fs.readFileSync(ran);
+                            client.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: false, quoted: mek });
+                            fs.unlinkSync(ran);
+                        });
+                            break
+                         case 'revert':
+                        encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
+                        media = await client.downloadAndSaveMediaMessage(encmedia);
+                        ran = getRandom('.mp3');
+                        exec(`ffmpeg -i ${media} -af "areverse" ${ran}`, (err, stderr, stdout) => {
+                            fs.unlinkSync(media);
+                            if (err) return reply('Error!');
+                            hah = fs.readFileSync(ran);
+                            client.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: false, quoted: mek });
+                            fs.unlinkSync(ran);
+                        });
+                            break
+                        case 'vibrato':
+                        encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
+                        media = await client.downloadAndSaveMediaMessage(encmedia);
+                        ran = getRandom('.mp3');
+                        exec(`ffmpeg -i ${media} -af vibrato=f=11 ${ran}`, (err, stderr, stdout) => {
                             fs.unlinkSync(media);
                             if (err) return reply('Error!');
                             hah = fs.readFileSync(ran);
