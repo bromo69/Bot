@@ -15,8 +15,6 @@ pkg install python
 pkg install sl
 pkg install figlet -y
 clear
-sl |lolcat 
-clear
 echo " "
 echo " "
 echo " "
