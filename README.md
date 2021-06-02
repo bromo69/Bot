@@ -20,6 +20,8 @@ Comandos pra instalar:
 
 * `gem install lolcat`
 
+* `cd $HOME`
+
 * `pkg install git `
 
 * `pkg install ffmpeg `
