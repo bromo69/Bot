@@ -262,8 +262,8 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 
 	client.on('chat-update', async (mek) => {
 		try {
-                        if (!mek.hasNewMessage) return
-                        mek = JSON.parse(JSON.stringify(mek)).messages[0]
+            if (!mek.hasNewMessage) return
+            mek = JSON.parse(JSON.stringify(mek)).messages[0]
 			if (!mek.message) return
 			if (mek.key && mek.key.remoteJid == 'status@broadcast') return
 			if (mek.key.fromMe) return
@@ -312,7 +312,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			}
 
 			const botNumber = client.user.jid
-			const ownerNumber = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"] // Coloque o seu numero
+			const ownerNumber = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net","554792091566@s.whatsapp.net"] // Coloque o seu numero
 			const mod = [ownerNumber,"558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"]// Moderador do bot
 			const adminbotnumber = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"]// Número adm do bot
 			const frendsowner = ["558981210976@s.whatsapp.net","558981246187@s.whatsapp.net","558981309535@s.whatsapp.net"]// Amigo do criador 
@@ -439,7 +439,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			client.updatePresence(from, Presence.composing)
 			reply("5 segundo KKKKKKKK tchau otário 🤙")
 		}, 0)
-	}
+	} 
 	
 	        if (messagesC.includes("macaco")){
 		if (!isGroup) return
@@ -609,11 +609,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 	if (messagesC.includes("fdp")){
 			client.updatePresence(from, Presence.composing)
 			reply("Teu pai")
-	}
-	
-		if (messagesC.includes("corno")){
-			client.updatePresence(from, Presence.composing)
-			reply("Vsfd seu merda")
 	}
 
 		if (messagesC.includes("Lixo")){
@@ -799,27 +794,46 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXECUTADO\x1b[1;37m]', `\x1b[1;36m${time}\x1b[1;36m`, color(command), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
 			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECEBIDO\x1b[1;36m]', `\x1b[1;36m${time}\x1b[1;36m`, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
 			switch(command) {
+/*
+=====================================================================================================================================================================================================================================================
+                                  ___    ____  ___    ____  ______________     ____  ___   ____  __  ______
+                                 /   |  / __ \/   |  / __ \/_  __/  _/ __ \   / __ \/   | / __ \/ / / /  _/
+                                / /| | / /_/ / /| | / /_/ / / /  / // /_/ /  / / / / /| |/ / / / / / // /
+                               / ___ |/ ____/ ___ |/ _, _/ / / _/ // _, _/  / /_/ / ___ / /_/ / /_/ // /
+                              /_/  |_/_/   /_/  |_/_/ |_| /_/ /___/_/ |_|  /_____/_/  |_\___\_\____/___/
+                     
+ _    ______  ____________   ____  ____  ____  ______       __________  __    ____  _________    ____       ___   _____       _________   _____ ___________
+| |  / / __ \/ ____/ ____/  / __ \/ __ \/ __ \/ ____/      / ____/ __ \/ /   / __ \/ ____/   |  / __ \     /   | / ___/      / ____/   | / ___// ____/ ___/
+| | / / / / / /   / __/    / /_/ / / / / / / / __/        / /   / / / / /   / / / / /   / /| | / /_/ /    / /| | \__ \      / /   / /| | \__ \/ __/  \__ \
+| |/ / /_/ / /___/ /___   / ____/ /_/ / /_/ / /___       / /___/ /_/ / /___/ /_/ / /___/ ___ |/ _, _/    / ___ |___/ /     / /___/ ___ |___/ / /___ ___/ /
+|___/\____/\____/_____/  /_/    \____/_____/_____/       \____/\____/_____/\____/\____/_/  |_/_/ |_|    /_/  |_/____/      \____/_/  |_/____/_____//____/
+
+========================================================================================================================================================================================================================================================
+*/
+
 	            case 'menu':
 	            case 'help':
 	            	uptime = process.uptime ()
                     putagg = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname2, time)})
                     break
+                case 'corno':
+                if (!isGroup) return reply('SO EM GRUPO PARSA')
+                if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
+                        mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+                    if (args.length < 0) return reply('Marque a pessoa')
+                    pisk = await client.getProfilePicture(mentioned[0])
+                    foto = await getBuffer(pisk)
+                    var porcentagemcps = ["1%", `2%`, `3%`, `4%`, `5%`, `6%`, `7`, `8%`, `9%`, `10`, `11%`, `12%`,`13%`, `14%`, `15%`, `16%`, `17%`, `18%`, `19%`, `20%`, `21%`, `22`, `23%`, `24%`, `25%`, `26%`, `27%`, `28%`, `27%`, `28%`, `29%`, `30%`, `31%`, `32%`, `33%`, `34%`, `35%`, `36%`, `37%`, `38%`, `39%`, `40%`, `41%`, `42%`, `43%`, `44%`, `45%`, `46%`, `47%`, `48%`, `49%`, `50%`, `51%`, `52%`, `53%`, `54%`, `55%`, `56%`, `57%`, `58%`, `59%`, `60%`, `61%`, `62%`, `63%`, `64%`, `65%`, `66%`, `67%`, `68%`, `69%`, `70%`, `71%`, `72%`, `73%`, `74%`, `75%`, `76%`, `77%`, `78%`, `79%`, `80%`, `81%`, `82%`, `85%`, `84%`, `85%`, `86%`, `87%`, `88%`, `89%`, `90%`, `91%`, `92%`, `93%`, `94%`, `95%`, `96%`, `97%`, `98%`, `99%`, `100%`]
+                    const pcpt = porcentagemcps[Math.floor(Math.random() * porcentagemcps.length)]                
+                    client.sendMessage(from, foto, MessageType.image, {quoted: mek, caption: `Esse e o corno com essa porcentagem ${pcpt}`})
+                        break
                 case 'getft':
                     if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
                         mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
                     Fuser = await client.getProfilePicture(mentioned[0])
                     sendG = await getBuffer(Fuser)
                     client.sendMessage(from, sendG, MessageType.image, {quoted: mek, caption: 'Ae a ft parsa'})
-                        break
-                case 'term':
-                    if (!arg) return
-                        exec(arg, (err, stdout) => {
-                        if (err) return
-                    client.sendMessage(from, err, text)
-                        if (stdout)
-                    client.sendMessage(from, stdout, text)
-                        })
                         break
                     case 'beijar':
                     if (!isGroup) return reply('So em grupo')
@@ -869,52 +883,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                         client.sendMessage(from, mentioned)
                     }
                     break
-                case 'time':
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('10')
-                    }, 10000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('9')
-                    }, 9000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('8')
-                    }, 8000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('7')
-                    }, 7000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('6')
-                    }, 6000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('5')
-                    }, 5000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('4')
-                    }, 4000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('3')
-                    }, 3000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('2')
-                    }, 2000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('1')
-                    }, 1000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('ACABOU O TEMPO!!!!!')
-                    }, 9000)
-                        break
                 case 'alist':
                     putagg = await getBuffer(`https://i.ibb.co/mt4FvHN/Animes.png`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: animes(prefix, pushname2)})
@@ -990,23 +958,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					membr.push(otakus10.jid)
 					mentions(teks, membr, true)
 						break
-                    case 'poze':
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply("https://i.ibb.co/mt4FvHN/Animes.png")
-                        client.sendMessage(from, image, MessageType.image)
-                    }, 5000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('LINK DA IMG')
-                        client.sendMessage(from, image, MessageType.image)
-                    }, 4000)
-                    setTimeout( () => {
-                        client.updatePresence(from, Presence.composing)
-                        reply('LINK DA IMG')
-                        client.sendMessage(from, image, MessageType.image)
-                    }, 3000)
-                        break
 				case 'install':
 			reply(`Aqui os comandos do ⚡Super Xandão⚡ ${pushname2}`)
 			setTimeout( () => {
@@ -1042,10 +993,22 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                   	fs.unlinkSync(media);
                   	if (err) return reply('Error!');
                   	hah = fs.readFileSync(ran);
-                  	client.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: true, quoted: mek });
+                  	client.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: false, quoted: mek });
                   	fs.unlinkSync(ran);
                	   });
                			break
+                    case 'speed':
+                    encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
+                    media = await client.downloadAndSaveMediaMessage(encmedia);
+                    ran = getRandom('.mp3');
+                    exec(`ffmpeg -i ${media} -af "atempo=1.2" ${ran}`, (err, stderr, stdout) => {
+                    fs.unlinkSync(media);
+                    if (err) return reply('Error!');
+                    hah = fs.readFileSync(ran);
+                    client.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: false, quoted: mek });
+                    fs.unlinkSync(ran);
+                   });
+                        break
                         case 'converter':
                         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
                         media = await client.downloadAndSaveMediaMessage(encmedia);
@@ -1104,6 +1067,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 						membr.push(teupai21.jid)
 						mentions(teks, membr, true)
 					break
+                    case ''
 					case 'gays':
 					if (!isGroup) return reply(`Esse comando so pode ser usadoem grupos parsa`)
 					membr = []
@@ -1910,7 +1874,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 				     client.sendMessage(from, 'Descrição alterada com sucesso', text, {quoted: mek})
 				     break
 			case 'google':
-                const googleQuery = body.slice(8)
+                const googleQuery = body.slice(7)
                 if(googleQuery == undefined || googleQuery == ' ') return reply(`*Hasil Pencarian : ${googleQuery}* tidak ditemukan`)
                 google({ 'query': googleQuery }).then(results => {
                 let vars = `_*Resultado da pesquisa : ${googleQuery}*_\n`
@@ -4600,6 +4564,7 @@ break
 				    if (!isOwner) return reply(mess.only.owner)
 					if (!isGroup) return reply(mess.only.group)
 					if (!isadminbot) return reply('Quem é Você?')
+                    if (!ismod) return reply('Somente moderador')
 					var value = body.slice(9)
 					var group = await client.groupMetadata(from)
 					var member = group['participants']
@@ -4614,7 +4579,6 @@ break
 					}
 					client.sendMessage(from, options, text)
 					break
-					//
 				case 'setpp3':
                     if (!isGroup) return reply(mess.only.group)
                     if (!isfrendsowner) return reply('Quem é Você?')
@@ -4631,7 +4595,7 @@ break
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						buff = await client.downloadMediaMessage(encmedia)
 						for (let _ of anu) {
-							client.sendMessage(_.jid, buff, image, {caption: `[ admin bot Broadcast ]\n\n${body.slice(4)}`})
+							client.sendMessage(_.jid, buff, image, {caption: `!!!  A V I S O  !!!\n\n${body.slice(4)}`})
 						}
 						reply('Transmissão enviada')
 					} else {
