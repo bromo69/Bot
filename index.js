@@ -835,6 +835,11 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     sendG = await getBuffer(Fuser)
                     client.sendMessage(from, sendG, MessageType.image, {quoted: mek, caption: 'Ae a ft parsa'})
                         break
+                    case 'eu':
+                    send = 'https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg'
+                    seng = getBuffer(send)
+                    client.sendMessage(from, seng, MessageType.image, {quoted: mek, caption: 'Você kkkkkkkkkk'})
+                    break
                     case 'beijar':
                     if (!isGroup) return reply('So em grupo')
                     if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
