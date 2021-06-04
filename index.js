@@ -837,8 +837,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                         break
                     case 'eu':
                     send = 'https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg'
-                    seng = getBuffer(send)
-                    client.sendMessage(from, seng, MessageType.image, {quoted: mek, caption: 'Você kkkkkkkkkk'})
+                    client.sendMessage(from, send, MessageType.image, {quoted: mek, caption: 'Você kkkkkkkkkk'})
                     break
                     case 'beijar':
                     if (!isGroup) return reply('So em grupo')
@@ -963,33 +962,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					membr.push(otakus10.jid)
 					mentions(teks, membr, true)
 						break
-				case 'install':
-			reply(`Aqui os comandos do ⚡Super Xandão⚡ ${pushname2}`)
-			setTimeout( () => {
-			client.sendMessage(from, Presence.composing)
-			reply("Você irá precisar do Termux instalado e dois celulares, quando pedir y/n digite Y e de enter, se pedir Y/N/M/S ou algo do tipo digite Y e de enter, aí e só ir fazendo isso ate aparecer o qr code")
-			}, 1000)
-			setTimeout( () => {
-				client.updatePresence(from, Presence.composing)
-				reply("termux-setup-storage")
-			}, 2000)
-			setTimeout( () => {
-				client.updatePresence(from, Presence.composing)
-				reply("pkg install git && pkg install ffmpeg && pkg install wget && pkg install nodejs && git clone https://github.com/Meliodas-rai/Bot")
-			}, 3000)
-			setTimeout( () => {
-				client.updatePresence(from, Presence.composing)
-				reply("cd Bot")
-			}, 5000)
-			setTimeout( () => {
-				client.updatePresence(from, Presence.composing)
-				reply("bash install.sh")
-			}, 6000)
-			setTimeout( () => {
-				client.updatePresence(from, Presence.composing)
-				reply("npm start")
-			}, 7000)
-					break
 					case 'bass':
                		encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
                		media = await client.downloadAndSaveMediaMessage(encmedia);
@@ -1072,7 +1044,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 						membr.push(teupai21.jid)
 						mentions(teks, membr, true)
 					break
-                    case ''
 					case 'gays':
 					if (!isGroup) return reply(`Esse comando so pode ser usadoem grupos parsa`)
 					membr = []
