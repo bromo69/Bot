@@ -9,7 +9,6 @@ const {
     GroupSettingChange
 } = require('@adiwajshing/baileys')
 const { color, bgcolor } = require('./lib/color')
-const { eu } = require('./Fxc7/eu')
 const imageToBase64 = require('image-to-base64')
 const { help } = require('./src/help')
 const {help1} = require('./src/help1')
@@ -76,6 +75,7 @@ const antilink = JSON.parse(fs.readFileSync('./database/json/antilink.json'))
 const event = JSON.parse(fs.readFileSync('./database/json/event.json'))
 const _level = JSON.parse(fs.readFileSync('./database/user/level.json'))
 const _limit = JSON.parse(fs.readFileSync('./database/json/limit.json'))
+const sexoD = JSON.parse(fs.readFileSync('./sexo.json'))
 /*********** FIM DO CARREGADOR DE ARQUIVO ***********/
 
 /********** FUNÇÕES ***************/
@@ -90,6 +90,7 @@ const getLevelingXp = (userId) => {
                 return _level[position].xp
             }
         }
+
 
         const getLevelingLevel = (userId) => {
             let position = false
@@ -146,7 +147,44 @@ const getLevelingXp = (userId) => {
             _level.push(obj)
             fs.writeFileSync('./database/user/level.json', JSON.stringify(_level))
         }
-        
+        // LISTA 
+        const getLista = (userId) => {
+            let position = false
+            Object.keys(_lista).forEach((i) => {
+                if (_lista[i].jid === userId) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return _lista[position].xp
+            }
+        }
+
+
+        const gettxt = (userId) => {
+            let position = false
+            Object.keys(_lista).forEach((i) => {
+                if (_lista[i].jid === userId) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return _lista[position].lista
+            }
+        }        
+
+        const getListaId = (userId) => {
+            let position = false
+            Object.keys(_lista).forEach((i) => {
+                if (_lista[i].jid === userId) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return _lista[position].jid
+            }
+        }
+        // FIM DA LISTA
                 const getLimit = (sender) => {
                 let position = false
               Object.keys(limit).forEach ((i) => {
@@ -836,7 +874,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     client.sendMessage(from, sendG, MessageType.image, {quoted: mek, caption: 'Ae a ft parsa'})
                         break
                     case 'eu':
-                    send = 'https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg'
+                    send = `https://i.ibb.co/TthtCSG/pakipariu-doido.jpg`
                     client.sendMessage(from, send, MessageType.image, {quoted: mek, caption: 'Você kkkkkkkkkk'})
                     break
                     case 'beijar':
@@ -978,7 +1016,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
                     media = await client.downloadAndSaveMediaMessage(encmedia);
                     ran = getRandom('.mp3');
-                    exec(`ffmpeg -i ${media} -af "atempo=1.2" ${ran}`, (err, stderr, stdout) => {
+                    exec(`ffmpeg -i ${media} -af "atempo=1.8" ${ran}`, (err, stderr, stdout) => {
                     fs.unlinkSync(media);
                     if (err) return reply('Error!');
                     hah = fs.readFileSync(ran);
@@ -1114,6 +1152,17 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     fetchJson(`https://api.exteam.xyz/attp?file&text=${encodeURIComponent(body.slice(5))}`)
                     client.sendMessage(from, attp1, sticker, {quoted: mek})
                         break
+                    case 'listar':
+                    if (!isGroup) return reply('Só em grupo')
+                        post = body.slice(7)
+                    sexoD.push(post)
+                    fs.writeFileSync('./sexo.json', JSON.stringify(sexoD))
+                    break
+                    case 'alistar':
+                    if (!isGroup) return reply('Só em grupo')
+                        DVL = sexoD[Math.floor(Math.random() * (sexoD.length))]
+                    client.sendMessage(from, '*'+DVL+'*', text, {quoted: mek})
+                    break
 					case 'addsay':
 				    hai = body.slice(8)
 						sayrandom.push(hai)
@@ -1993,7 +2042,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                  randIndex = Math.floor(Math.random() * jsonData.length);
                  randKey = jsonData[randIndex];
                 hasil = await getBuffer(randKey.result)
-                sendImage(hasil, mek, '*Narutoooooo!!!!*')
+                client.sendMessage(from, hasil, MessageType.image, {quoted: mek, caption: '*Jutso discurso No jutsu!!!!*'})
 				break
                 case 'alerta':
 				 data = fs.readFileSync('./src/alerta.js');
@@ -2122,7 +2171,7 @@ client.sendMessage(from, tujuh, MessageType.audio, {quoted: mek, mimetype: 'audi
 break
 case 'meliodas':
 tujuh = fs.readFileSync('./assets/edit.mp4');
-client.sendMessage(from, tujuh, MessageType.video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
+client.sendMessage(from, tujuh, MessageType.video, {quoted: mek, caption: 'PEITA A LENDA VAI', mimetype: 'video/mp4', ptt:true})
 break
 case 'beat10':
 tujuh = fs.readFileSync('./assets/beatd.mp3');
