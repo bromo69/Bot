@@ -58,7 +58,10 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  *camuflagem  
 ┣⊱  *rainbow  
 ┣⊱  *8bit  
-┣⊱  *wolflogo
+┣⊱  *wolf
+┣⊱  *neko
+┣⊱  *neko1
+┣⊱  *lolis
 ┣⊱  *narutologo 
 ┣⊱  *skytext
 ┣⊱  *cemiterio
