@@ -9,6 +9,7 @@ const {
     GroupSettingChange
 } = require('@adiwajshing/baileys')
 const { color, bgcolor } = require('./lib/color')
+const { hehehe } = require('./hehehe')
 const imageToBase64 = require('image-to-base64')
 const { help } = require('./src/help')
 const {help1} = require('./src/help1')
@@ -851,7 +852,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 
 	            case 'menu':
 	            case 'help':
-	            	uptime = process.uptime ()
+	            	uptime = process.uptime()
                     putagg = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
                     client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname2, time)})
                     break
@@ -866,6 +867,10 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     const pcpt = porcentagemcps[Math.floor(Math.random() * porcentagemcps.length)]                
                     client.sendMessage(from, foto, MessageType.image, {quoted: mek, caption: `Esse e o corno com essa porcentagem ${pcpt}`})
                         break
+                case 'hehe':
+                    foto = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
+                    client.sendMessage(from, foto, image, {quoted: mek, caption: hehehe(prefix)})
+                    break
                 case 'getft':
                     if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
                         mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
@@ -1045,6 +1050,18 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                             if (err) return reply('Error!');
                             hah = fs.readFileSync(ran);
                             client.sendMessage(from, hah, audio, { mimetype: 'audio/mp4', ptt: false, quoted: mek });
+                            fs.unlinkSync(ran);
+                        });
+                            break
+                        case 'Videore':
+                        encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
+                        media = await client.downloadAndSaveMediaMessage(encmedia);
+                        ran = getRandom('.mp4');
+                        exec(`ffmpeg -i ${media} -af "areverse" ${ran}`, (err, stderr, stdout) => {
+                            fs.unlinkSync(media);
+                            if (err) return reply('Error!');
+                            hah = fs.readFileSync(ran);
+                            client.sendMessage(from, hah, video, { mimetype: 'video/mp4', quoted: mek });
                             fs.unlinkSync(ran);
                         });
                             break
@@ -1278,9 +1295,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, video, {mimetype: 'video/mp4', filename: `${anu.title}.mp4`, quoted: mek})
 					break
-		case 'iri':
-			client.sendPtt(from, './lindy/iri.mp3', {quoted: mek, ptt:true})
-			break
 				case 'ytmp3':
 			    	if (!isPremium) return reply(mess.only.premium)
                    reply(mess.wait)
@@ -1697,63 +1711,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					case 'menu2':
 					client.sendMessage(from, menu2(prefix) , text, { quoted: mek })
 					break
-				case 'textsky':
-					if (args.length < 1) return reply(mess.blank)
-					tels = body.slice(9)
-					if (tels.ength > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					anu = await fetchJson(`https://hujanapi.herokuapp.com/api/sky_online?text=${tels}&apiKey=freetrial`, {method: 'get'})
-					buff = await getBuffer(anu.result.result)
-					client.sendMessage(from, buff, image, {quoted: mek})
-					break
-				case 'rize':
-					reply(mess.wait)
-					anu = await fetchJson(`https://api.fdci.se/rep.php?gambar=anime+rize`, {method: 'get'})
-					ri = JSON.parse(JSON.stringify(anu));
-					ze =  ri[Math.floor(Math.random() * ri.length)];
-					nye = await getBuffer(ze)
-					client.sendMessage(from, nye, image, { caption: 'rize chan!!', quoted: mek })
-					await limitAdd(sender) 	
-					break 
-				case 'mia':
-				  	if (!isNsfw) return reply(' *Ative o modo nsfw, para ativar use: .modonsfw on* ')
-					reply(mess.wait)
-					anu = await fetchJson(`https://testesw.herokuapp.com/`, {method: 'get'})
-					ri = JSON.parse(JSON.stringify(anu));
-					ze =  ri[Math.floor(Math.random() * ri.length)];
-					nye = await getBuffer(ze)
-					client.sendMessage(from, nye, image, { caption: 'i love you, mia 🥺❤️', quoted: mek })
-					await limitAdd(sender) 	
-					break 
-				case 'texteng':
-					if (args.length < 1) return reply(mess.blank)
-					tels = body.slice(9)
-					if (tels.ength > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					anu = await fetchJson(`http://melodicxt.herokuapp.com/api/txtcustom?theme=sand_engraved&text=${tels}&apiKey=administrator`, {method: 'get'})
-					buff = await getBuffer(anu.result)
-					client.sendMessage(from, buff, image, {quoted: mek})
-					break
-                case 'wolflogo':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      gh = body.slice(9)
-                      gl1 = gh.split("|")[0];
-                      gl2 = gh.split("|")[1];
-                      reply(mess.wait)
-                      anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=wolflogo1&text1=${gl1}&text2=${gl2}`, {method: 'get'})
-                      buff = await getBuffer(anu.result)
-                      client.sendMessage(from, buff, image, {quoted: mek})
-                      break
-                case 'lionlogo':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      gh = body.slice(9)
-                      gl1 = gh.split("|")[0];
-                      gl2 = gh.split("|")[1];
-                      reply(mess.wait)
-                      anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=lionlogo&text1=${gl1}&text2=${gl2}`, {method: 'get'})
-                      buff = await getBuffer(anu.result)
-                      client.sendMessage(from, buff, image, {quoted: mek})
-                      break
 					break
 				case 'nulis':
 				case 'tulis':
@@ -3381,6 +3338,14 @@ break
                     buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: 'Neon', quoted: mek})
 					break
+                case 'logo':
+                    if (args.length < 1) return reply(mess.blank)
+                    p1 = body.slice(5)
+                    reply('espere')
+                    anu = await fetchJson(`https://toddynn.herokuapp.com/api/text3d?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.results)
+                    client.sendMessage(from, buffer, image, {caption: 'Neon', quoted: mek})
+                    break
                 case 'smoke':
                     if (args.length < 1) return reply(mess.blank)
                     p1 = body.slice(6)
@@ -3447,6 +3412,7 @@ break
                     buffer = await getBuffer(anu.result)
                     client.sendMessage(from, buffer, image, {caption: 'Joguinho', quoted: mek})
                     break
+
                 case 'glitch':
                     p1 = gh.split("/")[0];
                     p2 = gh.split("/")[0];
@@ -3456,29 +3422,30 @@ break
                     buffer = await getBuffer(anu.result)
                     client.sendMessage(from, buffer, image, {caption: 'Bugado'})
                     break
-                case 'wolflogo':
+                case 'wolf':
 					if (args.length < 1) return reply('texto?')
-					p1 = body.slice(10)
+					p1 = body.slice(5)
 					reply('espere')
 					anu = await fetchJson(`https://api-gdr.herokuapp.com/api/wolf111?text=${p1}`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {caption: `${p1} ALPHA`, quoted: mek})
+					client.sendMessage(from, buffer, image, {caption: `Metálico`, quoted: mek})
 					break
                 case 'cemiterio':
 					if (args.length < 1) return reply(mess.blank)
-					p1 = body.slice(9)
+					p1 = body.slice(10)
 					reply('espere')
-					anu = await fetchJson(`https://mistic-api-br.herokuapp.com/api/cimiterio?text=${p1}`, {method: 'get'})
-                    buffer = await getBuffer(anu.result)
+					anu = getBuffer(`https://mistic-api-br.herokuapp.com/api/cimiterio?text=${p1}`, {method: 'get'})
+                    buffer = await fetchJson(anu.result)
 					client.sendMessage(from, buffer, image, {caption: '...I morreu....', quoted: mek})
 					break
-                case 'skytext':
+                case 'lol':
 					if (args.length < 1) return reply('texto?')
-					p1 = body.slice(8)
+					p1 = body.slice(4)
+                    // fil = body.slice(5)
 					reply('espere')
-					anu = await fetchJson(`https://mistic-api-br.herokuapp.com/api/shadow?text=${p1}`, {method: 'get'})
+					anu = await fetchJson(`https://api-exteam.herokuapp.com/api/photooxy/filter?text=${p1}&tema=avatar-champions&filtro=0`, {method: 'get'})
                     buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {caption: ' ', quoted: mek})
+					client.sendMessage(from, buffer, image, {caption: 'Lolzinho...', quoted: mek})
 					break
                       case 'teste': 
                                         var imgbb = require('imgbb-uploader')
@@ -3676,16 +3643,6 @@ break
 					buff = await getBuffer(anu.result)
 					client.sendMessage(from, buff, image, {quoted: mek})
 					break
-                case 'wolflogo':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      gh = body.slice(9)
-                      gl1 = gh.split("|")[0];
-                      gl2 = gh.split("|")[1];
-                      reply(mess.wait)
-                      anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=wolflogo1&text1=${gl1}&text2=${gl2}`, {method: 'get'})
-                      buff = await getBuffer(anu.result)
-                      client.sendMessage(from, buff, image, {quoted: mek})
-                      break
 					case 'spamcall':
           if (!isPremium) return reply(mess.only.premi)
           reply('Espere..')
