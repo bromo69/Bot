@@ -1344,78 +1344,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					  frhan.sendMessage(from, hasilhash, text, {quoted: mek})
 					  await limitAdd(sender)
 					  break 
-                case 'tahta':
-					if (args.length < 1) return reply(mess.blank)
-					teks = body.slice(7)
-					if (teks.length > 9) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/hartatahta?text=${teks}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Harta Tahta '+teks})
-					break
-				case 'testing':
-					var gh = body.slice(5)
-					var gbl3 = gh.split("|")[0];
-					var gbl4 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					reply(mess.wait)
-					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/watercolour?text1=${gbl3}&text2=${gbl4}&apikey=xptnbot352`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
-				case 'snowrite':
-					var gh = body.slice(10)
-					var gbl7 = gh.split("|")[0];
-					var gbl8 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					reply(mess.wait)
-					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/snowwrite?text1=${gbl7}&text2=${gbl8}&apikey=xptnbot352`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
-				case 'marvelogo':
-					var gh = body.slice(9)
-					var gbl5 = gh.split("|")[0];
-					var gbl6 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					reply(mess.wait)
-					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/marvellogo?text1=${gbl5}&text2=${gbl6}&apikey=xptnbot352`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
-				case 'lovemake':
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					love = body.slice(10)
-					if (love.length > 12) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/lovemessagetext?text=${love}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: ' '+love})
-					break
-				case 'thunder':
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					thun = body.slice(9)
-					if (thun.length > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/thundertext?text=${thun}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: ' '+thun})
-					break
-                case 'stiltext':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      gh = body.slice(11)
-                      gl1 = gh.split("|")[0];
-                      gl2 = gh.split("|")[1];
-                      buff = await getBuffer(`https://api.vhtear.com/silktext?text=${gl1}&text2=${gl2}&apikey=ANTIGRATISNIHANJENKKK`)
-                      reply(mess.wait)
-                      client.sendMessage(from, buff, image, {quoted: mek, caption: 'thund ni '+gh})
-                      break
-                case 'testing':
-					var gh = body.slice(9)
-					coli1 = gh.split("|")[0];
-					coli2 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto?')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://zeksapi.herokuapp.com/api/watercolour?text1=${coli1}&text2=${coli2}&apikey=xptnbot352`)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
                 case 'covidbr':
                     anu = await fetchJson(`https://api-gdr.herokuapp.com/api/covidbr`)
                     resp = `Ativos: ${anu.ativo}\nCasos: ${anu.casos}\nCasos Hoje: ${anu.casos_hoje}\nCasos Criticos: ${anu.criticos}\nMortes: ${anu.mortes}\nMortes Hoje: ${anu.mortes_hoje}`
@@ -1430,33 +1358,6 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					party = await getBuffer(`https://api.vhtear.com/partytext?text=${coli1}&text2=${coli2}&apikey=ANTIGRATISNIHANJENKKK`)
 					client.sendMessage(from, party, image, {quoted: mek})
 					break
-                case 'ninjalogo':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      gh = body.slice(11)
-                      gl1 = gh.split("|")[0];
-                      gl2 = gh.split("|")[1];
-                      reply(mess.wait)
-                      anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=ninjalogo&text1=${gl1}&text2=${gl2}`, {method: 'get'})
-                      buff = await getBuffer(anu.result)
-                      client.sendMessage(from, buff, image, {quoted: mek})
-                      break
-		case 'tahta':
-                tahta = `${body.slice(7)}`
-                     if (args.length < 1) return reply('Cadê o texto, mano??')
-                     if (args.length > 10) return reply('mínimo 10 linhas')
-                     buff = await getBuffer(`https://api.zeks.xyz/api/hartatahta?text=${tahta}&apikey=apivinz`, {method: 'get'})
-                     anker.sendMessage(from, buff, image, {quoted: mek, caption: `Tesouro do trono ${tahta}`})
-                  await limitAdd(sender) 
-                  break  
-                    case 'glitch':
-                    gh = body.slice(7)
-                    teks1 = gh.split("|")[0];
-                    teks2 = gh.split("|")[1];
-                    data = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=glitch&text1=${teks1}&text2=${teks2}&apikey=BotWeA`, {method: 'get'})
-                    hasil = await getBuffer(data.result)
-                    anker.sendMessage(from, hasil, image, {quoted: mek, caption: 'neh...'})
-                    await limitAdd(sender)
-                    break
           case 'snack':
 				if (args.length < 1) return reply('Cadê o url mano?')
 					if (!isUrl(args[0]) && !args[0].includes('sck')) return reply(mess.error.Iv)
@@ -3412,10 +3313,10 @@ break
                     buffer = await getBuffer(anu.result)
                     client.sendMessage(from, buffer, image, {caption: 'Joguinho', quoted: mek})
                     break
-
                 case 'glitch':
+                    gh = body.slice(7)
                     p1 = gh.split("/")[0];
-                    p2 = gh.split("/")[0];
+                    p2 = gh.split("/")[1];
                     if (args.length < 1) return reply('Texto?')
                     reply('espere')
                     anu = await fetchJson(`https://api-gdr.herokuapp.com/api/glitch?text=${p1}&text2=${p2}`, {method: 'get'})
@@ -3430,12 +3331,29 @@ break
                     buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: `Metálico`, quoted: mek})
 					break
+                case 'neko':
+                if (!isNsfw) return reply('Ative o modo *nsfw on, para poder usar este comando')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/nekohentai`)
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {quoted: mek, caption: 'heheheheheh'})
+                    break
+                case 'lolis':
+                    if (!isGroup) return reply('Só em grupo')
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/nekonime`)
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Lolizinha'})
+                    break
+                case 'neko1':
+                    anu = await fetchJson(`https://api-gdr.herokuapp.com/api/nekonime`)
+                    buffer = await getBuffer(anu.result)
+                    client.sendMessage(from, buffer, image, {quoted: mek, caption: '...'})
+                    break
                 case 'cemiterio':
 					if (args.length < 1) return reply(mess.blank)
 					p1 = body.slice(10)
 					reply('espere')
-					anu = getBuffer(`https://mistic-api-br.herokuapp.com/api/cimiterio?text=${p1}`, {method: 'get'})
-                    buffer = await fetchJson(anu.result)
+					anu = await fetchJson(`https://mistic-api-br.herokuapp.com/api/cimiterio?text=${p1}`, {method: 'get'})
+                    buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image, {caption: '...I morreu....', quoted: mek})
 					break
                 case 'lol':
@@ -3469,180 +3387,6 @@ break
                                                  reply('Use a foto!')
                                           }
                                              break
-                case 'tahta':
-					if (args.length < 1) return reply(mess.blank)
-					teks = body.slice(7)
-					if (teks.length > 9) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/hartatahta?text=${teks}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Harta Tahta '+teks})
-					break
-				case 'testing':
-					var gh = body.slice(5)
-					var gbl3 = gh.split("|")[0];
-					var gbl4 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					reply(mess.wait)
-					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/watercolour?text1=${gbl3}&text2=${gbl4}&apikey=xptnbot352`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
-				case 'snowrite':
-					var gh = body.slice(10)
-					var gbl7 = gh.split("|")[0];
-					var gbl8 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					reply(mess.wait)
-					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/snowwrite?text1=${gbl7}&text2=${gbl8}&apikey=xptnbot352`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
-				case 'marvelogo':
-					var gh = body.slice(9)
-					var gbl5 = gh.split("|")[0];
-					var gbl6 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					reply(mess.wait)
-					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/marvellogo?text1=${gbl5}&text2=${gbl6}&apikey=xptnbot352`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
-				case 'animehug':
-					ranp = getRandom('.gif')
-					rano = getRandom('.webp')
-					anu = await fetchJson('https://tobz-api.herokuapp.com/api/hug&apikey=BotWeA', {method: 'get'})
-					if (anu.error) return reply(anu.error)
-					exec(`wget ${anu.result} -O ${ranp} && ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${rano}`, (err) => {
-						fs.unlinkSync(ranp)
-						if (err) return reply(mess.error.stick)
-						buffer = fs.readFileSync(rano)
-						client.sendMessage(from, buffer, sticker, {quoted: mek})
-						fs.unlinkSync(rano)
-					})
-					break
-				case 'lovemake':
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					love = body.slice(10)
-					if (love.length > 12) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/lovemessagetext?text=${love}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: ' '+love})
-					break
-				case 'thunder':
-					if (args.length < 1) return reply('Cadê o texto, hum')
-					thun = body.slice(9)
-					if (thun.length > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/thundertext?text=${thun}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: ' '+thun})
-					break
-                case 'stiltext':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      gh = body.slice(11)
-                      gl1 = gh.split("|")[0];
-                      gl2 = gh.split("|")[1];
-                      buff = await getBuffer(`https://api.vhtear.com/silktext?text=${gl1}&text2=${gl2}&apikey=ANTIGRATISNIHANJENKKK`)
-                      reply(mess.wait)
-                      client.sendMessage(from, buff, image, {quoted: mek, caption: 'thund ni '+gh})
-                      break
-                case 'teste':
-					var gh = body.slice(9)
-					coli1 = gh.split("|")[0];
-					coli2 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto?')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://zeksapi.herokuapp.com/api/watercolour?text1=${coli1}&text2=${coli2}&apikey=xptnbot352`)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
-				case 'teste2':
-					var gh = body.slice(9)
-					coli1 = gh.split("|")[0];
-					coli2 = gh.split("|")[1];
-					if (args.length < 1) return reply('Cadê o texto?')
-					reply(mess.wait)
-					party = await getBuffer(`https://api.vhtear.com/partytext?text=${coli1}&text2=${coli2}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, party, image, {quoted: mek})
-					break
-                case 'ninjalogo':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      gh = body.slice(11)
-                      gl1 = gh.split("|")[0];
-                      gl2 = gh.split("|")[1];
-                      reply(mess.wait)
-                      anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=ninjalogo&text1=${gl1}&text2=${gl2}`, {method: 'get'})
-                      buff = await getBuffer(anu.result)
-                      client.sendMessage(from, buff, image, {quoted: mek})
-                      break
-				case 'party':
-					if (args.length < 1) return reply(mess.blank)
-					part = body.slice(7)
-					if (part.length > 20) return reply('O texto é muito longo, até 20 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/partytext?text=${part}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {caption: 'Aqui mana', quoted: mek})
-					break
-				case 'rtext':
-					if (args.length < 1) return reply(mess.blank)
-					tels5 = body.slice(7)
-					if (tels5.length > 10) return reply('O texto é longo, com até 10 caracteres')
-					reply(mess.wait)
-					buffer = await getBuffer(`https://api.vhtear.com/romancetext?text=${tels5}&apikey=ANTIGRATISNIHANJENKKK`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: tels5})
-					break
-				case 'water':
-					if (args.length < 1) return reply(mess.blank)
-					tels = body.slice(7)
-					if (tels.length > 15) return reply('O texto é muito longo, até 20 caracteres')
-					reply(mess.wait)
-					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/tfire?text=${tels}&apikey=xptnbot352`, {method: 'get'})
-					buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {quoted: mek})
-					break
-				case 'firetext':
-					if (args.length < 1) return reply(mess.blank)
-					tels = body.slice(7)
-					if (tels.ength > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/tlight?text=${tels}&apikey=xptnbot352`, {method: 'get'})
-					buff = await getBuffer(anu.result)
-					client.sendMessage(from, buff, image, {quoted: mek})
-					break
-				case 'textdark':
-					if (args.length < 1) return reply(mess.blank)
-					tels = body.slice(9)
-					if (tels.ength > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					anu = await fetchJson(`http://melodicxt.herokuapp.com/api/txtcustom?theme=metal_dark_gold&text=${tels}&apiKey=administrator`, {method: 'get'})
-					buff = await getBuffer(anu.result)
-					client.sendMessage(from, buff, image, {quoted: mek})
-					break
-				case 'textblue':
-					if (args.length < 1) return reply(mess.blank)
-					tels = body.slice(9)
-					if (tels.ength > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					anu = await fetchJson(`http://melodicxt.herokuapp.com/api/txtcustom?theme=blue_metal&text=${tels}&apiKey=administrator`, {method: 'get'})
-					buff = await getBuffer(anu.result)
-					client.sendMessage(from, buff, image, {quoted: mek})
-					break
-				case 'textsky':
-					if (args.length < 1) return reply(mess.blank)
-					tels = body.slice(9)
-					if (tels.ength > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					anu = await fetchJson(`https://hujanapi.herokuapp.com/api/sky_online?text=${tels}&apiKey=freetrial`, {method: 'get'})
-					buff = await getBuffer(anu.result.result)
-					client.sendMessage(from, buff, image, {quoted: mek})
-					break
-				case 'texteng':
-					if (args.length < 1) return reply(mess.blank)
-					tels = body.slice(9)
-					if (tels.ength > 10) return reply('O texto é longo, até 9 caracteres')
-					reply(mess.wait)
-					anu = await fetchJson(`http://melodicxt.herokuapp.com/api/txtcustom?theme=sand_engraved&text=${tels}&apiKey=administrator`, {method: 'get'})
-					buff = await getBuffer(anu.result)
-					client.sendMessage(from, buff, image, {quoted: mek})
-					break
 					case 'spamcall':
           if (!isPremium) return reply(mess.only.premi)
           reply('Espere..')
