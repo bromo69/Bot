@@ -663,13 +663,13 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			tujuh = fs.readFileSync('./assets/belmiro.mp3');
             client.sendMessage(from, tujuh, MessageType.audio, {quoted: mek, mimetype: 'audio/mp4', ptt:true})
 	}
-	
+/*	
 			if (messagesC.includes("*menu")){
 			client.updatePresence(from, Presence.composing)
 			tujuh = fs.readFileSync('./assets/pressao.mp3');
             client.sendMessage(from, tujuh, MessageType.audio, {quoted: mek, mimetype: 'audio/mp4', ptt:true})
 	}
-	
+	*/
 			if (messagesC.includes("@558981246187")){
 			client.updatePresence(from, Presence.composing)
 			tujuh = fs.readFileSync('./assets/chapa.mp3');
@@ -789,10 +789,10 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
 			const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 			const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b1;32mEXECUTADO\x1b[1;37m', `\x1b[1;36m${time}\x1b[1;36m`, color(command), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
-			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b1;31mRECEBIDO\x1b[1;36m', `\x1b[1;36m${time}\x1b[1;36m`, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'args :', color(args.length))
-			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b1;32mEXECUTADO\x1b[1;37m', `\x1b[1;36m${time}\x1b[1;36m`, color(command), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
-			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b1;31mRECEBIDO\x1b[1;36m', `\x1b[1;36m${time}\x1b[1;36m`, color('Menssagem'), 'do parsa', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
+			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '\x1b[1;32mEXECUTADO\x1b[1;37m', `\x1b[1;36m${time}\x1b[1;36m`, color(command), 'DO MERO MORTAL', color(sender.split('@')[0]), 'args :', color(args.length))
+			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '\x1b[1;31mRECEBIDO\x1b[1;36m', `\x1b[1;36m${time}\x1b[1;36m`, color('Menssagem'), 'DO MERO MORTAL', color(sender.split('@')[0]), 'args :', color(args.length))
+			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '\x1b[1;32mEXECUTADO\x1b[1;37m', `\x1b[1;36m${time}\x1b[1;36m`, color(command), 'DO MERO MORTAL', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
+			if (!isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '\x1b[1;31mRECEBIDO\x1b[1;36m', `\x1b[1;36m${time}\x1b[1;36m`, color('Menssagem'), 'DO MERO MORTAL', color(sender.split('@')[0]), 'No grupo', color(groupName), 'args :', color(args.length))
 			switch(command) {
 /*
 =====================================================================================================================================================================================================================================================
@@ -4039,7 +4039,7 @@ break
 						console.log(muehe)
 						reply(muehe)
 					} else {
-						console.log(color('[ERRO]','red'), 'Eita bixo, comando não registrado', color(sender.split('@')[0]))
+						console.log(color('ERRO','red'), 'COMANDO NÃO REGISTRADO...', color(sender.split('@')[0]))
 					}
                            }
 		} catch (e) {
