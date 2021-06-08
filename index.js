@@ -851,11 +851,13 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 */
 
 	            case 'menu':
-	            case 'help':
-	            	uptime = process.uptime()
-                    putagg = await getBuffer(`https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`)
-                    client.sendMessage(from, putagg, image, {quoted: mek, caption: help(prefix, sender, pushname2, time)})
-                    break
+                case 'help':
+                uptime = process.uptime()
+                var setP  = ["https://i.ibb.co/SXdhh6T/Xand-o.jpg", `https://i.ibb.co/Lpv80kh/Super-Xand-o.jpg`, `https://i.ibb.co/7rB7NNx/Super-Xandao.jpg`, `https://i.ibb.co/ydDQTXR/campeao.jpg`, `https://i.ibb.co/pbL2yrM/zeus.jpg`, `https://i.ibb.co/2MXkhDj/Xandaozera.jpg`]
+                const getFoto = setP[Math.floor(Math.random() * setP.length)]
+                const putagg = await getBuffer(getFoto)
+                client.sendMessage(from, putagg, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚡Super Xandão⚡", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./sticker/xandao.webp')} } }, caption: help(prefix, sender, pushname2, time)})
+                  break
                 case 'corno':
                 if (!isGroup) return reply('SO EM GRUPO PARSA')
                 if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
@@ -879,8 +881,9 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                     client.sendMessage(from, sendG, MessageType.image, {quoted: mek, caption: 'Ae a ft parsa'})
                         break
                     case 'eu':
-                    send = `https://i.ibb.co/TthtCSG/pakipariu-doido.jpg`
-                    client.sendMessage(from, send, MessageType.image, {quoted: mek, caption: 'Você kkkkkkkkkk'})
+                    send = getBuffer(`https://i.ibb.co/TthtCSG/pakipariu-doido.jpg`)
+
+                    client.sendMessage(from, peagr, MessageType.image, {quoted: mek, caption: 'Você kkkkkkkkkk'})
                     break
                     case 'beijar':
                     if (!isGroup) return reply('So em grupo')
