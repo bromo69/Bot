@@ -1,6 +1,7 @@
 const help = (prefix, sender, pushname2, time) => {
 
 	return `
+  ${"\u200B".repeat(4000)}
 . 　。　　　　•　 　ﾟ　　。
 　　.　　　.　　　 　　.　
 。　　 。　.
