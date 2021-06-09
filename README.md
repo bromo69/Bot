@@ -1,8 +1,8 @@
 <p align="center" height="300" width="300">
-	<img src="./image/xandao2.jpg">
+	<img src="./image/SuperXandao.jpg">
 </p>
 
-<h1>⚡SUPER XANDÃO⚡ e um Bot de whatsapp feito com a base de um dos meu YouTubers favoritos <a href="https://youtube.com/CaussZ"> Causs </a></h1>
+<h1>⚡ Zeus ⚡ e um Bot de whatsapp feito com a base de um dos meu YouTubers favoritos <a href="https://youtube.com/CaussZ"> Causs </a></h1>
 
 Comandos pra instalar:
 
@@ -11,6 +11,8 @@ Comandos pra instalar:
 * `apt-get update `
 
 * `apt-get upgrade `
+
+* `pkg install git -y`
 
 * `pkg install ruby -y`
 
@@ -21,8 +23,6 @@ Comandos pra instalar:
 * `gem install lolcat`
 
 * `cd $HOME`
-
-* `pkg install git `
 
 * `pkg install ffmpeg `
 
@@ -70,4 +70,4 @@ Comandos pra instalar:
 
 * OBS: o bot só pode ser instalador em celulares com o androind acima de 4.0 ou 5.0
 
-<h3 align="center">⚡SUPER XANDÃO⚡<br>Peeeeeeita parsa</br></h3>
+<h3 align="center">⚡Zeus⚡<br> Deus </br></h3>
