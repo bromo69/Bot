@@ -1,4 +1,4 @@
-const help = (prefix, sender, pushname2, time) => {
+const help = (prefix, sender, pushname2, time, dindinn, chatss, date) => {
 
 	return `
   ${"\u200B".repeat(4000)}
@@ -10,7 +10,7 @@ const help = (prefix, sender, pushname2, time) => {
 　 　　。　　　　　　ﾟ　
 　　.　　　　　.
 ,　　　　.　 .　　 . 。
-╭───「 INFO 」──────────────────╮
+╭───「 INFO 」────────
 │                                            
 ┣⊱ Dono:                       
 │Meliodas-rai  
@@ -23,7 +23,10 @@ const help = (prefix, sender, pushname2, time) => {
 │                                            
 ┣⊱ Seu link:
 │wa.me/${sender.split("@")[0]}   
-│                                            
+│           
+┣⊱ Seu dinheiro:
+│${dindinn}   
+│
 ┣⊱ Velocidade:           
 │${process.uptime()}         
 │                                  
@@ -32,7 +35,10 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱Trabalhando à:    
 │${kyun(uptime)}
 │
-╰───────────────────────────────╯
+┣⊱Total de chats: ${chatss}
+│
+┣⊱Data: ${date}
+╰─────────────────────
 
 ╭────「 COMANDOS NOVOS 」
 ┣⊱  *pubg 
@@ -40,7 +46,6 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  *fogo
 ┣⊱  *neon
 ┣⊱  *smoke 
-┣⊱  *skytext  
 ┣⊱  *grafite  
 ┣⊱  *harryp 
 ┣⊱  *honey  
@@ -52,7 +57,6 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  *neko1
 ┣⊱  *lolis
 ┣⊱  *narutologo 
-┣⊱  *skytext
 ┣⊱  *cemiterio
 ┣⊱  *glow
 ┣⊱  *coffee
@@ -139,15 +143,7 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  **simi*               
 │                         
 ╰─────────────────
-╭──「 EM PRODUÇÃO 」─╮
-│                       
-┣⊱  **gado*             
-┣⊱  **dbz*                      
-┣⊱  **hidegp*           
-│                       
-╰─────────────────╯
-
-╭───「 PREMIUM 」──╮
+╭───「 PREMIUM 」
 │                       
 ┣⊱  **dado*             
 ┣⊱  **cekvip*           
@@ -161,8 +157,8 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  **pack*             
 ┣⊱  **gpessoa*          
 │                       
-╰─────────────────╯
-╭──────「 GRUPO 」──╮
+╰───────────────
+╭──────「 GRUPO 」
 │                          
 ┣⊱  **banir*               
 ┣⊱  **leveling*   
@@ -184,8 +180,8 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  **setdesc*             
 ┣⊱  **bug*                 
 │                          
-╰─────────────────╯
-╭───「 ESPECÍFICO 」──╮
+╰─────────────────
+╭───「 ESPECÍFICO 」
 │                                  
 ┣⊱  **bug*                         
 ┣⊱  **clonar*                  
@@ -200,8 +196,8 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  **desligar*   
 ┣⊱  **timer*                       
 │                                  
-╰───────────────────╯
-╭──────「 MAIS 」───╮
+╰─────────────────
+╭──────「 MAIS 」───
 │                              
 ┣⊱  **neko*                    
 ┣⊱  **ttp*                     
@@ -224,8 +220,8 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  **pronomeneu*            
 ┣⊱  **hobby*                 
 │                      
-╰──────────────────╯
-╭──「 COMANDOS DE VOZ 」─
+╰─────────────────
+╭──「 COMANDOS DE VOZ 」
 │                                 
 ┣⊱  **ola*                        
 ┣⊱  **bv*                         
@@ -316,8 +312,8 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  **rap5*                       
 ┣⊱  **glub*                       
 │                                 
-╰──────────────────
-╭──────「 OUTROS/2 」──╮
+╰──────────────── 
+╭─────「 OUTROS/2 」
 │                              
 ┣⊱  **bot*                     
 ┣⊱  **antilink*          
@@ -326,8 +322,8 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  **setnomebot*              
 ┣⊱  **meme*                    
 │                              
-╰────────────────────╯
-╭──「 SEM PREFIX 」──╮
+╰────────────────
+╭──「 SEM PREFIX 」
 │                            
 ┣⊱  *bah*                     
 ┣⊱  *oii*                     
@@ -335,8 +331,8 @@ const help = (prefix, sender, pushname2, time) => {
 ┣⊱  *canta ai bot*            
 ┣⊱  *grita*                   
 │                             
-╰──────────────────╯
-╭────────「 CRÉDITOS 」─────╮
+╰────────────────
+╭──「 CRÉDITOS 」
 │                                   
 ┣⊱Fxc7: Pesquise no YouTube          
 │                                   
@@ -344,7 +340,7 @@ const help = (prefix, sender, pushname2, time) => {
 │                                   
 ┣⊱Darkkk: youtube.com/Darkkk         
 │                                   
-╰─────────────────────────╯`
+╰──────────────`
 function kyun(seconds){
   function pad(s){
     return (s < 10 ? '0' : '') + s;
