@@ -19,8 +19,8 @@ echo " "
 echo " "
 echo " "
 echo " "
-figlet "Super Xandao" |lolcat -a -d 15
+figlet "Zeus" |lolcat -a -d 15
 echo " "
 echo " "
 echo " "
-echo "Eae Parsa esse e o SUPER XANDÃO o mais brabo " |lolcat -a -d 60
+echo "Sou ⚡ ZEUS ⚡ " |lolcat -a -d 23

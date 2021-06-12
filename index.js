@@ -53,6 +53,14 @@ const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
 const samih = JSON.parse(fs.readFileSync('./src/simi.json'))
 /*const { xp } = require('./database/menu/xp')
 const { limit } = require('./database/menu/limit*/
+// TTT
+
+const daily = JSON.parse(fs.readFileSync('./data/diario.json'))
+const tictactoe = JSON.parse(fs.readFileSync('./database/ttt/tictactoe.json'));
+const infos = JSON.parse(fs.readFileSync('./data/settings.json'))
+const { cdd, ammoff, crconfig, crlv, crh, crtt } = infos
+
+// FIM DO TTT
 const apivhtear = 'apivhtear';
 const apibarbar = 'apibarbar';
 const tobzkey = 'apitobz';
@@ -69,6 +77,7 @@ prefix = '*'
 blocked = []
 limitawal = '999999999'
 cr = '*Meliodas*'
+meliodas = 'Meliodas-rai, e o dono'
 
 /*********** CARREGAR ARQUIVO ***********/
 const _leveling = JSON.parse(fs.readFileSync('./database/group/leveling.json'))
@@ -77,9 +86,630 @@ const event = JSON.parse(fs.readFileSync('./database/json/event.json'))
 const _level = JSON.parse(fs.readFileSync('./database/user/level.json'))
 const _limit = JSON.parse(fs.readFileSync('./database/json/limit.json'))
 const sexoD = JSON.parse(fs.readFileSync('./sexo.json'))
+const antifake = JSON.parse(fs.readFileSync('./antifake/antifake.json'))
+const uang = JSON.parse(fs.readFileSync('./dinheiro/uang.json'));
+
+//_TIC-TAC-TOE By: Resen
+const { ttthelp } = require('./database/ttt/TTTconfig/ttthelp');
+const { tttme } = require('./database/ttt/TTTconfig/tttme');
+var tttset = require('./database/ttt/TTTconfig/tttset.json');
+var esp = require('./database/ttt/TTTconfig/tttframe.json');
 /*********** FIM DO CARREGADOR DE ARQUIVO ***********/
 
+//_TESTE PARA VITÓRIA DE ❌
+const WinnerX = () => {
+    if (
+        (esp.a1=="❌"&&esp.a2=="❌"&&esp.a3=="❌") || (esp.b1=="❌"&&esp.b2=="❌"&&esp.b3=="❌") || (esp.c1=="❌"&&esp.c2=="❌"&&esp.c3=="❌") || 
+        (esp.a1=="❌"&&esp.b1=="❌"&&esp.c1=="❌") || (esp.a2=="❌"&&esp.b2=="❌"&&esp.c2=="❌") || (esp.a3=="❌"&&esp.b3=="❌"&&esp.c3=="❌") ||
+        (esp.a1=="❌"&&esp.b2=="❌"&&esp.c3=="❌") || (esp.a3=="❌"&&esp.b2=="❌"&&esp.c1=="❌")
+    ) {
+        return true
+    } else {
+        return false
+    }
+}
+
+//TESTE PARA VITÓRIA DE ⭕
+const WinnerO = () => {
+    if (
+        (esp.a1=="⭕"&&esp.a2=="⭕"&&esp.a3=="⭕") || (esp.b1=="⭕"&&esp.b2=="⭕"&&esp.b3=="⭕") || (esp.c1=="⭕"&&esp.c2=="⭕"&&esp.c3=="⭕") || 
+        (esp.a1=="⭕"&&esp.b1=="⭕"&&esp.c1=="⭕") || (esp.a2=="⭕"&&esp.b2=="⭕"&&esp.c2=="⭕") || (esp.a3=="⭕"&&esp.b3=="⭕"&&esp.c3=="⭕") ||
+        (esp.a1=="⭕"&&esp.b2=="⭕"&&esp.c3=="⭕") || (esp.a3=="⭕"&&esp.b2=="⭕"&&esp.c1=="⭕")
+    ) {
+        return true
+    } else {
+        return false
+    }
+}
+
+//TESTE PARA EMPATE
+const Tie = () => {
+    if (esp.a1!="🔲"&&esp.a2!="🔲"&&esp.a3!="🔲"&&esp.b1!="🔲"&&esp.b2!="🔲"&&esp.b3!="🔲"&&esp.c1!="🔲"&&esp.c2!="🔲"&&esp.c3!="🔲") {
+        return true
+    } else {
+        return false
+    }
+}
+
+const IA = () => {
+    if (WinnerX() || WinnerO() || Tie()) {
+        tttset.reActivate1 = "off"
+//INICIO DO MODO IMPOSSIVEL
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" && ( 
+        //TESTE PARA TENTATIVA DE VITÓRIA
+        (esp.a1=="⭕"&&esp.a2=="⭕"&&esp.a3=="🔲") || (esp.a1=="⭕"&&esp.a2=="🔲"&&esp.a3=="⭕") || (esp.a1=="🔲"&&esp.a2=="⭕"&&esp.a3=="⭕") ||
+        (esp.b1=="⭕"&&esp.b2=="⭕"&&esp.b3=="🔲") || (esp.b1=="⭕"&&esp.b2=="🔲"&&esp.b3=="⭕") || (esp.b1=="🔲"&&esp.b2=="⭕"&&esp.b3=="⭕") ||
+        (esp.c1=="⭕"&&esp.c2=="⭕"&&esp.c3=="🔲") || (esp.c1=="⭕"&&esp.c2=="🔲"&&esp.c3=="⭕") || (esp.c1=="🔲"&&esp.c2=="⭕"&&esp.c3=="⭕") ||
+        (esp.a1=="⭕"&&esp.b1=="⭕"&&esp.c1=="🔲") || (esp.a1=="⭕"&&esp.b1=="🔲"&&esp.c1=="⭕") || (esp.a1=="🔲"&&esp.b1=="⭕"&&esp.c1=="⭕") ||
+        (esp.a2=="⭕"&&esp.b2=="⭕"&&esp.c2=="🔲") || (esp.a2=="⭕"&&esp.b2=="🔲"&&esp.c2=="⭕") || (esp.a2=="🔲"&&esp.b2=="⭕"&&esp.c2=="⭕") ||
+        (esp.a3=="⭕"&&esp.b3=="⭕"&&esp.c3=="🔲") || (esp.a3=="⭕"&&esp.b3=="🔲"&&esp.c3=="⭕") || (esp.a3=="🔲"&&esp.b3=="⭕"&&esp.c3=="⭕") ||
+        (esp.a1=="⭕"&&esp.b2=="⭕"&&esp.c3=="🔲") || (esp.a1=="⭕"&&esp.b2=="🔲"&&esp.c3=="⭕") || (esp.a1=="🔲"&&esp.b2=="⭕"&&esp.c3=="⭕") ||
+        (esp.a3=="⭕"&&esp.b2=="⭕"&&esp.c1=="🔲") || (esp.a3=="⭕"&&esp.b2=="🔲"&&esp.c1=="⭕") || (esp.a3=="🔲"&&esp.b2=="⭕"&&esp.c1=="⭕") ||
+        //TESTE PARA TENTATIVA DE BLOQUEIO
+        (esp.a1=="❌"&&esp.a2=="❌"&&esp.a3=="🔲") || (esp.a1=="❌"&&esp.a2=="🔲"&&esp.a3=="❌") || (esp.a1=="🔲"&&esp.a2=="❌"&&esp.a3=="❌") ||
+        (esp.b1=="❌"&&esp.b2=="❌"&&esp.b3=="🔲") || (esp.b1=="❌"&&esp.b2=="🔲"&&esp.b3=="❌") || (esp.b1=="🔲"&&esp.b2=="❌"&&esp.b3=="❌") ||
+        (esp.c1=="❌"&&esp.c2=="❌"&&esp.c3=="🔲") || (esp.c1=="❌"&&esp.c2=="🔲"&&esp.c3=="❌") || (esp.c1=="🔲"&&esp.c2=="❌"&&esp.c3=="❌") ||
+        (esp.a1=="❌"&&esp.b1=="❌"&&esp.c1=="🔲") || (esp.a1=="❌"&&esp.b1=="🔲"&&esp.c1=="❌") || (esp.a1=="🔲"&&esp.b1=="❌"&&esp.c1=="❌") ||
+        (esp.a2=="❌"&&esp.b2=="❌"&&esp.c2=="🔲") || (esp.a2=="❌"&&esp.b2=="🔲"&&esp.c2=="❌") || (esp.a2=="🔲"&&esp.b2=="❌"&&esp.c2=="❌") ||
+        (esp.a3=="❌"&&esp.b3=="❌"&&esp.c3=="🔲") || (esp.a3=="❌"&&esp.b3=="🔲"&&esp.c3=="❌") || (esp.a3=="🔲"&&esp.b3=="❌"&&esp.c3=="❌") ||
+        (esp.a1=="❌"&&esp.b2=="❌"&&esp.c3=="🔲") || (esp.a1=="❌"&&esp.b2=="🔲"&&esp.c3=="❌") || (esp.a1=="🔲"&&esp.b2=="❌"&&esp.c3=="❌") ||
+        (esp.a3=="❌"&&esp.b2=="❌"&&esp.c1=="🔲") || (esp.a3=="❌"&&esp.b2=="🔲"&&esp.c1=="❌") || (esp.a3=="🔲"&&esp.b2=="❌"&&esp.c1=="❌")
+    )){
+        tttset.reActivate1 = "off"
+        IAmove1()
+    //JOGADAS PROGRAMADAS ABAIXO
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+              ((esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "❌" && esp.c2 == "🔲" && esp.c3 == "⭕") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "❌" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "⭕") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "❌" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "❌" && esp.c1 == "❌" && esp.c2 == "🔲" && esp.c3 == "🔲"))) {
+          tttset.reActivate1 = "off"
+          esp.a1 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+              ((esp.a1 == "⭕" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "❌" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "❌") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "❌" && esp.c1 == "❌" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "❌" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "❌") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "❌" && esp.c2 == "🔲" && esp.c3 == "🔲"))) {
+          tttset.reActivate1 = "off"
+          esp.a2 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+              ((esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "🔲" && esp.c3 == "❌") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "❌" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "❌" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "❌" && esp.c3 == "⭕") ||
+               (esp.a1 == "⭕" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "❌"))) {
+          tttset.reActivate1 = "off"
+          esp.a3 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+              ((esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "❌" && esp.c3 == "🔲") ||
+               (esp.a1 == "⭕" && esp.a2 == "❌" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "❌"))) {
+          tttset.reActivate1 = "off"
+          esp.b1 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+              ((esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "❌" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "❌" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "❌" && esp.c3 == "⭕") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "❌" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "⭕") ||
+               (esp.a1 == "⭕" && esp.a2 == "❌" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "⭕" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "❌" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "❌" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "❌" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "❌" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "⭕") ||
+               (esp.a1 == "⭕" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "❌") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "❌" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "❌" && esp.c1 == "⭕" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "❌" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "❌" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "⭕") ||
+               (esp.a1 == "🔲" && esp.a2 == "❌" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "⭕") ||
+               (esp.a1 == "⭕" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "❌" && esp.c3 == "🔲") ||
+               (esp.a1 == "⭕" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "❌" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "❌" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "⭕" && esp.b1 == "❌" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "❌") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "❌" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "❌" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲"))) {
+          tttset.reActivate1 = "off"
+          esp.b2 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+              ((esp.a1 == "❌" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "❌" && esp.c3 == "⭕") ||
+               (esp.a1 == "🔲" && esp.a2 == "❌" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "❌" && esp.c2 == "🔲" && esp.c3 == "🔲"))) {
+          tttset.reActivate1 = "off"
+          esp.b3 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+              ((esp.a1 == "❌" && esp.a2 == "🔲" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "❌" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "❌" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "❌" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "⭕") ||
+               (esp.a1 == "⭕" && esp.a2 == "❌" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "❌"))) {
+          tttset.reActivate1 = "off"
+          esp.c1 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+              ((esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "❌" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "❌" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "❌" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "⭕"))) {
+          tttset.reActivate1 = "off"
+          esp.c2 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" &&
+            ((esp.a1 == "⭕" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "🔲" && esp.b2 == "🔲" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "⭕" && esp.a2 == "🔲" && esp.a3 == "🔲" && esp.b1 == "🔲" && esp.b2 == "❌" && esp.b3 == "🔲" && esp.c1 == "🔲" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "🔲" && esp.a3 == "❌" && esp.b1 == "❌" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "⭕" && esp.c2 == "🔲" && esp.c3 == "🔲") ||
+               (esp.a1 == "🔲" && esp.a2 == "❌" && esp.a3 == "⭕" && esp.b1 == "🔲" && esp.b2 == "⭕" && esp.b3 == "🔲" && esp.c1 == "❌" && esp.c2 == "🔲" && esp.c3 == "🔲"))) {
+          tttset.reActivate1 = "off"
+          esp.c3 = "⭕"
+    } else if (tttset.tttdifficulty == "IMPOSSIBLE" && (esp.a1 ==  "🔲" || esp.a3 ==  "🔲" || esp.b2 ==  "🔲" || esp.c1 ==  "🔲" || esp.c3 ==  "🔲")) {
+        //PRIORIZAR CANTOS E CENTRO
+        tttset.reActivate1 = "off"
+        while (tttset.reActivate3 == "on") {
+            priorityC()
+        }
+        tttset.reActivate3 = "on"
+//FIM DO MODO IMPOSSIVEL
+    } else if (tttset.tttdifficulty == "HARD" && ( 
+        //TESTE PARA TENTATIVA DE VITÓRIA
+        (esp.a1=="⭕"&&esp.a2=="⭕"&&esp.a3=="🔲") || (esp.a1=="⭕"&&esp.a2=="🔲"&&esp.a3=="⭕") || (esp.a1=="🔲"&&esp.a2=="⭕"&&esp.a3=="⭕") ||
+        (esp.b1=="⭕"&&esp.b2=="⭕"&&esp.b3=="🔲") || (esp.b1=="⭕"&&esp.b2=="🔲"&&esp.b3=="⭕") || (esp.b1=="🔲"&&esp.b2=="⭕"&&esp.b3=="⭕") ||
+        (esp.c1=="⭕"&&esp.c2=="⭕"&&esp.c3=="🔲") || (esp.c1=="⭕"&&esp.c2=="🔲"&&esp.c3=="⭕") || (esp.c1=="🔲"&&esp.c2=="⭕"&&esp.c3=="⭕") ||
+        (esp.a1=="⭕"&&esp.b1=="⭕"&&esp.c1=="🔲") || (esp.a1=="⭕"&&esp.b1=="🔲"&&esp.c1=="⭕") || (esp.a1=="🔲"&&esp.b1=="⭕"&&esp.c1=="⭕") ||
+        (esp.a2=="⭕"&&esp.b2=="⭕"&&esp.c2=="🔲") || (esp.a2=="⭕"&&esp.b2=="🔲"&&esp.c2=="⭕") || (esp.a2=="🔲"&&esp.b2=="⭕"&&esp.c2=="⭕") ||
+        (esp.a3=="⭕"&&esp.b3=="⭕"&&esp.c3=="🔲") || (esp.a3=="⭕"&&esp.b3=="🔲"&&esp.c3=="⭕") || (esp.a3=="🔲"&&esp.b3=="⭕"&&esp.c3=="⭕") ||
+        (esp.a1=="⭕"&&esp.b2=="⭕"&&esp.c3=="🔲") || (esp.a1=="⭕"&&esp.b2=="🔲"&&esp.c3=="⭕") || (esp.a1=="🔲"&&esp.b2=="⭕"&&esp.c3=="⭕") ||
+        (esp.a3=="⭕"&&esp.b2=="⭕"&&esp.c1=="🔲") || (esp.a3=="⭕"&&esp.b2=="🔲"&&esp.c1=="⭕") || (esp.a3=="🔲"&&esp.b2=="⭕"&&esp.c1=="⭕") ||
+        //TESTE PARA TENTATIVA DE BLOQUEIO
+        (esp.a1=="❌"&&esp.a2=="❌"&&esp.a3=="🔲") || (esp.a1=="❌"&&esp.a2=="🔲"&&esp.a3=="❌") || (esp.a1=="🔲"&&esp.a2=="❌"&&esp.a3=="❌") ||
+        (esp.b1=="❌"&&esp.b2=="❌"&&esp.b3=="🔲") || (esp.b1=="❌"&&esp.b2=="🔲"&&esp.b3=="❌") || (esp.b1=="🔲"&&esp.b2=="❌"&&esp.b3=="❌") ||
+        (esp.c1=="❌"&&esp.c2=="❌"&&esp.c3=="🔲") || (esp.c1=="❌"&&esp.c2=="🔲"&&esp.c3=="❌") || (esp.c1=="🔲"&&esp.c2=="❌"&&esp.c3=="❌") ||
+        (esp.a1=="❌"&&esp.b1=="❌"&&esp.c1=="🔲") || (esp.a1=="❌"&&esp.b1=="🔲"&&esp.c1=="❌") || (esp.a1=="🔲"&&esp.b1=="❌"&&esp.c1=="❌") ||
+        (esp.a2=="❌"&&esp.b2=="❌"&&esp.c2=="🔲") || (esp.a2=="❌"&&esp.b2=="🔲"&&esp.c2=="❌") || (esp.a2=="🔲"&&esp.b2=="❌"&&esp.c2=="❌") ||
+        (esp.a3=="❌"&&esp.b3=="❌"&&esp.c3=="🔲") || (esp.a3=="❌"&&esp.b3=="🔲"&&esp.c3=="❌") || (esp.a3=="🔲"&&esp.b3=="❌"&&esp.c3=="❌") ||
+        (esp.a1=="❌"&&esp.b2=="❌"&&esp.c3=="🔲") || (esp.a1=="❌"&&esp.b2=="🔲"&&esp.c3=="❌") || (esp.a1=="🔲"&&esp.b2=="❌"&&esp.c3=="❌") ||
+        (esp.a3=="❌"&&esp.b2=="❌"&&esp.c1=="🔲") || (esp.a3=="❌"&&esp.b2=="🔲"&&esp.c1=="❌") || (esp.a3=="🔲"&&esp.b2=="❌"&&esp.c1=="❌")
+    )){
+        //HARD
+        tttset.reActivate1 = "off"
+        IAmove1()
+    } else if (tttset.tttdifficulty == "NORMAL" && ( 
+        //TESTE PARA TENTATIVA DE VITÓRIA
+        (esp.a1=="⭕"&&esp.a2=="⭕"&&esp.a3=="🔲") || (esp.a1=="⭕"&&esp.a2=="🔲"&&esp.a3=="⭕") || (esp.a1=="🔲"&&esp.a2=="⭕"&&esp.a3=="⭕") ||
+        (esp.b1=="⭕"&&esp.b2=="⭕"&&esp.b3=="🔲") || (esp.b1=="⭕"&&esp.b2=="🔲"&&esp.b3=="⭕") || (esp.b1=="🔲"&&esp.b2=="⭕"&&esp.b3=="⭕") ||
+        (esp.c1=="⭕"&&esp.c2=="⭕"&&esp.c3=="🔲") || (esp.c1=="⭕"&&esp.c2=="🔲"&&esp.c3=="⭕") || (esp.c1=="🔲"&&esp.c2=="⭕"&&esp.c3=="⭕") ||
+        (esp.a1=="⭕"&&esp.b1=="⭕"&&esp.c1=="🔲") || (esp.a1=="⭕"&&esp.b1=="🔲"&&esp.c1=="⭕") || (esp.a1=="🔲"&&esp.b1=="⭕"&&esp.c1=="⭕") ||
+        (esp.a2=="⭕"&&esp.b2=="⭕"&&esp.c2=="🔲") || (esp.a2=="⭕"&&esp.b2=="🔲"&&esp.c2=="⭕") || (esp.a2=="🔲"&&esp.b2=="⭕"&&esp.c2=="⭕") ||
+        (esp.a3=="⭕"&&esp.b3=="⭕"&&esp.c3=="🔲") || (esp.a3=="⭕"&&esp.b3=="🔲"&&esp.c3=="⭕") || (esp.a3=="🔲"&&esp.b3=="⭕"&&esp.c3=="⭕") ||
+        (esp.a1=="⭕"&&esp.b2=="⭕"&&esp.c3=="🔲") || (esp.a1=="⭕"&&esp.b2=="🔲"&&esp.c3=="⭕") || (esp.a1=="🔲"&&esp.b2=="⭕"&&esp.c3=="⭕") ||
+        (esp.a3=="⭕"&&esp.b2=="⭕"&&esp.c1=="🔲") || (esp.a3=="⭕"&&esp.b2=="🔲"&&esp.c1=="⭕") || (esp.a3=="🔲"&&esp.b2=="⭕"&&esp.c1=="⭕") ||
+        //TESTE PARA TENTATIVA DE BLOQUEIO
+        (esp.a1=="❌"&&esp.a2=="❌"&&esp.a3=="🔲") || (esp.a1=="❌"&&esp.a2=="🔲"&&esp.a3=="❌") || (esp.a1=="🔲"&&esp.a2=="❌"&&esp.a3=="❌") ||
+        (esp.b1=="❌"&&esp.b2=="❌"&&esp.b3=="🔲") || (esp.b1=="❌"&&esp.b2=="🔲"&&esp.b3=="❌") || (esp.b1=="🔲"&&esp.b2=="❌"&&esp.b3=="❌") ||
+        (esp.c1=="❌"&&esp.c2=="❌"&&esp.c3=="🔲") || (esp.c1=="❌"&&esp.c2=="🔲"&&esp.c3=="❌") || (esp.c1=="🔲"&&esp.c2=="❌"&&esp.c3=="❌") ||
+        (esp.a1=="❌"&&esp.b1=="❌"&&esp.c1=="🔲") || (esp.a1=="❌"&&esp.b1=="🔲"&&esp.c1=="❌") || (esp.a1=="🔲"&&esp.b1=="❌"&&esp.c1=="❌") ||
+        (esp.a2=="❌"&&esp.b2=="❌"&&esp.c2=="🔲") || (esp.a2=="❌"&&esp.b2=="🔲"&&esp.c2=="❌") || (esp.a2=="🔲"&&esp.b2=="❌"&&esp.c2=="❌") ||
+        (esp.a3=="❌"&&esp.b3=="❌"&&esp.c3=="🔲") || (esp.a3=="❌"&&esp.b3=="🔲"&&esp.c3=="❌") || (esp.a3=="🔲"&&esp.b3=="❌"&&esp.c3=="❌") ||
+        (esp.a1=="❌"&&esp.b2=="❌"&&esp.c3=="🔲") || (esp.a1=="❌"&&esp.b2=="🔲"&&esp.c3=="❌") || (esp.a1=="🔲"&&esp.b2=="❌"&&esp.c3=="❌") ||
+        (esp.a3=="❌"&&esp.b2=="❌"&&esp.c1=="🔲") || (esp.a3=="❌"&&esp.b2=="🔲"&&esp.c1=="❌") || (esp.a3=="🔲"&&esp.b2=="❌"&&esp.c1=="❌")
+    )){
+        //NORMAL
+        tttset.reActivate1 = "off"
+        let randomNORMAL = Math.floor(Math.random() * 3)
+        if (randomNORMAL == 0 || randomNORMAL == 1) {
+            IAmove1()
+        } else {
+            while (tttset.reActivate2 == "on") {
+                IAalter()
+            }
+        }
+        tttset.reActivate2 = "on"
+    } else {
+        //EASY / RANDOM
+        let randomALL = Math.floor(Math.random() * 9)
+        switch (randomALL) {
+            case 0:
+                if (esp.a1 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.a1 = "⭕"
+                }
+            break
+            case 1:
+                if (esp.a2 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.a2 = "⭕"
+                }
+            break
+            case 2:
+                if (esp.a3 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.a3 = "⭕"
+                }
+            break
+            case 3:
+                if (esp.b1 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.b1 = "⭕"
+                }
+            break
+            case 4:
+                if (esp.b2 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.b2 = "⭕"
+                }
+            break
+            case 5:
+                if (esp.b3 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.b3 = "⭕"
+                }
+            break
+            case 6:
+                if (esp.c1 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.c1 = "⭕"
+                }
+            break
+            case 7:
+                if (esp.c2 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.c2 = "⭕"
+                }
+            break
+            case 8:
+                if (esp.c3 == "🔲") {
+                    tttset.reActivate1 = "off"
+                    esp.c3 = "⭕"
+                }
+            break
+        }
+    }
+}
+
+const IAmove1 = () => {
+    //JOGADA PARA VITÓRIA
+    if (esp.a1=="⭕"&&esp.a2=="⭕"&&esp.a3=="🔲") {
+        esp.a3 = "⭕"
+    } else if (esp.a1=="⭕"&&esp.a2=="🔲"&&esp.a3=="⭕") {
+        esp.a2 = "⭕"
+    } else if (esp.a1=="🔲"&&esp.a2=="⭕"&&esp.a3=="⭕") {
+        esp.a1 = "⭕"
+    } else if (esp.b1=="⭕"&&esp.b2=="⭕"&&esp.b3=="🔲") {
+        esp.b3 = "⭕"
+    } else if (esp.b1=="⭕"&&esp.b2=="🔲"&&esp.b3=="⭕") {
+        esp.b2 = "⭕"
+    } else if (esp.b1=="🔲"&&esp.b2=="⭕"&&esp.b3=="⭕") {
+        esp.b1 = "⭕"
+    } else if (esp.c1=="⭕"&&esp.c2=="⭕"&&esp.c3=="🔲") {
+        esp.c3 = "⭕"
+    } else if (esp.c1=="⭕"&&esp.c2=="🔲"&&esp.c3=="⭕") {
+        esp.c2 = "⭕"
+    } else if (esp.c1=="🔲"&&esp.c2=="⭕"&&esp.c3=="⭕") {
+        esp.c1 = "⭕"
+    } else if (esp.a1=="⭕"&&esp.b1=="⭕"&&esp.c1=="🔲") {
+        esp.c1 = "⭕"
+    } else if (esp.a1=="⭕"&&esp.b1=="🔲"&&esp.c1=="⭕") {
+        esp.b1 = "⭕"
+    } else if (esp.a1=="🔲"&&esp.b1=="⭕"&&esp.c1=="⭕") {
+        esp.a1 = "⭕"
+    } else if (esp.a2=="⭕"&&esp.b2=="⭕"&&esp.c2=="🔲") {
+        esp.c2 = "⭕"
+    } else if (esp.a2=="⭕"&&esp.b2=="🔲"&&esp.c2=="⭕") {
+        esp.b2 = "⭕"
+    } else if (esp.a2=="🔲"&&esp.b2=="⭕"&&esp.c2=="⭕") {
+        esp.a2 = "⭕"
+    } else if (esp.a3=="⭕"&&esp.b3=="⭕"&&esp.c3=="🔲") {
+        esp.c3 = "⭕"
+    } else if (esp.a3=="⭕"&&esp.b3=="🔲"&&esp.c3=="⭕") {
+        esp.b3 = "⭕"
+    } else if (esp.a3=="🔲"&&esp.b3=="⭕"&&esp.c3=="⭕") {
+        esp.a3 = "⭕"
+    } else if (esp.a1=="⭕"&&esp.b2=="⭕"&&esp.c3=="🔲") {
+        esp.c3 = "⭕"
+    } else if (esp.a1=="⭕"&&esp.b2=="🔲"&&esp.c3=="⭕") {
+        esp.b2 = "⭕"
+    } else if (esp.a1=="🔲"&&esp.b2=="⭕"&&esp.c3=="⭕") {
+        esp.a1 = "⭕"
+    } else if (esp.a3=="⭕"&&esp.b2=="⭕"&&esp.c1=="🔲") {
+        esp.c1 = "⭕"
+    } else if (esp.a3=="⭕"&&esp.b2=="🔲"&&esp.c1=="⭕") {
+        esp.b2 = "⭕"
+    } else if (esp.a3=="🔲"&&esp.b2=="⭕"&&esp.c1=="⭕") {
+        esp.a3 = "⭕"
+    //JOGADA PARA BLOQUEIO
+    } else if (esp.a1=="❌"&&esp.a2=="❌"&&esp.a3=="🔲") {
+        esp.a3 = "⭕"
+    } else if (esp.a1=="❌"&&esp.a2=="🔲"&&esp.a3=="❌") {
+        esp.a2 = "⭕"
+    } else if (esp.a1=="🔲"&&esp.a2=="❌"&&esp.a3=="❌") {
+        esp.a1 = "⭕"
+    } else if (esp.b1=="❌"&&esp.b2=="❌"&&esp.b3=="🔲") {
+        esp.b3 = "⭕"
+    } else if (esp.b1=="❌"&&esp.b2=="🔲"&&esp.b3=="❌") {
+        esp.b2 = "⭕"
+    } else if (esp.b1=="🔲"&&esp.b2=="❌"&&esp.b3=="❌") {
+        esp.b1 = "⭕"
+    } else if (esp.c1=="❌"&&esp.c2=="❌"&&esp.c3=="🔲") {
+        esp.c3 = "⭕"
+    } else if (esp.c1=="❌"&&esp.c2=="🔲"&&esp.c3=="❌") {
+        esp.c2 = "⭕"
+    } else if (esp.c1=="🔲"&&esp.c2=="❌"&&esp.c3=="❌") {
+        esp.c1 = "⭕"
+    } else if (esp.a1=="❌"&&esp.b1=="❌"&&esp.c1=="🔲") {
+        esp.c1 = "⭕"
+    } else if (esp.a1=="❌"&&esp.b1=="🔲"&&esp.c1=="❌") {
+        esp.b1 = "⭕"
+    } else if (esp.a1=="🔲"&&esp.b1=="❌"&&esp.c1=="❌") {
+        esp.a1 = "⭕"
+    } else if (esp.a2=="❌"&&esp.b2=="❌"&&esp.c2=="🔲") {
+        esp.c2 = "⭕"
+    } else if (esp.a2=="❌"&&esp.b2=="🔲"&&esp.c2=="❌") {
+        esp.b2 = "⭕"
+    } else if (esp.a2=="🔲"&&esp.b2=="❌"&&esp.c2=="❌") {
+        esp.a2 = "⭕"
+    } else if (esp.a3=="❌"&&esp.b3=="❌"&&esp.c3=="🔲") {
+        esp.c3 = "⭕"
+    } else if (esp.a3=="❌"&&esp.b3=="🔲"&&esp.c3=="❌") {
+        esp.b3 = "⭕"
+    } else if (esp.a3=="🔲"&&esp.b3=="❌"&&esp.c3=="❌") {
+        esp.a3 = "⭕"
+    } else if (esp.a1=="❌"&&esp.b2=="❌"&&esp.c3=="🔲") {
+        esp.c3 = "⭕"
+    } else if (esp.a1=="❌"&&esp.b2=="🔲"&&esp.c3=="❌") {
+        esp.b2 = "⭕"
+    } else if (esp.a1=="🔲"&&esp.b2=="❌"&&esp.c3=="❌") {
+        esp.a1 = "⭕"
+    } else if (esp.a3=="❌"&&esp.b2=="❌"&&esp.c1=="🔲") {
+        esp.c1 = "⭕"
+    } else if (esp.a3=="❌"&&esp.b2=="🔲"&&esp.c1=="❌") {
+        esp.b2 = "⭕"
+    } else if (esp.a3=="🔲"&&esp.b2=="❌"&&esp.c1=="❌") {
+        esp.a3 = "⭕"
+    }
+}
+
+//MOVIMENTO ALTERNATIVO
+const IAalter = () => {
+    let randomALTER = Math.floor(Math.random() * 9)
+    switch (randomALTER) {
+        case 0:
+            if (esp.a1 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.a1 = "⭕"
+            }
+        break
+        case 1:
+            if (esp.a2 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.a2 = "⭕"
+            }
+        break
+        case 2:
+            if (esp.a3 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.a3 = "⭕"
+            }
+        break
+        case 3:
+            if (esp.b1 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.b1 = "⭕"
+            }
+        break
+        case 4:
+            if (esp.b2 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.b2 = "⭕"
+            }
+        break
+        case 5:
+            if (esp.b3 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.b3 = "⭕"
+            }
+        break
+        case 6:
+            if (esp.c1 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.c1 = "⭕"
+            }
+        break
+        case 7:
+            if (esp.c2 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.c2 = "⭕"
+            }
+        break
+        case 8:
+            if (esp.c3 == "🔲") {
+                tttset.reActivate2 = "off"
+                esp.c3 = "⭕"
+            }
+        break
+    }
+}
+
+//JOGAR NOS CANTOS E CENTRO - IMPOSSIVEL
+const priorityC = () => {
+    let randomPriC = Math.floor(Math.random() * 5)
+    switch (randomPriC) {
+        case 0 :
+            if (esp.a1 == "🔲") {
+                tttset.reActivate3 = "off"
+                esp.a1 = "⭕"
+            }
+        break
+        case 1 :
+            if (esp.a3 == "🔲") {
+                tttset.reActivate3 = "off"
+                esp.a3 = "⭕"
+            }
+        break
+        case 2 :
+            if (esp.b2 == "🔲") {
+                tttset.reActivate3 = "off"
+                esp.b2 = "⭕"
+            }
+        break
+        case 3 :
+            if (esp.c1 == "🔲") {
+                tttset.reActivate3 = "off"
+                esp.c1 = "⭕"
+            }
+        break
+        case 4 :
+            if (esp.c3 == "🔲") {
+                tttset.reActivate3 = "off"
+                esp.c3 = "⭕"
+            }
+        break
+    }
+}
+///_ END TIC-TAC-TOE CONFIG by: Resen
+const crypto = require('crypto')
+
+
+const addTTTId = (userId) => {
+    const obj = {jid: userId, wins: 0, defeats: 0, ties: 0, points: 0}
+    tictactoe.push(obj)
+    fs.writeFileSync('./database/ttt/tictactoe.json', JSON.stringify(tictactoe))
+}
+
+const addTTTwin = (userId, amount) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        tictactoe[position].wins += amount
+        fs.writeFileSync('./database/ttt/tictactoe.json', JSON.stringify(tictactoe))
+    }
+}
+
+const addTTTdefeat = (userId, amount) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        tictactoe[position].defeats += amount
+        fs.writeFileSync('./database/ttt/tictactoe.json', JSON.stringify(tictactoe))
+    }
+}
+
+const addTTTtie = (userId, amount) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        tictactoe[position].ties += amount
+        fs.writeFileSync('./database/ttt/tictactoe.json', JSON.stringify(tictactoe))
+    }
+}
+
+const addTTTpoints = (userId, amount) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        tictactoe[position].points += amount
+        fs.writeFileSync('./database/ttt/tictactoe.json', JSON.stringify(tictactoe))
+    }
+}
+
+const getTTTId = (userId) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        return tictactoe[position].jid
+    }
+}
+
+const getTTTwins = (userId) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        return tictactoe[position].wins
+    }
+}
+
+const getTTTdefeats = (userId) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        return tictactoe[position].defeats
+    }
+}
+
+const getTTTties = (userId) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        return tictactoe[position].ties
+    }
+}
+
+const getTTTpoints = (userId) => {
+    let position = false
+    Object.keys(tictactoe).forEach((i) => {
+        if (tictactoe[i].jid === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        return tictactoe[position].points
+    }
+}
+
 /********** FUNÇÕES ***************/
+const addATM = (sender) => {
+            const obj = {id: sender, uang : 0}
+            uang.push(obj)
+        }
+        
+        const addKoinUser = (sender, amount) => {
+            let position = false
+            Object.keys(uang).forEach((i) => {
+                if (uang[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                uang[position].uang += amount
+                fs.writeFileSync('./dinheiro/uang.json', JSON.stringify(uang))
+            }
+        }
+       
+        const checkATMuser = (sender) => {
+            let position = false
+            Object.keys(uang).forEach((i) => {
+                if (uang[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return uang[position].uang
+            }
+        }
 const getLevelingXp = (userId) => {
             let position = false
             Object.keys(_level).forEach((i) => {
@@ -148,45 +778,23 @@ const getLevelingXp = (userId) => {
             _level.push(obj)
             fs.writeFileSync('./database/user/level.json', JSON.stringify(_level))
         }
-                const getLimit = (sender) => {
-                let position = false
-              Object.keys(limit).forEach ((i) => {
-                if (limit[position].id === sender) {
-                   position = i
-                  }
-              })
-             if (position !== false) {
-                return limit[position].limit
-            }
-        }
-        
-                const bayarLimit = (sender, amount) => {
-                let position = false
-            Object.keys(_limit).forEach((i) => {
-                if (_limit[i].id === sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                _limit[position].limit -= amount
-                fs.writeFileSync('./database/json/limit.json', JSON.stringify(_limit))
-            }
-        }
-        
-                const limitAdd = (sender) => {
-             let position = false
-            Object.keys(_limit).forEach((i) => {
-                if (_limit[i].id == sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                _limit[position].limit += 1
-                fs.writeFileSync('./database/json/limit.json', JSON.stringify(_limit))
-            }
-        }
+                const addLimit = (userId, _dir) => {
+    const obj = { id: userId, time: Date.now() }
+    _dir.push(obj)
+    fs.writeFileSync('./data/diario.json', JSON.stringify(_dir))
+}
 
-
+const getLimit = (userId, _dir) => {
+    let position = false
+    Object.keys(_dir).forEach((i) => {
+        if (_dir[i].id === userId) {
+            position = i
+        }
+    })
+    if (position !== false) {
+        return _dir[position].time
+    }
+}  
 function kyun(seconds){
   function pad(s){
     return (s < 10 ? '0' : '') + s;
@@ -217,7 +825,55 @@ async function starts() {
 	await client.connect({timeoutMs: 30*1000})
         fs.writeFileSync('./Meliodas-rai.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
 
-	client.on('group-participants-update', async (anu) => {
+                client.on('group-participants-update', async (anu) => {
+                const mdata = await client.groupMetadata(anu.jid)
+                if(antifake.includes(anu.jid)) {
+                if (anu.action == 'add'){
+            num = anu.participants[0]
+            if(!num.split('@')[0].startsWith(55)) {
+            client.sendMessage(mdata.id, 'Corra numero fake safado seu ban esta próximo', MessageType.text)
+            setTimeout(async function () {
+            client.groupRemove(mdata.id, [num])
+                        }, 3000)
+                    }
+                }
+            }
+            if (!welkom.includes(anu.jid)) return
+                    try {
+                            const imgur = require('imgur')
+                num = anu.participants[0]
+                const mdata = await client.groupMetadata(anu.jid)
+                try {
+                    var pp_user = await client.getProfilePicture(num)
+                } catch (e) {
+                    var pp_user = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
+                }
+                exeone = await imageToBase64(JSON.stringify(pp_user).replace(/\"/gi, ''))
+                            exetwo = getRandom('.jpeg')
+                            fs.writeFileSync(exetwo, exeone, 'Base64')
+                            let psCAPA = await imgur.uploadFile(exetwo)
+                            fs.unlinkSync(exetwo)
+                if (anu.action == 'add') {
+                    ini_user = client.contacts[num]
+                    ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/welcome?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://pt-static.z-dn.net/files/df9/e66f1513bca9d94fefdea96e5a5c59de.jpg`)
+                    teks = `━━━━━━❰⊰❰⊰✾⊱❱⊱❱━━━━━━
+    Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido 
+
+    ⚡ ⚡Zeus⚡ ⚡ 
+    ━━━━━━❰⊰❰⊰✾⊱❱⊱❱━━━━━━`
+                    group_info = await client.groupMetadata(anu.jid)
+                    client.sendMessage(anu.jid, ini_img, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
+                }
+                if (anu.action == 'remove') {
+                ini_user = client.contacts[num]
+                ini_img = await getBuffer(`https://api-exteam.herokuapp.com/api/goodbye?nome=${pushname2}&gpnome=${encodeURIComponent(mdata.subject)}&perfil=${psCAPA.link}&fundo=https://pt-static.z-dn.net/files/df9/e66f1513bca9d94fefdea96e5a5c59de.jpg`)
+                client.sendMessage(anu.jid, ini_img, MessageType.image)
+                }
+                    } catch (e) {
+                            console.log('Error : %s', color(e, 'red'))
+                    }
+    })
+	/*client.on('group-participants-update', async (anu) => {
 if (!welkom.includes(anu.jid)) return
                 try {
                         const imgur = require('imgur')
@@ -253,7 +909,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                 } catch (e) {
                         console.log('Error : %s', color(e, 'red'))
                 }
-})
+})*/
 	client.on('CB:Blocklist', json => {
             if (blocked.length > 2) return
 	    for (let i of json[1].blocklist) {
@@ -327,10 +983,16 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 			const groupId = isGroup ? groupMetadata.jid : ''
 			const time = moment.tz('America/Sao_Paulo').format('DD/MM HH:mm:ss')
+            const data = moment.tz('America/Sao_Paulo').format('DD/MM/YY')
             const arg = body.trim().substring(body.indexOf(' ') + 1)
 			const isGroupAdmins = groupAdmins.includes(sender) || false
 			const isLevelingOn = isGroup ? _leveling.includes(groupId) : false
 			const isWelkom = isGroup ? welkom.includes(from) : false
+            body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''
+            budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
+            //const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
+            const tescuk = ["0@s.whatsapp.net"]
+            const totalchat = await client.chats.all()
 			const isNsfw = isGroup ? nsfw.includes(from) : true
             const isAntiLink = isGroup ? antilink.includes(from) : false
 	    	const isAnime = isGroup ? anime.includes(from) : false
@@ -338,6 +1000,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			const isSimi = isGroup ? samih.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
 			const isPremium = premium.includes(sender)
+            const isAntiFake = isGroup ? antifake.includes(from) : false
 			const ismod = mod.includes(sender)
 			const errorurl2 = 'https://i.ibb.co/dttZM8b/591530180aad.png'
 			const isadminbot = adminbotnumber.includes(sender)
@@ -357,7 +1020,10 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			const mentions = (teks, memberr, id) => {
 				(id == null || id == undefined || id == false) ? client.sendMessage(from, teks.trim(), extendedText, {contextInfo: {"mentionedJid": memberr}}) : client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}})
 			}
-              //função de nível 
+            const costum = (pesan, tipe, target, target2) => {
+                 client.sendMessage(from, pesan, tipe, {quoted: {key: {fromMe: false, participant: `${target}`, ...(from ? {remoteJid: from}: {})}, message: {conversation: `${target2}` }}})
+            }
+            // NiVEL            
             if (isGroup && isLevelingOn) {
             const currentLevel = getLevelingLevel(sender)
             const checkId = getLevelingId(sender)
@@ -374,7 +1040,38 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
             } catch (err) {
                 console.error(err)
             }
-        }	        
+        }	       
+                 //_DINHEIRO 
+                    if (isGroup) {
+                    const checkATM = checkATMuser(sender)
+                        try {
+                    if (checkATM === undefined) addATM(sender)
+                        const uangsaku = Math.floor(Math.random() * 10) + 90
+                        addKoinUser(sender, uangsaku)
+                    } catch (err) {
+                        console.error(err)
+                    }
+                } 
+                ////FINALIZAR TTT AUTOMATICAMENTE By: Resen
+if (tttset.tttstatus == "off" && tttset.autoEndTime == "on") {
+tttset.autoEndTime = "off"
+} else if (tttset.tttstatus == "on" && tttset.autoEndTime == "on") {
+if (isLevelingOn) {
+const randomEndTTTXP = 0 - (Math.floor(Math.random() * 75) + 75)
+addLevelingXp(tttset.player, randomEndTTTXP)
+const checkTTTIdEnd = getTTTId(tttset.player)
+if (checkTTTIdEnd === undefined) addTTTId(tttset.player)
+addTTTpoints(tttset.player, randomEndTTTXP)
+tiringa.sendMessage(tttset.local,`❌ O TEMPO DE JOGO EXPIROU ❌\n\n➣  PUNIÇÃO: ${randomEndTTTXP} XP 🔮`, text, {quoted: tttset.mentionPlayer})
+} else {
+tiringa.sendMessage(tttset.local,`❌ O TEMPO DE JOGO EXPIROU ❌`, text, {quoted: tttset.mentionPlayer})
+}
+esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
+esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
+esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
+tttset.tttstatus = "off"
+tttset.autoEndTime = "off"
+}
         if (messagesC.includes("preto")){
 		if (!isGroup) return
 		if (!isAntiRacismo) return
@@ -813,12 +1510,325 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 
 	            case 'menu':
                 case 'help':
+                const date = `${data.length}`
+                const chatss = `${totalchat.length}`
                 uptime = process.uptime()
+                const dindinn = checkATMuser(sender)
                 var setP  = [`https://i.ibb.co/7rB7NNx/Super-Xandao.jpg`, `https://i.ibb.co/pbL2yrM/zeus.jpg`, `http://2.bp.blogspot.com/-4kfin532HAI/TbFOHy7pG3I/AAAAAAAAADI/x4qPRiwIMVA/w1200-h630-p-k-no-nu/gran_zeus_by_el_grimlock%255B1%255D.jpg`, `https://www.itl.cat/pngfile/big/10-106051_zeus-god-wallpaper-hd-god-of-war-ascension.jpg`, `https://i.pinimg.com/originals/7e/2a/8a/7e2a8a155c2f2a7a7213db2b4c1c6f2c.jpg`, `https://7wallpapers.net/wp-content/uploads/18_Dota2-Zeus.jpg`]
                 const getFoto = setP[Math.floor(Math.random() * setP.length)]
                 const putagg = await getBuffer(getFoto)
-                client.sendMessage(from, putagg, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚡ Zeus ⚡", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./sticker/Zeus.webp')} } }, caption: help(prefix, sender, pushname2, time)})
+                client.sendMessage(from, putagg, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚡ Zeus ⚡", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./sticker/Zeus.webp')} } }, caption: help(prefix, sender, pushname2, time, dindinn, chatss, date)})
                   break
+//_JOGO DA VELHA By: Resen
+//INICIO DO JOGO DA VELHA ❌ ⭕ 🔲
+case 'ttt':
+const limitrl = getLimit(sender, daily)
+if (!isGroup) {
+reply(ptbr.group())
+} else if (tttset.tttstatus == "on") {
+reply(`Alguém já está jogando no momento\nPor favor aguarde um instante...`)
+} else if (tttset.waitingTime == "on") {
+reply(`Alguém jogou recentemente\nPor favor aguarde o tempo de espera...`)
+} else if (args == 0 || (args != 'easy' && args != 'Easy' && args != 'EASY' && args != 'normal' && args != 'Normal' && args != 'NORMAL' && args != 'hard' && args != 'Hard' && args != 'HARD'&& args != 'impossible'&& args != 'Impossible' && args != 'IMPOSSIBLE')) {
+reply(`Defina a dificuldade\nEx.: ${prefix}ttt easy\n\nDificuldades: easy, normal, hard e impossible`)
+} else if (limitrl !== undefined && cdd - (Date.now() - limitrl) > 0) {
+reply('Opa, deixe seus abigos jogarem também, tente novamente em 8 minutos.')
+} else {
+tttset.tttstatus = "on"
+tttset.player = sender
+tttset.playerName = pushname2
+tttset.mentionPlayer = mek
+tttset.local = from
+if (args == 'easy' || args == 'Easy' || args == 'EASY') {
+tttset.tttdifficulty = "EASY"
+} else if (args == 'normal' || args == 'Normal' || args == 'NORMAL') {
+tttset.tttdifficulty = "NORMAL"
+} else if (args == 'hard' || args == 'Hard' || args == 'HARD') {
+tttset.tttdifficulty = "HARD"
+} else if (args == 'impossible' || args == 'Impossible' || args == 'IMPOSSIBLE') {
+tttset.tttdifficulty = "IMPOSSIBLE"
+}
+const randomStartIA = Math.floor(Math.random() * 3)
+if (randomStartIA == 0) {
+IA()
+tttset.reActivate1 = "on"   
+}
+costum(`O jogo começou!!!\nModo: ${tttset.tttdifficulty}`, text, tescuk, crtt)
+client.sendMessage(from, `🌀1️⃣2️⃣3️⃣\n🅰️${esp.a1}${esp.a2}${esp.a3}\n🅱️${esp.b1}${esp.b2}${esp.b3}\n©️${esp.c1}${esp.c2}${esp.c3}`,text )
+client.sendMessage(from,`Caso não saiba como jogar digite: ${prefix}ttthelp`, text) 
+setTimeout( () => {
+tttset.waitingTime = "off"
+tttset.autoEndTime = "on"
+}, 10000) //4 minutos
+addLimit(sender, daily)
+}
+break
+
+case 'ttthelp':
+client.sendMessage(from, ttthelp(prefix), text)
+break
+
+case 'tttme':
+if (!isGroup) return reply(mess.only.group)
+const checkTTTIdMe = getTTTId(sender)
+if (checkTTTIdMe === undefined) addTTTId(sender)
+client.sendMessage(from, tttme(pushname2, getTTTwins(sender), getTTTdefeats(sender), getTTTties(sender), getTTTpoints(sender)), text, {quoted:mek})
+break
+
+case 'tttrank':
+if (!isGroup) return reply(ptbr.group())
+//if (tictactoe.length < 3) return reply(`Humm, é necessário que no mínimo 3 pessoas tenham jogado...`)
+tictactoe.sort((a, b) => (a.points < b.points) ? 1 : -1)
+mentioned_jid = []
+let board = '【 TTT RANKS 】\n\n'
+try {
+for (let i = 0; i < 3; i++) {
+if (i == 0) {board += `${i + 1}º 🥇 : @${tictactoe[i].jid.split('@')[0]}\n╭╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸\n│ ➣ Vitórias: ${tictactoe[i].wins} 🎊\n│ ➣ Derrotas: ${tictactoe[i].defeats} 💥\n│ ➣ Empates: ${tictactoe[i].ties} 🌀\n│ ➣ Pontos: ${tictactoe[i].points} ✨\n╰╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸\n\n`
+} else if (i == 1) {board += `${i + 1}º 🥈 : @${tictactoe[i].jid.split('@')[0]}\n╭╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸\n│ ➣ Vitórias: ${tictactoe[i].wins} 🎊\n│ ➣ Derrotas: ${tictactoe[i].defeats} 💥\n│ ➣ Empates: ${tictactoe[i].ties} 🌀\n│ ➣ Pontos: ${tictactoe[i].points} ✨\n╰╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸\n\n`
+} else if (i == 2) {board += `${i + 1}º 🥉 : @${tictactoe[i].jid.split('@')[0]}\n╭╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸\n│ ➣ Vitórias: ${tictactoe[i].wins} 🎊\n│ ➣ Derrotas: ${tictactoe[i].defeats} 💥\n│ ➣ Empates: ${tictactoe[i].ties} 🌀\n│ ➣ Pontos: ${tictactoe[i].points} ✨\n╰╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸\n\n`
+}
+mentioned_jid.push(tictactoe[i].jid)
+} 
+mentions(board, mentioned_jid, true)
+} catch (err) {
+console.log(err)
+await client.sendMessage(from, `Humm, é necessário que no mínimo 3 pessoas tenham jogado...`, text, {quoted: mek})
+}
+break
+
+case 'coord' :
+tttset.playertest = sender
+if (!isGroup) {
+reply(ptbr.group())
+} else if (tttset.tttstatus == "off") {
+reply(`Você ainda não iniciou o jogo\nDigite ${prefix}ttt [DIFICULDADE] para iniciar`)
+} else if (tttset.player != tttset.playertest) {
+reply(`Alguém já está jogando no momento\nPor favor aguarde um instante...`)
+} else if (tttset.tttantibug == "on") {
+reply(`Aguarde a ação anterior ser concluída...`)
+} else {
+tttset.tttantibug = "on"
+const coordX = args
+if (coordX != 'a1' && coordX != 'a2' && coordX != 'a3' &&
+coordX != 'b1' && coordX != 'b2' && coordX != 'b3' &&
+coordX != 'c1' && coordX != 'c2' && coordX != 'c3') {
+reply(`Digite o comando com uma coordenada\nExemplo: ${prefix}coord a1`)
+tttset.tttantibug = "off"
+} else {
+switch (args[0]) {
+case 'a1':
+if (esp.a1 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.a1 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+case 'a2':
+if (esp.a2 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.a2 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+case 'a3':
+if (esp.a3 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.a3 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+case 'b1':
+if (esp.b1 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.b1 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+case 'b2':
+if (esp.b2 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.b2 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+case 'b3':
+if (esp.b3 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.b3 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+case 'c1':
+if (esp.c1 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.c1 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+case 'c2':
+if (esp.c2 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.c2 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+case 'c3':
+if (esp.c3 != "🔲") {
+reply('O espaço já foi ocupado\nTente outra coordenada')
+} else {
+esp.c3 = "❌"
+while (tttset.reActivate1 == "on") {
+IA()
+}
+}
+break
+}
+tttset.reActivate1 = "on"
+reply(`🌀1️⃣2️⃣3️⃣\n🅰️${esp.a1}${esp.a2}${esp.a3}\n🅱️${esp.b1}${esp.b2}${esp.b3}\n©️${esp.c1}${esp.c2}${esp.c3}`)
+var randomTTTXP = 0
+if (WinnerX()) {
+if (isLevelingOn) {
+switch (tttset.tttdifficulty) {
+case "EASY":
+randomTTTXP = Math.floor(Math.random() * 25) + 25
+addLevelingXp(tttset.player, randomTTTXP)
+break
+case "NORMAL":
+randomTTTXP = Math.floor(Math.random() * 75) + 75
+addLevelingXp(tttset.player, randomTTTXP)
+break
+case "HARD":
+randomTTTXP = Math.floor(Math.random() * 200) + 200
+addLevelingXp(tttset.player, randomTTTXP)
+break
+case "IMPOSSIBLE":
+randomTTTXP = Math.floor(Math.random() * 1000) + 1000
+addLevelingXp(tttset.player, randomTTTXP)
+break
+}
+client.sendMessage(from, `🎉🎉 VITÓRIA DO JOGADOR 🎉🎉\n\n➣  RECOMPENSA: +${randomTTTXP} XP 🔮`, text)
+} else {
+client.sendMessage(from, `🎉🎉 VITÓRIA DO JOGADOR 🎉🎉`, text)
+}
+const currentTTTwins = getTTTwins(tttset.player)
+const checkTTTIdWin = getTTTId(tttset.player)
+if (currentTTTwins === undefined && checkTTTIdWin === undefined) addTTTId(tttset.player)
+addTTTwin(tttset.player, 1)
+addTTTpoints(tttset.player, randomTTTXP)
+esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
+esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
+esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
+tttset.tttstatus = "off"
+tttset.waitingTime = "on"
+} else if (WinnerO()) {
+if (isLevelingOn) {
+switch (tttset.tttdifficulty) {
+case "EASY":
+randomTTTXP = 0 - (Math.floor(Math.random() * 200) + 200)
+addLevelingXp(tttset.player, randomTTTXP)
+break
+case "NORMAL":
+randomTTTXP = 0 - (Math.floor(Math.random() * 75) + 75)
+addLevelingXp(tttset.player, randomTTTXP)
+break
+case "HARD":
+randomTTTXP = 0 - (Math.floor(Math.random() * 25) + 25)
+addLevelingXp(tttset.player, randomTTTXP)
+break
+case "IMPOSSIBLE":
+randomTTTXP = 0
+addLevelingXp(tttset.player, randomTTTXP)
+break
+}   
+client.sendMessage(from, `🎉🎉 ZEUS GANHOU 🎉🎉\n\n➣  PUNIÇÃO: ${randomTTTXP} XP 🔮`, text)
+} else {
+client.sendMessage(from, `🎉🎉 ZEUS GANHOU 🎉🎉`, text)
+}
+const currentTTTdefeats = getTTTdefeats(tttset.player)
+const checkTTTIdDefeat = getTTTId(tttset.player)
+if (currentTTTdefeats === undefined && checkTTTIdDefeat === undefined) addTTTId(tttset.player)
+addTTTdefeat(tttset.player, 1)
+addTTTpoints(tttset.player, randomTTTXP)
+esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
+esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
+esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
+tttset.tttstatus = "off"
+tttset.waitingTime = "on"
+} else if (Tie()) {
+if (isLevelingOn) {
+client.sendMessage(from, `🎉🎉 EMPATE 🎉🎉\n\n➣  NÃO HÁ GANHOS NEM PERDAS`, text)
+} else {
+client.sendMessage(from, `🎉🎉 EMPATE 🎉🎉`, text)
+}
+const currentTTTties = getTTTties(tttset.player)
+const checkTTTIdTie = getTTTId(tttset.player)
+if (currentTTTties === undefined && checkTTTIdTie === undefined) addTTTId(tttset.player)
+addTTTtie(tttset.player, 1)
+esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
+esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
+esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
+tttset.tttstatus = "off"
+tttset.waitingTime = "on"
+}
+tttset.tttantibug = "off"
+}
+}
+break
+//_FIM DO JOGO DA VELHA By: Resen
+
+                    
+                case 'dindin':
+                    if (!isGroup) return reply('só em grupo')
+                    const dindin = checkATMuser(sender)
+                    teks = `Voçê tem:\n╭─────────\n┣⊱R$${dindin}\n╰─────────`
+                    client.sendMessage(from, teks, text, {quoted: mek})
+                  break
+                case 'antifake':
+                    try {
+                    if (!isGroup) return reply(mess.only.group)
+                    if (!isGroupAdmins) return reply(mess.only.admin)
+                    if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+                    if (args.length < 1) return reply('Hmmmm')
+                    if (Number(args[0]) === 1) {
+                        if (isAntiFake) return reply('Ja esta ativo')
+                        antifake.push(from)
+                        fs.writeFileSync('./antifake/antifake.json', JSON.stringify(antifake))
+                        reply('Ativou com sucesso o recurso de antifake neste grupo✔️')
+                    } else if (Number(args[0]) === 0) {
+                        antifake.splice(from, 1)
+                        fs.writeFileSync('./antifake/antifake.json', JSON.stringify(antifake))
+                        reply('Desativou com sucesso o recurso de antifake neste grupo✔️')
+                    } else {
+                        reply('1 para ativar, 0 para desativar')
+                    }
+                    } catch {
+                        reply('Deu erro, tente novamente :/')
+                    }
+                break
                 case 'corno':
                 if (!isGroup) return reply('SO EM GRUPO PARSA')
                 if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return
@@ -835,7 +1845,7 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
                         mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
                     Fuser = await client.getProfilePicture(mentioned[0])
                     sendG = await getBuffer(Fuser)
-                    client.sendMessage(from, sendG, MessageType.image, {quoted: mek, caption: 'Ae a ft parsa'})
+                    client.sendMessage(from, sendG, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚡ Zeus ⚡", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./sticker/Zeus.webp')} } }, caption: '...'})
                         break
                     case 'beijar':
                     if (!isGroup) return reply('So em grupo')
@@ -1678,14 +2688,15 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 					mentions(teks, members_id, true)
 					break
                 case 'pinterest':
-                    tels = body.slice(11)
+                    tels = body.slice(10)
 					client.updatePresence(from, Presence.composing) 
-					data = await fetchJson(`https://api.fdci.se/rep.php?gambar=${tels}`, {method: 'get'})
-					reply(mess.wait)
+					data = await fetchJson(`https://fdciabdul.tech/api/pinterest?keyword=${tels}`, {method: 'get'})
+					reply('⚡Zeus⚡ está a procurar...')
 					n = JSON.parse(JSON.stringify(data));
 					nimek =  n[Math.floor(Math.random() * n.length)];
 					pok = await getBuffer(nimek)
-					client.sendMessage(from, pok, image, { quoted: mek, caption: `*PINTEREST*\n\*Resultado da pesquisa* : *${tels}*`})
+                    reply('Encontrado !!!')
+					client.sendMessage(from, pok, image, { quoted: mek, caption: `Resultado da pesquisa: ${tels}`})
                     await limitAdd(sender)
 					break
                 case 'darkjokes':
@@ -2472,14 +3483,14 @@ break
 						if (isAntiLink) return reply('o anti-link está ativo')
 						antilink.push(from)
 						fs.writeFileSync('./src/antilink.json', JSON.stringify(antilink))
-						reply('Grupo anti-link ativado com sucesso neste grupo ✔️')
-						client.sendMessage(from,`Atencao a todos os membros ativos deste grupo anti-link. ee você enviar um link de grupo, voce sera expulso daqui  grupo`, text)
+						reply('Grupo anti-link ativado com sucesso neste grupo ✔️', text, tescuk)
+						client.sendMessage(from,`Atencao a todos os membros ativos deste grupo anti-link. se você enviar um link de grupo, voce sera expulso daqui do grupo`, text)
 					} else if (Number(args[0]) === 0) {
 						if (!isantilink) return reply('O modo de grupo anti-link foi desabilitado ')
 						var ini = anti.clientOf(from)
 						antilink.splice(ini, 1)
 						fs.writeFileSync('./src/antilink.json', JSON.stringify(antilink))
-						reply('Desativar grupo anti-link com sucesso neste grupo ✔️')
+						reply('Desativar grupo anti-link com sucesso neste grupo ✔️', text, tescuk)
 					} else {
 						reply('1 para ativar, 0 para desativar ')
 					}
@@ -3170,8 +4181,8 @@ break
                     // fil = body.slice(5)
 					reply('espere')
 					anu = await fetchJson(`https://api-exteam.herokuapp.com/api/photooxy/filter?text=${p1}&tema=avatar-champions&filtro=0`, {method: 'get'})
-                    buffer = await getBuffer(anu.result)
-					client.sendMessage(from, buffer, image, {caption: 'Lolzinho...', quoted: mek})
+                    buffer = await getBuffer(anu.results)
+					client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Lolzinho...', quoted: mek})
 					break
                 case 'ttp':
                 if (args.length < 1) return reply('Sou vidente porra? cadê o texto?')
@@ -3376,6 +4387,101 @@ break
 						reply(`Envie fotos com legendas **sticker* ou marque uma imagem que já foi enviada`)
 					}
 					break
+                case 'sticker2':
+                case 'stiker2':
+                case 's2':
+                    if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
+                        const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+                        const media = await client.downloadAndSaveMediaMessage(encmedia)
+                        ran = getRandom('.webp')
+                        await ffmpeg(`./${media}`)
+                            .input(media)
+                            .on('start', function (cmd) {
+                                console.log(`Started : ${cmd}`)
+                            })
+                            .on('error', function (err) {
+                                console.log(`Error : ${err}`)
+                                fs.unlinkSync(media)
+                                reply(mess.error.stick)
+                            })
+                            .on('end', function () {
+                                console.log('Finish')
+                                client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+                                fs.unlinkSync(media)
+                                fs.unlinkSync(ran)
+                            })
+                            .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+                            .toFormat('webp')
+                            .save(ran)
+                    } else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
+                        const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+                        const media = await client.downloadAndSaveMediaMessage(encmedia)
+                        ran = getRandom('.webp')
+                        reply(mess.wait)
+                        await ffmpeg(`./${media}`)
+                            .inputFormat(media.split('.')[1])
+                            .on('start', function (cmd) {
+                                console.log(`Started : ${cmd}`)
+                            })
+                            .on('error', function (err) {
+                                console.log(`Error : ${err}`)
+                                fs.unlinkSync(media)
+                                tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+                                reply(`❌ Falhou, no momento da conversão ${tipe} para o adesivo`)
+                            })
+                            .on('end', function () {
+                                console.log('Finish')
+                                client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+                                fs.unlinkSync(media)
+                                fs.unlinkSync(ran)
+                            })
+                            .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+                            .toFormat('webp')
+                            .save(ran)
+                    } else if ((isMedia || isQuotedImage) && args[0] == 'nobg') {
+                        const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+                        const media = await client.downloadAndSaveMediaMessage(encmedia)
+                        ranw = getRandom('.webp')
+                        ranp = getRandom('.png')
+                        reply(mess.wait)
+                        keyrmbg = 'Your-ApiKey'
+                        await removeBackgroundFromImageFile({path: media, apiKey: keyrmbg.result, size: 'auto', type: 'auto', ranp}).then(res => {
+                            fs.unlinkSync(media)
+                            let buffer = Buffer.from(res.base64img, 'base64')
+                            fs.writeFileSync(ranp, buffer, (err) => {
+                                if (err) return reply('Armaria vey deu erro aqui mn, tenta mais tarde ae.')
+                            })
+                            exec(`ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=60 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${ranw}`, (err) => {
+                                fs.unlinkSync(ranp)
+                                if (err) return reply(mess.error.stick)
+                                client.sendMessage(from, fs.readFileSync(ranw), sticker, {quoted: mek})
+                            })
+                        })
+                    /*} else if ((isMedia || isQuotedImage) && colors.includes(args[0])) {
+                        const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+                        const media = await client.downloadAndSaveMediaMessage(encmedia)
+                        ran = getRandom('.webp')
+                        await ffmpeg(`./${media}`)
+                            .on('start', function (cmd) {
+                                console.log('Started :', cmd)
+                            })
+                            .on('error', function (err) {
+                                fs.unlinkSync(media)
+                                console.log('Error :', err)
+                            })
+                            .on('end', function () {
+                                console.log('Finish')
+                                fs.unlinkSync(media)
+                                client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+                                fs.unlinkSync(ran)
+                            })
+                            .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=${args[0]}@0.0, split [a][b]; [a] palettegen=reserve_transparent=off; [b][p] paletteuse`])
+                            .toFormat('webp')
+                            .save(ran)*/
+                    } else {
+                        reply(`Envie fotos com legendas **sticker* ou marque uma imagem que já foi enviada`)
+                    }
+                    break
 				case 'tts':
 					if (args.length < 1) return client.sendMessage(from, 'Ox, cade o codigo da liguagem mn? \n Exemplo: *tts pt palavra', text, {quoted: mek})
 					const gtts = require('./lib/gtts')(args[0])
@@ -3590,11 +4696,6 @@ break
 					buffer = await getBuffer(`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtbo5EcVSGj-IvEVznHIgMZ9vjFptZfvprtg&usqp=CAU`)
 					client.sendMessage(from, buffer, image, {quoted: mek, caption: '️💆'})
 					break
-				case 'canal':
-					memein = await kagApi.memeindo()
-					buffer = await getBuffer(`https://imgur.com/gallery/xuTCBPO`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: '️*canal do ✞︎𝙼𝚎𝚕𝚒𝚘𝚍𝚊𝚜✞︎:*\n\n https://youtube.com/channel/UCpB3qh2Sp3K23s9a2Q-Gf-g'})
-					break
 				case 'nsfwloli1':
 					memein = await kagApi.memeindo()
 					buffer = await getBuffer(`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJhzKetbU3pzhoZdaIo6qBklCzwvmCCOznbg&usqp=CAU`)
@@ -3642,9 +4743,8 @@ break
 					client.sendMessage(from, buffer, image, {quoted: mek, caption: '.......'})
 					break
 				case 'dono':
-					memein = await kagApi.memeindo()
 					buffer = await getBuffer(`https://i.ibb.co/Q6TftwD/Meliodas.png`)
-					client.sendMessage(from, buffer, image, {quoted: mek, caption: '*Criador do ⚡ Zeus ⚡:Eae meu parsa, sou ꧁╰‿╯𝙼𝙴𝙻𝙸𝙾𝙳𝙰𝚂-𝚁𝙰𝙸╰‿╯꧂ Filho do rei demônio e sou criador do ⚡ Zeus ⚡\n*WPP:* wa.me/+558981246187\n\n\nEspero que tenham gostado do bot ⚡ \nKibadores vão se FUDER'})
+                    client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Criador do ⚡ Zeus ⚡:Eae meu parsa, sou ꧁╰‿╯𝙼𝙴𝙻𝙸𝙾𝙳𝙰𝚂-𝚁𝙰𝙸╰‿╯꧂ Filho do rei demônio e sou criador do ⚡ Zeus ⚡\n*WPP:* wa.me/+558981246187\n\n\nEspero que tenham gostado do bot ⚡ \nKibadores vão se FUDER'})
 					break
 				case 'dono2':
 					memein = await kagApi.memeindo()
@@ -3773,12 +4873,12 @@ break
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						buff = await client.downloadMediaMessage(encmedia)
 						for (let _ of anu) {
-							client.sendMessage(_.jid, buff, image, {caption: `[ TRANSMIÇÃO DE AVISO ]\n\n${body.slice(4)}`})
+							client.sendMessage(_.jid, buff, image, {caption: `! ! !  A V I S O  ! ! !\n\n╭─────────────\n┣⊱${body.slice(4)}\n╰─────────────`})
 						}
 						reply('Transmissão enviada com sucesso')
 					} else {
 						for (let _ of anu) {
-							sendMess(_.jid, `[ RAPAZIADA OLHA ESSE AVISO ]\n\n${body.slice(4)}`)
+							sendMess(_.jid, `! ! !  A V I S O  ! ! !\n\n╭─────────────\n┣⊱${body.slice(4)}\n╰─────────────`)
 						}
 						reply('Transmissão enviada com sucesso')
 					}
@@ -3830,7 +4930,7 @@ break
 						client.groupAdd(from, [num])
 					} catch (e) {
 						console.log('Error :', e)
-						reply('Falha ao adicionar destino, talvez porque é privado')
+						reply('Falha ao adicionar, acho que ele não permite que não contatos adicionem ele em grupos')
 					}
 					break
 				case 'banir':
@@ -3847,7 +4947,7 @@ break
 						mentions(teks, mentioned, true)
 						client.groupRemove(from, mentioned)
 					} else {
-						mentions(`Alvo removido com sucesso  : @${mentioned[0].split('@')[0]}`, mentioned, true)
+						mentions(`Alvo @${mentioned[0].split('@')[0]} removido com sucesso`, mentioned, true)
 						client.groupRemove(from, mentioned)
 					}
 					break
@@ -3924,7 +5024,7 @@ break
 						fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
 						reply('Ativou com sucesso o recurso de boas-vindas neste grupo 😉️')
 					} else if (Number(args[0]) === 0) {
-						welkom.splice(from, 1)
+				    	welkom.splice(from, 1)
 						fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
 						reply('Desativou com sucesso o recurso de boas-vindas neste grupo 😡️')
 					} else {
