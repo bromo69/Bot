@@ -14,8 +14,9 @@ npm install imgur
 pkg install python
 pkg install sl
 pkg install figlet -y
+cd /data/data/com.termux/files/home/Bot/node_modules/@adiwajshing/baileys/lib/WAConnection/
+mv Utils.js /data/data/com.termux/files/home/
+cd $HOME && cd Bot
 mv Utils.js /data/data/com.termux/files/home/Bot/node_modules/@adiwajshing/baileys/lib/WAConnection/
-echo "Pronto, o nécessario ja foi instalado, irei iniciar o bot em 15 segundos" |lolcat -a -d 19
 figlet "Zeus" |lolcat 
 echo "Eu SOU ⚡ ZEUS ⚡ " |lolcat -a -d 23
-node index.js

@@ -28,6 +28,8 @@ Comandos pra instalar:
 
 * `bash install.sh `
 
+* `node index.js`
+
 * ESCANEIE O QR CODE QUE IRA APARECER COM O WHATSAPP WEB
 
 ## Comandos do PM2 Monit
