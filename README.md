@@ -8,9 +8,7 @@ Comandos pra instalar:
 
 * `termux-setup-storage`
 
-* `apt-get update `
-
-* `apt-get upgrade `
+* `apt-get update -y && pkg upgrade -y`
 
 * `pkg install git -y`
 
@@ -24,21 +22,13 @@ Comandos pra instalar:
 
 * `cd $HOME`
 
-* `pkg install ffmpeg `
-
-* `pkg instal wget `
-
-* `pkg install nodejs `
-
-* `git clone https://github.com/Meliodas-rai/Bot `
+* `git clone https://github.com/Meliodas-rai/Bot`
 
 * `cd Bot `
 
 * `bash install.sh `
 
-* `npm start `
-
-* ESCANEIE O QR CODE QUE IRA APARECER COM O WHATSAPP 
+* ESCANEIE O QR CODE QUE IRA APARECER COM O WHATSAPP WEB
 
 ## Comandos do PM2 Monit
 
@@ -56,7 +46,7 @@ Comandos pra instalar:
 
 * `git pull `
 
-* `npm start `
+* `node index.js `
 
 * APERTE NO BOTÂO "CTRL" DEPOIS VA NO TECLADO E APERTE "C" E DIGITE O SEGUINTE:
 
@@ -70,4 +60,4 @@ Comandos pra instalar:
 
 * OBS: o bot só pode ser instalador em celulares com o androind acima de 4.0 ou 5.0
 
-<h3 align="center">⚡Zeus⚡<br> Deus </br></h3>
+<h3 align="center">⚡Zeus⚡</h3>
