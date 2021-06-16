@@ -1,5 +1,4 @@
 echo "Vou começar a resolver o erro de conexão do Bot"
-sleep(3)
 cd $HOME && mkdir backup
 echo "Criei uma pasta de backup da 0.Base.js para caso der erro tem um backup salvo"
 clear
