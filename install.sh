@@ -28,8 +28,7 @@ echo "3"
 echo "2"
 echo "1"
 clear
-figlet "Zeus"
+figlet "Zeus" |lolcat 
 echo "Eu SOU ⚡ ZEUS ⚡ " |lolcat -a -d 23
-sleep(3)
 clear
 node index.js
