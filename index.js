@@ -917,6 +917,21 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 	    }
 	})
 
+    client.on('CB:action,,battery', json => {
+        global.batteryLevelStr = json[2][0][1].value
+        global.batterylevel = parseInt(batteryLevelStr)
+        baterai = batterylevel
+        if (json[2][0][1].live == 'true') charging = true
+        if (json[2][0][1].live == 'false') charging = false
+        })
+        global.prefix
+        global.batrei = global.batrei ? global.batrei : []
+        client.on('CB:action,,battery', json => {
+        const batteryLevelStr = json[2][0][1].value
+        const batterylevel = parseInt(batteryLevelStr)
+        global.batrei.push(batterylevel)
+        })
+
 	client.on('chat-update', async (mek) => {
 		try {
             if (!mek.hasNewMessage) return
@@ -1008,9 +1023,12 @@ Bem Vindo Ao Grupo! Olhe As Regras Do grupo Para Não Ser Banido
 			const isUrl = (url) => {
 			    return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
 			}
-			const reply = (teks) => {
+			/*const reply = (teks) => {
 				client.sendMessage(from, teks, text, {quoted:mek})
-			}
+			}*/
+            const reply = (teks) => {
+                client.sendMessage(from, teks, text, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚡ Zeus ⚡", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./sticker/Zeus.webp')}}}})
+            }
 			const sendImage = (teks) => {
 		    client.sendMessage(from, teks, image, {quoted:mek})
 		    }
@@ -1327,11 +1345,11 @@ tttset.autoEndTime = "off"
 			client.updatePresence(from, Presence.composing)
 			reply("opa")
 	}
-
+/*
 		if (messagesC.includes("causs")){
 			client.updatePresence(from, Presence.composing)
 			reply("Gostosooooooooooo, muito gostoso")
-	}
+	}*/
 	
 		if (messagesC.includes("oiii")){
 			client.updatePresence(from, Presence.composing)
@@ -1377,11 +1395,6 @@ tttset.autoEndTime = "off"
 			client.updatePresence(from, Presence.composing)
 			tujuh = fs.readFileSync('./assets/hehe.mp3');
             client.sendMessage(from, tujuh, MessageType.audio, {quoted: mek, mimetype: 'audio/mp4', ptt:true})
-	}
-
-			if (messagesC.includes("bu")){
-				client.sendMessage(from, Presence.composing)
-				reply("ce")
 	}
 /*	
 			if (messagesC.includes("bot")){
@@ -1507,7 +1520,7 @@ tttset.autoEndTime = "off"
 
 ========================================================================================================================================================================================================================================================
 */
-
+                    
 	            case 'menu':
                 case 'help':
                 const date = `${data.length}`
@@ -1519,6 +1532,69 @@ tttset.autoEndTime = "off"
                 const putagg = await getBuffer(getFoto)
                 client.sendMessage(from, putagg, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚡ Zeus ⚡", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('./sticker/Zeus.webp')} } }, caption: help(prefix, sender, pushname2, time, dindinn, chatss, date)})
                   break
+                  case 'google2':
+                  textt = body.slice(8)
+                    var gis = require('g-i-s');
+                        gis(`${textt}`, logResults);
+
+                        function logResults(error, results) {
+                        if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(JSON.stringify(results, null, '  '));
+                }
+            }
+                            break
+                case 'jsorte':
+                if (!isGroup) return reply('Só em grupo')
+                const sorte1 = [`pimenta`, `pimenta`, `banana`, `banana`]
+                const sorte2 = [`pimenta`, `pimenta`, `banana`, `banana`]
+                const sortes1 = sorte1[Math.floor(Math.random() * sorte1.length)]
+                const sortes2 = sorte2[Math.floor(Math.random() * sorte2.length)]
+                teks = `Reultado do jogo\n${sortes1} ${sortes2}`
+                client.sendMessage(from, teks, text)
+                break
+                case 'play2':
+                reply('⚡ Zeus está a procurar ⚡ ')
+                teext = body.slice(6)
+                anu = await fetchJson(`https://api-gdr2.herokuapp.com/api/yt/play2?query=${teext}`)
+                buffer = await getBuffer(anu.result.thumbnail)
+                tabu = await getBuffer(anu.result.url_audio)
+                teks = `Nome da música: ${text}\nTitulo: ${anu.result.title}\ndescrição do video: ${anu.result.description}\nurl: ${anu.result.url}\nPublicado em: ${anu.result.publishDate}\n\nAGUARDE, ENVIANDO ÁUDIO...`
+                client.sendMessage(from, teks)
+                client.sendMessage(from, buffer, sticker)
+                client.sendMessage(from, tabu, audio, {mimetype: 'audio/mp4', filename: `${anu.result.url_audio}.mp3`, quoted: mek})
+                break
+                case 'exec':
+                if (!isOwner) return reply('somente meu dono')
+                var exec = require('execjs')
+                const cmD = body.slice(5)
+                exec(cmD, (err, stdout) => {
+                    if (err) return client.sendMessage(from, `root @zeus:~ ${err}`, text, {quoted: mek })
+                        if (stdout) {
+                            client.sendMessage(from, stdout, text)
+                        }
+                    })
+                break
+                
+                case 'spam':
+                    if (!isGroup) return reply(mess.only.group)
+                    if (!isGroupAdmins) return reply(mess.only.admin)
+                    members_id = []
+                    cuzcu = body.slice(5)
+                    teks = (args.length > 1) ? body.slice(8).trim() : ''
+                    teks += '\n\n'
+                    for (let mem of groupMembers) {
+                        reply(`! ! ! ! ! ${cuzcu} ! ! ! ! !`)
+                        teks += `*#* @${mem.jid.split('@')[0]}\n`
+                        members_id.push(mem.jid)
+                    }
+                    mentions(teks, members_id, true)
+                    break
+                    case 'bateria':
+                        var bateriaa = global.batrei[global.batrei.length - 1]
+                        reply(`Estou com ${bateriaa}%`)
+                        break
 //_JOGO DA VELHA By: Resen
 //INICIO DO JOGO DA VELHA ❌ ⭕ 🔲
 case 'ttt':
@@ -2002,6 +2078,21 @@ break
                             fs.unlinkSync(ran);
                         });
                             break
+                        case 'reiniciar':
+                        if (!isOwner) return reply('Somente meu dono pode usar este comando usuário comun')
+                            client.updatePresence(from, Presence.composing)
+                        setTimeout( () => {
+                            reply('Reiniciando...')
+                        }, 2000)
+                        const pm2 = `^C && cls`
+                        if (pm2, (err, stdout) => {
+                            if (err) return reply('Ouve um erro', text, {quoted: mek})
+
+                            if (stdout) { 
+                                client.sendMessage(from, stdout, text, {quoted: mek})
+                            }
+                        })
+                        break
                         case 'Videore':
                         encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo;
                         media = await client.downloadAndSaveMediaMessage(encmedia);
@@ -3482,14 +3573,14 @@ break
 					if (Number(args[0]) === 1) {
 						if (isAntiLink) return reply('o anti-link está ativo')
 						antilink.push(from)
-						fs.writeFileSync('./src/antilink.json', JSON.stringify(antilink))
+						fs.writeFileSync('./database/json/antilink.json', JSON.stringify(antilink))
 						reply('Grupo anti-link ativado com sucesso neste grupo ✔️', text, tescuk)
 						client.sendMessage(from,`Atencao a todos os membros ativos deste grupo anti-link. se você enviar um link de grupo, voce sera expulso daqui do grupo`, text)
 					} else if (Number(args[0]) === 0) {
-						if (!isantilink) return reply('O modo de grupo anti-link foi desabilitado ')
-						var ini = anti.clientOf(from)
-						antilink.splice(ini, 1)
-						fs.writeFileSync('./src/antilink.json', JSON.stringify(antilink))
+						// if (!isantilink) return reply('O modo de grupo anti-link foi desabilitado ')
+						// var ini = anti.clientOf(from)
+						antilink.splice(from, 1)
+						fs.writeFileSync('./database/json/antilink.json', JSON.stringify(antilink))
 						reply('Desativar grupo anti-link com sucesso neste grupo ✔️', text, tescuk)
 					} else {
 						reply('1 para ativar, 0 para desativar ')
@@ -3982,7 +4073,7 @@ break
                 reply(mess.wait)
                 play = body.slice(5)
                 anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?q=${play}&apikey=apivinz`)
-               if (anu.error) return reply(anu.error)
+                if (anu.error) return reply(anu.error)
                  infomp3 = `*MÚSICA ENCONTRADA ${pushname2}*\nTítulo: ${anu.result.title}\nLink: ${anu.result.source}\nTamanho: ${anu.result.size}\n\n*Mandando aúdio...*`
                 buffer = await getBuffer(anu.result.thumbnail)
                 lagu = await getBuffer(anu.result.url_audio)
