@@ -65,19 +65,19 @@ const apivhtear = 'apivhtear';
 const apibarbar = 'apibarbar';
 const tobzkey = 'apitobz';
 const BotName = '⚡Zeus⚡'; 
-const instagram = 'http://www.instagram.com/'; 
+const instagram = 'http://www.instagram.com/d4ss4d.das'; 
 const aktif = '08:00 - 22:00';
 const vcard = 'BEGIN:VCARD\n'
             + 'VERSION:3.0\n' 
-            + 'FN:Meliodas\n' // Seu nome
+            + 'FN:Bromas\n' // Seu nome
             + 'ORG:Zeus;\n' // Nome do Bot
-            + 'TEL;type=CELL;type=VOICE;waid=5589981210976:+55 89 981210976\n' // Numero do Whatsapp
+            + 'TEL;type=CELL;type=VOICE;waid=56985855555:+56 9 8585 5555\n' // Numero do Whatsapp
             + 'END:VCARD'
 prefix = '*'
 blocked = []
 limitawal = '999999999'
-cr = '*Meliodas*'
-meliodas = 'Meliodas-rai, e o dono'
+cr = '*Bromo*'
+bromo = 'bromo-rai, e o dono'
 
 /*********** CARREGAR ARQUIVO ***********/
 const _leveling = JSON.parse(fs.readFileSync('./database/group/leveling.json'))
